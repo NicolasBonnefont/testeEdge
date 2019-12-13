@@ -30,12 +30,12 @@ async function logar() {
     const bi = response.data.empresas.bi
     var empresa = response.data.empresas.empresa
     const sessao = response.data.token.token
-    empresa.tolowercase()
+ 
 
       // QUANDO O STATUS VINDO DO BACKEND FOR 200, AI FAZ O LOGIN
     if(response.status === 200){
 
-    sessionStorage.setItem('empresa', empresa)   
+    sessionStorage.setItem('empresa', empresa.tolowe)   
     sessionStorage.setItem('bi', bi)    
     sessionStorage.setItem('sessao',sessao)
      
