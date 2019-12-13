@@ -101,11 +101,11 @@ async function alterarUsuario() {
   const empresaAltera = document.getElementById('empresaAltera').value
   const usuarioBusca = document.getElementById('usuarioBusca').value
   const adminAltera = document.getElementById('adminAltera').value
-  const adminOK = 0
+  var adminOK = 0
 
   if(adminAltera.checked = true){
     
-    adminOK.value = 1
+    adminOK = 1
   }
 
 
