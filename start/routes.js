@@ -1,0 +1,31 @@
+'use strict'
+/** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
+const Route = use('Route')
+
+
+// ROTAS PARA AS VIEWS
+Route.on('/').render('home')
+Route.on('/home').render('home')
+Route.on('/resetpassword').render('resetpassword')
+Route.on('/esqueciasenha').render('esqueciasenha')
+Route.on('/pag/cadastroEmpresa').render('pag/cadastroEmpresa')
+Route.on('/pag/cadastroUsuario').render('pag/cadastroUsuario')
+Route.on('/pag/dashboard').render('pag/dashboard')
+Route.on('/pag/principal').render('pag/principal')
+
+
+// rotas para as API
+Route.get('users/:username', 'UserController.show')
+Route.delete('users/:username', 'UserController.destroy')
+Route.put('users','UserController.update')
+Route.post('users','UserController.store')
+
+Route.post('sessions','SessionController.store')
+
+Route.post('passwords','ForgotPasswordController.store')
+Route.put('passwords','ForgotPasswordController.update')
+
+Route.post('empresa','EmpresaController.store')
+Route.get('empresa/:empresa','EmpresaController.show')
+Route.put('empresa','EmpresaController.update')
+Route.delete('empresa/:empresa','EmpresaController.destroy')

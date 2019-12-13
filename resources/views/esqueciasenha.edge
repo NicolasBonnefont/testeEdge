@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/Login.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+  <title>Recuperação de senha</title>
+</head>
+
+<div class="valign-wrapper row login-box Login">
+  <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+    
+    <form onsubmit="recuperar()" method="POST">
+
+      <div class="card-content center-align">
+        <span class="card-title">Informe o email para recuperação</span>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="email">Endereço de Email</label>
+            <input type="email" class="validate" name="email" id="email" required />
+          </div>
+        </div>
+       
+      </div>
+      <div class="card-action ">
+        <button class="btn waves-effect waves-light" type="submit">Enviar Email
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+      <div class="" id='progresso'>
+        <div class="indeterminate"></div>
+    </div>
+
+    </form>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/esqueciasenha.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+    
+
+  </div>
+</div>
