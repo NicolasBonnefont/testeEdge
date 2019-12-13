@@ -11,7 +11,7 @@ Route.on('/esqueciasenha').render('esqueciasenha')
 Route.on('/pag/cadastroEmpresa').render('pag/cadastroEmpresa')
 Route.on('/pag/cadastroUsuario').render('pag/cadastroUsuario')
 Route.on('/pag/dashboard').render('pag/dashboard')
-Route.on('/pag/principal').render('pag/principal')
+Route.on('/pag/principal').render('pag/principal').middleware(['User'])
 
 
 // rotas para as API
@@ -29,3 +29,4 @@ Route.post('empresa','EmpresaController.store')
 Route.get('empresa/:empresa','EmpresaController.show')
 Route.put('empresa','EmpresaController.update')
 Route.delete('empresa/:empresa','EmpresaController.destroy')
+
