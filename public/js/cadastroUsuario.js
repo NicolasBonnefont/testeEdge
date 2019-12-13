@@ -104,8 +104,8 @@ async function alterarUsuario() {
   const adminOK = 0
 
   if(adminAltera.checked = true){
-    console.log('admin altera ok')
-   adminOK = 1
+    
+    adminOK = 1
   }
 
 
