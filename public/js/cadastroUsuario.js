@@ -105,7 +105,7 @@ async function alterarUsuario() {
 
   if(adminAltera.checked = true){
     
-    adminOK = 1
+    adminOK.value = 1
   }
 
 
