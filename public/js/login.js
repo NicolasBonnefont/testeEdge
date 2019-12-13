@@ -34,7 +34,7 @@ async function logar() {
       // QUANDO O STATUS VINDO DO BACKEND FOR 200, AI FAZ O LOGIN
     if(response.status === 200){
 
-    sessionStorage.setItem('empresa', empresa).lowercase()     
+    sessionStorage.setItem('empresa', empresa).tolowercase()     
     sessionStorage.setItem('bi', bi)    
     sessionStorage.setItem('sessao',sessao)
      
