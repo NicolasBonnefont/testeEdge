@@ -18,7 +18,6 @@ class SessionController {
       const {empresa} = await User.findByOrFail('email',email)
 
       const empresas = await Empresa.findBy('empresa',empresa)
-      
       if (empresas){
         return {token, user, empresas}
       }

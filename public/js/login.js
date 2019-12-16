@@ -21,7 +21,7 @@ async function logar() {
   const email = document.getElementById('email').value
   const progresso = document.getElementById('progresso')
 
-  progresso.className="progress"
+  //progresso.className="progress"
  
   await axios.post('/sessions', {"password":`${password}`,"email":`${email}`})
 
@@ -35,7 +35,7 @@ async function logar() {
       // QUANDO O STATUS VINDO DO BACKEND FOR 200, AI FAZ O LOGIN
     if(response.status === 200){
 
-    sessionStorage.setItem('empresa', empresa.tolowe)   
+    sessionStorage.setItem('empresa', empresa)   
     sessionStorage.setItem('bi', bi)    
     sessionStorage.setItem('sessao',sessao)
      
@@ -50,7 +50,7 @@ async function logar() {
   .catch(function (error) {
     console.log(error)
     alert("Problema na autenticação !")
-    progresso.className=""
+    //progresso.className=""
     
   })
 
