@@ -11,8 +11,10 @@ function verificaAcesso(){
   var caminhoEmpresa = window.sessionStorage.getItem("empresa")
   var empresa = window.sessionStorage.getItem("empresa")
   const linkPrincipal = document.getElementById('linkPrincipal')
-
-  caminhoEmpresa.toLocaleLowerCase()
+  
+   // colocado o caminho em lowercase para nao gerar problema com servido online
+  var empresalow = caminhoEmpresa.toLocaleLowerCase()
+  console.log(empresalow)
   
     // VERIFICA SE ESTA LOGADO
   if (!sessao){
@@ -20,7 +22,7 @@ function verificaAcesso(){
     window.location.replace("../home");    
   }
  
-  document.body.style.backgroundImage = "url('/img/empresa/"+caminhoEmpresa+"/logo.png')";
+  document.body.style.backgroundImage = "url('/img/empresa/"+empresalow+"/logo.png')";
   linkPrincipal.text = empresa
   
   
