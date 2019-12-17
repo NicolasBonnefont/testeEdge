@@ -12,16 +12,14 @@ function verificaAcesso(){
   var empresa = window.sessionStorage.getItem("empresa")
   const linkPrincipal = document.getElementById('linkPrincipal')
   
-   // colocado o caminho em lowercase para nao gerar problema com servido online
-  var empresalow = caminhoEmpresa.toLocaleLowerCase()
-  console.log(empresalow)
-  
     // VERIFICA SE ESTA LOGADO
   if (!sessao){
     // NAO LOGADO, REDIRECIONA PARA A TELA DE LOGIN
     window.location.replace("../home");    
   }
- 
+
+  // colocado o caminho em lowercase para nao gerar problema com servido online
+  var empresalow = caminhoEmpresa.toLocaleLowerCase()
   document.body.style.backgroundImage = "url('/img/empresa/"+empresalow+"/logo.png')";
   linkPrincipal.text = empresa
   
