@@ -30,6 +30,9 @@ async function logar() {
     const bi = response.data.empresas.bi
     var empresa = response.data.empresas.empresa
     const sessao = response.data.token.token
+    const user = response.data.user
+
+    const usuario = JSON.stringify(user)
  
 
       // QUANDO O STATUS VINDO DO BACKEND FOR 200, AI FAZ O LOGIN
@@ -38,6 +41,7 @@ async function logar() {
     sessionStorage.setItem('empresa', empresa)   
     sessionStorage.setItem('bi', bi)    
     sessionStorage.setItem('sessao',sessao)
+    sessionStorage.setItem('user', usuario)
      
 
       alert("Logado com Sucesso")

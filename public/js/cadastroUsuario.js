@@ -11,14 +11,16 @@ async function cadastraUsuario() {
   const email = document.getElementById('email').value
   const empresa = document.getElementById('empresa').value
   const admin = document.getElementById('admin')
-  const adminOK = 0
+
+  var adminOK = 0
 
   if(admin.checked){
-   adminOK === 1
+   adminOK = 1
   }else{
-    adminOK === 0
+    adminOK = 0
   }
-  
+  console.log(admin.checked)
+  console.log(adminOK)
   await axios.post('/users', {
       "username": `${username}`,
       "name": `${name}`,
@@ -64,8 +66,7 @@ async function buscarUsuario() {
   await axios.get("/users/" + usuarioBusca)
   
     .then(function (response) {
-
-
+      
       
       campos.disabled = false
 
@@ -73,14 +74,17 @@ async function buscarUsuario() {
       emailAltera.value = response.data.email
       empresaAltera.value = response.data.empresa
       adminAltera.value =  response.data.admin
-      if ( adminAltera.value ===1){
-        console.log(' adminAltera ok')
+      
+      if ( adminAltera.value ==1){
+        adminAltera.checked = true
+      }else{
+        adminAltera.checked = false
       }
      
 
     })
     .catch(function (error) {
-      console.log([response.data.user.admin])
+     
       alert("Usuario não encotrado")
       campos.disabled = true
       document.getElementById("formBusca").reset();
@@ -100,12 +104,15 @@ async function alterarUsuario() {
   const emailAltera = document.getElementById('emailAltera').value
   const empresaAltera = document.getElementById('empresaAltera').value
   const usuarioBusca = document.getElementById('usuarioBusca').value
-  const adminAltera = document.getElementById('adminAltera').value
-  var adminOK = 0
-
-  if(adminAltera.checked = true){
-    
-    adminOK = 1
+  const adminAltera = document.getElementById('adminAltera')
+  var adminAlteraOK = 0
+  console.log(adminAltera.checked)
+  if(adminAltera.checked){
+    console.log('alterar para 1 ')
+    adminAlteraOK = 1
+  }else{
+    console.log('alterar para 0 ')
+    adminAlteraOK = 0
   }
 
 
@@ -114,7 +121,7 @@ async function alterarUsuario() {
       "email": `${emailAltera}`,
       "username": `${usuarioBusca}`,
       "empresa": `${empresaAltera}`,
-      "admin":`${adminOK}`
+      "admin":`${adminAlteraOK}`
     })
 
     .then(function (response) {

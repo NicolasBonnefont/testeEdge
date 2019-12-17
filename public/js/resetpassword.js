@@ -1,7 +1,4 @@
-var url ='https://api-mor.herokuapp.com'
-
-  // ACESA A ROTA QUE RESETA O ACESSO
-async function resetar() {
+async function renovar() {
   event.preventDefault();
   
 

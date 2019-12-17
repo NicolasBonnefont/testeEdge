@@ -60,10 +60,11 @@ class UserController {
     
     }
     catch (err){
-      return response.status(err.status).send({error: { message: 'Algo não deu certo!' } } )
+      return response.status(404).send({error: { message: 'Usuario ão cadastrado!' } } )
 
     }
   }
+
   async destroy ({ params, request, response }) {
     const user = await User.findByOrFail(params)
     await user.delete()
