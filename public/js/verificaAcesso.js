@@ -8,8 +8,11 @@ async function deslogar(){
 function verificaAcesso(){
   
   const sessao = window.sessionStorage.getItem("sessao")
-  const empresa = window.sessionStorage.getItem("empresa")
+  var caminhoEmpresa = window.sessionStorage.getItem("empresa")
+  var empresa = window.sessionStorage.getItem("empresa")
   const linkPrincipal = document.getElementById('linkPrincipal')
+
+  caminhoEmpresa.toLocaleLowerCase()
   
     // VERIFICA SE ESTA LOGADO
   if (!sessao){
@@ -17,7 +20,7 @@ function verificaAcesso(){
     window.location.replace("../home");    
   }
  
-  document.body.style.backgroundImage = "url('/img/empresa/"+empresa+"/logo.png')";
+  document.body.style.backgroundImage = "url('/img/empresa/"+caminhoEmpresa+"/logo.png')";
   linkPrincipal.text = empresa
   
   
