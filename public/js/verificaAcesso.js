@@ -14,7 +14,7 @@ function verificaAcesso(){
     // VERIFICA SE ESTA LOGADO
   if (!sessao){
     // NAO LOGADO, REDIRECIONA PARA A TELA DE LOGIN
-    window.location.replace("home");    
+    window.location.replace("../home");    
   }
  
   document.body.style.backgroundImage = "url('/img/empresa/"+empresa+"/logo.png')";

@@ -7,6 +7,9 @@ async function resetar() {
 
   const token = document.getElementById('token').value;
   const password = document.getElementById('password').value;
+  const resetar = document.getElementById('resetar')
+
+  resetar.disabled = true
 
  
   await axios.put('/passwords', { "token": `${token}`,"password":`${password}` })
@@ -21,5 +24,6 @@ async function resetar() {
       console.log(error);
       alert('Favor, checar o token !', error);
       document.getElementById("form").reset();
+      resetar.disabled = false
     });
 }
