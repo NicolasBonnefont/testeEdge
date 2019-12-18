@@ -72,6 +72,13 @@ class UserController {
     return response.status(200).send({ok:'Deletado com sucesso'})
   }
 
+  async index({response}){
+
+    const data = await User.all()
+
+    return {data}
+  }
+
 
 }
 

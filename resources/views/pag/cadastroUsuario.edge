@@ -12,6 +12,8 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+  
   <title>Cadastro de Clientes</title>
 </head>
 
@@ -32,8 +34,12 @@
           <a class="nav-link active" data-toggle="tab" href="#Cadastrar">Cadastrar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#menu1">Alterar</a>
+          <a class="nav-link" data-toggle="tab" href="#alterar">Alterar</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#permissoes">Permissões</a>
+        </li>
+
 
 
       </ul>
@@ -83,10 +89,7 @@
         </div>
 
         <!--  Menu de Alterar o Usuario   -->
-        <div id="menu1" class="container tab-pane fade"><br>
-
-
-
+        <div id="alterar" class="container tab-pane fade"><br>
           <form class=" form-group " id="formBusca" onsubmit="buscarUsuario()" method="POST">
             <div class="col-6 align-items-center">
               <label class="sr-only">Usuário</label>
@@ -131,10 +134,24 @@
           </form>
         </div>
 
+
+
+
+        <div id="permissoes" class="container tab-pane fade"><br>
+          <table id="teste" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Admin</th>                                  
+                </tr>
+            </thead>
+        </table>
+        </div>        
       </div>
     </div>
   </div>
-
 
 
 
@@ -147,6 +164,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="../js/verificaAcesso.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+
+  <script>
+$(document).ready(function() {
+    $('#teste').DataTable( {
+        "ajax": "../users",
+        "columns": [
+            { "data": "username" },
+            { "data": "name" },
+            { "data": "email" },
+            { "data": "admin" }
+        ]
+    } );
+} );
+
+  </script>
+  
 </body>
 
 </html>

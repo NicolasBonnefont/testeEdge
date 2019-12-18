@@ -166,3 +166,6 @@ console.log(usuarioAltera)
 function prevenir(){
   event.preventDefault()
 }
+
+
+

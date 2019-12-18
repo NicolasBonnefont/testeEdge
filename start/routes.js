@@ -17,6 +17,7 @@ Route.on('/pag/principal').render('pag/principal')
 
 // rotas para as API
 Route.get('users/:username', 'UserController.show')
+Route.get('users', 'UserController.index')
 Route.delete('users/:username', 'UserController.destroy')
 Route.put('users','UserController.update')
 Route.post('users','UserController.store')
