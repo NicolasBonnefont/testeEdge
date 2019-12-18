@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
 
   <meta charset="UTF-8">
@@ -14,14 +13,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
   
+
+
   <title>Cadastro de Clientes</title>
 </head>
 
 <body>
   <!--INICO-->
   @include('nav/nav')
-
-
   <!-- PARTE MENU-->
   <div class="container  ">
 
@@ -37,11 +36,8 @@
           <a class="nav-link" data-toggle="tab" href="#alterar">Alterar</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#permissoes">Permissões</a>
+          <a class="nav-link" data-toggle="tab" href="#permissoes" onclick="atualizaTabela()">Permissões</a>
         </li>
-
-
-
       </ul>
 
       <!-- Propriedades dos Menus quando selecionado -->
@@ -126,18 +122,17 @@
                 </div>
                 <br>
                 <button class="btn btn btn-outline-primary" onclick="alterarUsuario()">Alterar</button>
-                <button class="btn btn btn-outline-danger" onclick="excluirUsuario()" data-toggle="modal"
-                  data-target="#exampleModal">Excluir</button>
+                <button class="btn btn btn-outline-danger" onclick="excluirUsuario()">Excluir</button>
               </div>
 
             </fieldset>
           </form>
         </div>
+        <!-- MENU DA TABELA DE USUARIOS-->
 
-
-
-
-        <div id="permissoes" class="container tab-pane fade"><br>
+        
+        <div id="permissoes" class="container tab-pane fade" ><br>
+          
           <table id="teste" class="display" style="width:100%">
             <thead>
                 <tr>
@@ -147,41 +142,28 @@
                     <th>Admin</th>                                  
                 </tr>
             </thead>
+            
         </table>
-        </div>        
+        <br>   
+        <button class="btn btn btn-outline-primary" onclick="atualizaTabela()">Atualizar Tabela</button>
+        <button class="btn btn btn-outline-danger" onclick="alteraTabela()">Alterar Tabela</button> 
+        </div>  
+  
       </div>
     </div>
+    
   </div>
-
-
-
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="../js/verificaAcesso.js"></script>
   <script src="../js/cadastroUsuario.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="../js/verificaAcesso.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
-
-  <script>
-$(document).ready(function() {
-    $('#teste').DataTable( {
-        "ajax": "../users",
-        "columns": [
-            { "data": "username" },
-            { "data": "name" },
-            { "data": "email" },
-            { "data": "admin" }
-        ]
-    } );
-} );
-
-  </script>
+ 
   
 </body>
 
