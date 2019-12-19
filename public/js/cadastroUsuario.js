@@ -174,7 +174,6 @@ function mostrarTabela(){
             "ajax": "../users",
             "columns": [
                 { "data": "username" },
-                { "data": "name" },
                 { "data": "email" },
                 { "data": "admin" }
             ],
