@@ -1,5 +1,3 @@
-var url ='https://api-mor.herokuapp.com'
-
 // FUNCAO QUE CRIA USUARIO
 async function cadastraUsuario() {
 
