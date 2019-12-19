@@ -65,7 +65,7 @@ async function buscarUsuario() {
   
     .then(function (response) {
       
-      
+      console.log(usuarioBusca)
       campos.disabled = false
 
       usuarioAltera.value = response.data.name
@@ -73,7 +73,7 @@ async function buscarUsuario() {
       empresaAltera.value = response.data.empresa
       adminAltera.value =  response.data.admin
       
-      if ( adminAltera.value ==1){
+      if ( adminAltera.value == 1){
         adminAltera.checked = true
       }else{
         adminAltera.checked = false
@@ -82,7 +82,7 @@ async function buscarUsuario() {
 
     })
     .catch(function (error) {
-     
+      console.log(error)
       alert("Usuario não encotrado")
       campos.disabled = true
       document.getElementById("formBusca").reset();
