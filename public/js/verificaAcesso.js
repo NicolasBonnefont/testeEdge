@@ -31,6 +31,7 @@ function verificaAcesso(){
   document.body.style.backgroundImage = "url('/img/empresa/"+empresalow+"/logo.png')";
   linkPrincipal.text = empresa
 
+
   // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
   console.log(user.admin)
   if(user.admin == 1){
