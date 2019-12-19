@@ -3,6 +3,7 @@ async function deslogar(){
   
   sessionStorage.clear()
   localStorage.clear()
+  verificaAcesso()
   }
 
 function verificaAcesso(){
@@ -13,6 +14,7 @@ function verificaAcesso(){
   const linkPrincipal = document.getElementById('linkPrincipal')
   var menuCadastro = document.getElementById('menuCadastro')
   menuCadastro.classList.add("disabled")
+  
 
   var data = sessionStorage.getItem("user")
   const user = JSON.parse(data)
@@ -33,7 +35,8 @@ function verificaAcesso(){
   console.log(user.admin)
   if(user.admin == 1){
     console.log('ok')
-    menuCadastro.classList.remove("disabled")
+   menuCadastro.classList.remove("disabled")
+   
   }
   
 }
