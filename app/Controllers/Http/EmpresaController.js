@@ -5,6 +5,9 @@ const Empresa = use('App/Models/Empresa')
 class EmpresaController {
 
   async index ({ request, response, view }) {
+    const data = await Empresa.all()
+
+    return {data}
   }
 
   async create ({ request  }) {
@@ -35,9 +38,9 @@ class EmpresaController {
   }
 
   async update ({ params, request, response }) {
-    const {empresa} = request.all()
+    const {id} = request.all()
 
-    const empresas = await Empresa.findByOrFail('empresa', empresa)
+    const empresas = await Empresa.findByOrFail('id', id)
     const data = request.only(["empresa", "bi"]);
   
     empresas.merge(data);

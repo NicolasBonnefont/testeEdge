@@ -9,7 +9,6 @@ async function cadastraUsuario() {
   const email = document.getElementById('email').value
   const empresa = document.getElementById('empresa').value
   const admin = document.getElementById('admin')
-
   var adminOK = 0
 
   if(admin.checked){
@@ -17,8 +16,7 @@ async function cadastraUsuario() {
   }else{
     adminOK = 0
   }
-  console.log(admin.checked)
-  console.log(adminOK)
+
   await axios.post('/users', {
       "username": `${username}`,
       "name": `${name}`,
@@ -97,7 +95,6 @@ async function alterarUsuario() {
   event.preventDefault()
 
   const campos = document.getElementById('campos')
-
   const usuarioAltera = document.getElementById('usuarioAltera').value
   const emailAltera = document.getElementById('emailAltera').value
   const empresaAltera = document.getElementById('empresaAltera').value
@@ -140,7 +137,6 @@ async function alterarUsuario() {
 async function excluirUsuario(){
 
   event.preventDefault()
-
   const campos = document.getElementById('campos')
   const usuarioBusca = document.getElementById('usuarioBusca').value
 
@@ -174,6 +170,7 @@ function mostrarTabela(){
             "ajax": "../users",
             "columns": [
                 { "data": "username" },
+                { "data": "name" },
                 { "data": "email" },
                 { "data": "admin" }
             ],

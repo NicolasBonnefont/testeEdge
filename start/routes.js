@@ -31,4 +31,8 @@ Route.post('empresa','EmpresaController.store')
 Route.get('empresa/:empresa','EmpresaController.show')
 Route.put('empresa','EmpresaController.update')
 Route.delete('empresa/:empresa','EmpresaController.destroy')
+Route.get('empresa','EmpresaController.index')
+
+Route.post('files', 'FileController.store')
+Route.get('files/:id', 'FileController.show')
 

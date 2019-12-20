@@ -31,7 +31,6 @@ async function logar() {
     var empresa = response.data.empresas.empresa
     const sessao = response.data.token.token
     const user = response.data.user
-
     const usuario = JSON.stringify(user)
  
 
@@ -44,8 +43,7 @@ async function logar() {
     sessionStorage.setItem('user', usuario)
      
 
-      alert("Logado com Sucesso")
-      
+      alert("Logado com Sucesso")      
       window.location.replace("pag/principal");
       
     }

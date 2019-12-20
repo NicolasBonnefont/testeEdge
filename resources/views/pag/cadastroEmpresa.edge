@@ -31,6 +31,9 @@
                   <li class="nav-item">
                       <a class="nav-link" href="#Alterar" data-toggle="tab">Alterar</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#Listagem" data-toggle="tab" onclick="atualizaTabela()" >Listagem</a>
+                </li>                  
               </ul>
           </div>
       </div>
@@ -45,9 +48,8 @@
               <div class="form-group ">
                 <label for="exampleInputEmail1">BI</label>
                 <input type="text" class="form-control" id="linkbi" required>                  
-              </div>
-
-            <br>
+              </div>             
+              <br>
               <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>             
           </div>
@@ -84,21 +86,29 @@
                 <input type="text" class="form-control" id="linkbiAltera"required>
               </div>                
             <br>
-              <button type="submit" class="btn btn-primary">Alterar</button>
+              <button type="submit" class="btn btn-primary" onclick="alteraEmpresa()">Alterar</button>
               </fieldset>
             </form> 
-          </div>                    
+          </div>
+
+          <div class="tab-pane" id="Listagem">
+            <table id="teste" class="display" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Empresa</th>
+                  <th>Link BI</th>   
+                </tr>
+              </thead>
+            </table>
+          </div>          
+      </div>
+    
+
           </div>
       </div>
   </div>
 </div>
 
-
-
-
-
-
-
   </div>
 </div>
 
@@ -109,10 +119,13 @@
 
 
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="../js/verificaAcesso.js"></script>
 <script src="../js/cadastroEmpresa.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="../js/verificaAcesso.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
 </body>
 
 </html>
