@@ -19,7 +19,7 @@ class FileController {
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
-      await upload.move(Helpers.resourcesPath('img/pefil'),{
+      await upload.move(Helpers.publicPath('img/pefil'),{
         name: fileName
       })
 
@@ -49,7 +49,7 @@ class FileController {
   
     const file = await File.findOrFail(params.id)
 
-    return response.download(Helpers.resourcesPath(`img/perfil/${file.file}`))
+    return response.download(Helpers.publicPath(`img/perfil/${file.file}`))
   
 
   }
@@ -61,7 +61,7 @@ class FileController {
     try {
 
       await file.delete()
-      fs.unlinkSync(Helpers.resourcesPath(`img/perfil/${file.file}`))
+      fs.unlinkSync(Helpers.publicPath(`img/perfil/${file.file}`))
       return response.status(200).send({ok:'IMG Deletado com sucesso'})
     } 
     catch(err) {
