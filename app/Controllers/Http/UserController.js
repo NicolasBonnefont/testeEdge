@@ -21,17 +21,13 @@ class UserController {
 
   }
 
-
-
-
-
   async update({ request, response }) {
     try{
 
       const {username} = request.all()
 
       const user = await User.findByOrFail('username', username)
-      const data = request.only(["username", "name","email","empresa","admin"]);
+      const data = request.only(["username", "name","email","empresa","admin","url","urlID"]);
     
       user.merge(data);
       await user.save();

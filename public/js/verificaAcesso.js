@@ -19,7 +19,6 @@ function verificaAcesso(){
   var data = sessionStorage.getItem("user")
   const user = JSON.parse(data)
 
-  
     // VERIFICA SE ESTA LOGADO
   if (!sessao){
     // NAO LOGADO, REDIRECIONA PARA A TELA DE LOGIN
@@ -28,14 +27,16 @@ function verificaAcesso(){
 
   // colocado o caminho em lowercase para nao gerar problema com servidor online
   var empresalow = caminhoEmpresa.toLocaleLowerCase()
-  document.body.style.backgroundImage = "url('/img/empresa/"+empresalow+"/logo.png')";
+  // CARREGA OS DADOS DA EMPRESA CONFORME USER LOGADO E IM DO PERFIL
+  document.body.style.backgroundImage = "url('/img/empresa/"+empresalow+"/logo.png')"
   linkPrincipal.text = empresa
+  document.getElementById("imgLogin").src = user.url
 
 
   // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
-  console.log(user.admin)
+  
   if(user.admin == 1){
-    console.log('ok')
+    
    menuCadastro.classList.remove("disabled")
    
   }

@@ -9,10 +9,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="../css/alinhamentoCadastro.css">
   <link href="../css/alinhamentoImg.css" rel="stylesheet">
-
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- 
+
 
 
   <title>Cadastro de Clientes</title>
@@ -28,12 +26,12 @@
         <div class="nav-tabs-wrapper">
           <ul class="nav nav-tabs" data-tabs="tabs">
             <li class="nav-item">
-              <a class="nav-link active" href="#Cadastrar" data-toggle="tab">Cadastrar</a>
+              <a class="nav-link active" href="#Cadastrar" data-toggle="tab"onclick="limparCampos()">Cadastrar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#Alterar" data-toggle="tab">Alterar</a>
+              <a class="nav-link" href="#Alterar" data-toggle="tab"onclick="limparCampos()">Alterar</a>
             </li>
-            <li class="nav-item" >
+            <li class="nav-item">
               <a class="nav-link" href="#Listagem" data-toggle="tab" onclick="atualizaTabela()">Listagem</a>
             </li>
           </ul>
@@ -46,6 +44,7 @@
 
           <div class="row">
             <div class="col-md-6">
+
               <form id="form" onsubmit="cadastraUsuario()" method="POST">
                 <div class="form-group ">
                   <label for="exampleInputEmail1">Usuário</label>
@@ -78,20 +77,22 @@
                   </label>
                 </div>
                 <br>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-              </form>
-            </div> 
+
+            </div>
+
             <div class="cold-md-5 text-center">
               <div class="card" style="width: 25rem;">
-                <img class="card-img-top rounded img-fluid " src="https://images.unsplash.com/photo-1517303650219-83c8b1788c4c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bd4c162d27ea317ff8c67255e955e3c8&auto=format&fit=crop&w=2691&q=80" alt=" Thumbnail Image ">
+                <img id="imageNovo" class="card-img-top rounded img-fluid "
+                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
                 <form><br>
                   <div class="form-group">
-                    <label for="exampleFormControlFile1">Carregar Foto<label>                  
-                      <input type="file" class="form-control-file" id="exampleFormControlFile1">              
+                    <label for="imgNovo">CARREGAR FOTO<label>
+                        <input onchange="showImageNovo.call(this)" type="file" class="form-control-file" id="imgNovo">
                   </div>
-                </form>
               </div>
             </div>
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
           </div>
 
         </div>
@@ -99,7 +100,6 @@
         <!--               PARTE DE ALTERACAO      -->
 
         <div class="tab-pane" id="Alterar">
-
           <form class="form-group" id="formBusca" onsubmit="buscarUsuario()" method="POST">
 
             <div class="col-8 align-items-center">
@@ -115,32 +115,48 @@
             <div class="col-auto">
             </div>
           </form>
-    
 
-          <form class=" form-group" id="formAltera" method="POST">
-            <fieldset id="campos" disabled>
+          <div class="row">
+            <div class="col-md-6">
+
+              <form class=" form-group" id="formAltera" method="POST" class="">
+                <fieldset id="campos" disabled>
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Nome</label>
+                    <input type="text" class="form-control" id="usuarioAltera" required>
+                  </div>
+              </form>
               <div class="form-group ">
-                <label for="exampleInputEmail1">Nome</label>
-                <input type="text" class="form-control" id="usuarioAltera" required>
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="emailAltera" required>
               </div>
-          </form>
-          <div class="form-group ">
-            <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control" id="emailAltera" required>
-          </div>
-          <div class="form-group ">
-            <label for="exampleInputEmail1">Empresa</label>
-            <input type="text" class="form-control" id="empresaAltera" required>
-          </div>
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="adminAltera" type="checkbox" value="">
-              Administrador
-              <span class="form-check-sign">
-                <span class="check"></span>
-              </span>
-            </label>
-          </div>
+              <div class="form-group ">
+                <label for="exampleInputEmail1">Empresa</label>
+                <input type="text" class="form-control" id="empresaAltera" required>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" id="adminAltera" type="checkbox" value="">
+                  Administrador
+                  <span class="form-check-sign">
+                    <span class="check"></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="cold-md-5 text-center">
+              <div class="card" style="width: 25rem;">
+                <img id="imageAltera" class="card-img-top rounded img-fluid "
+                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
+                <form><br>
+                  <div class="form-group">
+                    <label for="imgAltera">CARREGAR FOTO<label>
+                        <input onchange="showImageAltera.call(this)" type="file" class="form-control-file" id="imgAltera">
+                  </div>
+              </div>
+            </div>
+           </div>
+
           <br>
           <button type="submit" class="btn btn-primary" onclick="alterarUsuario()">Alterar</button>
           </fieldset>
@@ -148,7 +164,8 @@
         </div>
 
 
-        <div class="tab-pane" id="Listagem">
+
+        <div class="tab-pane table table-striped table-bordered" id="Listagem">
           <table id="teste" class="display" style="width:100%">
             <thead>
               <tr>
@@ -172,8 +189,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
- 
-
 
 </body>
 

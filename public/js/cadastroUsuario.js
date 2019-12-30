@@ -9,21 +9,46 @@ async function cadastraUsuario() {
   const email = document.getElementById('email').value
   const empresa = document.getElementById('empresa').value
   const admin = document.getElementById('admin')
+  const imgNovo = document.getElementById('imgNovo').files[0]
+
+  var url = ''
   var adminOK = 0
 
-  if(admin.checked){
-   adminOK = 1
-  }else{
+  let data = new FormData()
+  data.append("file", imgNovo)
+
+  if (admin.checked) {
+    adminOK = 1
+  } else {
     adminOK = 0
   }
+
+
+  var conteudo = {
+    header: {
+      "content-type": "multipart/form-data"
+    }
+  }
+  await axios.post('/files', data, conteudo)
+
+    .then(function (response) {
+      url = response.data.url
+
+
+    }).catch(function (err) {
+      console.log("erro :( ")
+
+    });
+
 
   await axios.post('/users', {
       "username": `${username}`,
       "name": `${name}`,
       "password": `${password}`,
       "email": `${email}`,
-      "empresa":`${empresa}`,
-      "admin":`${adminOK}`
+      "empresa": `${empresa}`,
+      "admin": `${adminOK}`,
+      "url": url
     })
 
     .then(function (response) {
@@ -34,9 +59,9 @@ async function cadastraUsuario() {
       }
 
       if (response.status === 200) {
-        console.log(response.data)
         alert('Usuario Cadastrado com Sucesso !')
         document.getElementById("form").reset();
+        document.getElementById("image").src = 'https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg';
 
       }
 
@@ -58,25 +83,30 @@ async function buscarUsuario() {
   const usuarioBusca = document.getElementById('usuarioBusca').value
   const campos = document.getElementById('campos')
 
-  
   await axios.get("/users/" + usuarioBusca)
-  
+
     .then(function (response) {
-      
+
       console.log(usuarioBusca)
       campos.disabled = false
 
       usuarioAltera.value = response.data.name
       emailAltera.value = response.data.email
       empresaAltera.value = response.data.empresa
-      adminAltera.value =  response.data.admin
+      adminAltera.value = response.data.admin
+      document.getElementById("imageAltera").src = response.data.url     
+      urlID = response.data.urlID
+      url = response.data.url
+
+      console.log(urlID)
       
-      if ( adminAltera.value == 1){
+
+      if (adminAltera.value == 1) {
         adminAltera.checked = true
-      }else{
+      } else {
         adminAltera.checked = false
       }
-     
+
 
     })
     .catch(function (error) {
@@ -93,38 +123,82 @@ async function buscarUsuario() {
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
 async function alterarUsuario() {
   event.preventDefault()
-
+  
   const campos = document.getElementById('campos')
   const usuarioAltera = document.getElementById('usuarioAltera').value
   const emailAltera = document.getElementById('emailAltera').value
   const empresaAltera = document.getElementById('empresaAltera').value
   const usuarioBusca = document.getElementById('usuarioBusca').value
+  const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera')
   var adminAlteraOK = 0
-  console.log(adminAltera.checked)
-  if(adminAltera.checked){
-    console.log('alterar para 1 ')
+  var urlAltera = url
+  
+
+  if (adminAltera.checked) {
+
     adminAlteraOK = 1
-  }else{
-    console.log('alterar para 0 ')
+  } else {
+
     adminAlteraOK = 0
   }
 
+
+  console.log("img ID no altera"+ urlID)
+  console.log("url no altera"+ url)
+  if (!imgAltera == ''){
+
+  await axios.delete("/files/" + urlID)
+  
+  .then(function(response){
+    console.log("img deletado")
+  })
+  .catch(function(error){
+    console.log("problema deletar img")
+  })
+
+ 
+
+  let dataAltera = new FormData()
+  dataAltera.append("file", imgAltera)
+
+  var conteudo = {
+    header: {
+      "content-type": "multipart/form-data"
+    }
+  }
+   //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
+   // SE ALTERADO, ASSUME A NOVA URL E ID
+  
+    
+    await axios.post('/files', dataAltera, conteudo)
+ 
+    .then(function (response) {
+      urlAltera = response.data.url
+      urlID = response.data.id
+      
+
+    }).catch(function (err) {
+      console.log(err)
+
+    });
+
+  }
 
   await axios.put("/users", {
       "name": `${usuarioAltera}`,
       "email": `${emailAltera}`,
       "username": `${usuarioBusca}`,
       "empresa": `${empresaAltera}`,
-      "admin":`${adminAlteraOK}`
+      "admin": `${adminAlteraOK}`,
+      "url": urlAltera,
+      "urlID": urlID
     })
 
     .then(function (response) {
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
-      document.getElementById("formBusca").reset();
-      document.getElementById("formAltera").reset();
-
+      limparCampos()
 
     })
     .catch(function (error) {
@@ -134,21 +208,29 @@ async function alterarUsuario() {
     })
 }
 
-async function excluirUsuario(){
-
+async function excluirUsuario() {
   event.preventDefault()
+
   const campos = document.getElementById('campos')
   const usuarioBusca = document.getElementById('usuarioBusca').value
 
-console.log(usuarioAltera)
-  await axios.delete("/users/"+usuarioBusca)
+  await axios.delete("/files/" + urlID)
+
+  .then(function(response){
+    console.log("img deletado")
+  })
+  .catch(function(error){
+    console.log("problema deletar img")
+  })
+
+  await axios.delete("/users/" + usuarioBusca)
 
     .then(function (response) {
       alert("Usuário excluido com sucesso !")
       campos.disabled = true
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
-     
+
     })
     .catch(function (error) {
       campos.disabled = true
@@ -156,33 +238,46 @@ console.log(usuarioAltera)
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
     })
+
+  
 }
-function prevenir(){
+
+// FUNCAO QUE REMOVE O EVENTO PADRAO DE SUBMIT DO BOTAO
+function prevenir() {
   event.preventDefault()
 }
 
-function atualizaTabela(){
-  $ ('#teste').DataTable().ajax.reload();
+// FUNCAO 
+function atualizaTabela() {
+  $('#teste').DataTable().ajax.reload();
 }
-function mostrarTabela(){
-    $(document).ready(function() {
-        $('#teste').DataTable( {           
-            "ajax": "../users",
-            "columns": [
-                { "data": "username" },
-                { "data": "name" },
-                { "data": "email" },
-                { "data": "admin" }
-            ],
-            "language": idioma,
-            buttons: [
-              'copy', 'excel', 'pdf'
-          ]
-        })
 
+function mostrarTabela() {
+  $(document).ready(function () {
+    $('#teste').DataTable({
+      "ajax": "../users",
+      "columns": [{
+          "data": "username"
+        },
+        {
+          "data": "name"
+        },
+        {
+          "data": "email"
+        },
+        {
+          "data": "admin"
+        }
+      ],
+      "language": idioma,
+      buttons: [
+        'copy', 'excel', 'pdf'
+      ]
     })
-    var idioma = {
-      
+
+  })
+  var idioma = {
+
     "sEmptyTable": "Nenhum registro encontrado",
     "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
     "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
@@ -195,24 +290,56 @@ function mostrarTabela(){
     "sZeroRecords": "Nenhum registro encontrado",
     "sSearch": "Pesquisar",
     "oPaginate": {
-        "sNext": "Próximo",
-        "sPrevious": "Anterior",
-        "sFirst": "Primeiro",
-        "sLast": "Último"
+      "sNext": "Próximo",
+      "sPrevious": "Anterior",
+      "sFirst": "Primeiro",
+      "sLast": "Último"
     },
     "oAria": {
-        "sSortAscending": ": Ordenar colunas de forma ascendente",
-        "sSortDescending": ": Ordenar colunas de forma descendente"
+      "sSortAscending": ": Ordenar colunas de forma ascendente",
+      "sSortDescending": ": Ordenar colunas de forma descendente"
     },
     "select": {
-        "rows": {
-            "_": "Selecionado %d linhas",
-            "0": "Nenhuma linha selecionada",
-            "1": "Selecionado 1 linha"
-        }
+      "rows": {
+        "_": "Selecionado %d linhas",
+        "0": "Nenhuma linha selecionada",
+        "1": "Selecionado 1 linha"
+      }
     }
-}  
+  }
+}
+
+function limparCampos() {
+  document.getElementById("form").reset();
+  document.getElementById("formBusca").reset();
+  document.getElementById("formAltera").reset();
+  document.getElementById("imageNovo").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
+  document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
+}
+
+
+
+function showImageNovo() {
+  if (this.files && this.files[0]) {
+    var obj = new FileReader()
+    obj.onload = function (data) {
+      var imgNovo = document.getElementById("imageNovo")
+      imgNovo.src = data.target.result
+    }
+    obj.readAsDataURL(this.files[0])
+  }
+}
+
+function showImageAltera() {
+  console.log("NOVO IMG ")
+  if (this.files && this.files[0]) {
+    var obj = new FileReader()
+    obj.onload = function (data) {
+      var imgAltera = document.getElementById("imageAltera")
+      imgAltera.src = data.target.result
+    }
+    obj.readAsDataURL(this.files[0])
+  }
 }
 
 mostrarTabela()
-

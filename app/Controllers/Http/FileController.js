@@ -1,6 +1,7 @@
 'use strict'
 const File = use('App/Models/File')
 const Helpers = use('Helpers')
+const fs = require('fs')
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -12,7 +13,7 @@ class FileController {
   async store ({ request, response }) {
     try{
 
-      if(!request.file('file')) return
+      if(!request.file('file')) return response.status(500).send({mensagem:"erro"})
 
       const upload = request.file('file', { size: '2mb'})
 
@@ -45,11 +46,29 @@ class FileController {
   }
 
   async show({params,response}){
-
+  
     const file = await File.findOrFail(params.id)
 
     return response.download(Helpers.tmpPath(`uploads/${file.file}`))
+  
+
   }
+
+  async destroy ({ params, response }) {
+    const file = await File.findByOrFail(params)
+    
+
+    try {
+
+      await file.delete()
+      fs.unlinkSync(Helpers.tmpPath(`uploads/${file.file}`))
+      return response.status(200).send({ok:'IMG Deletado com sucesso'})
+    } 
+    catch(err) {
+      return response.status(500).send({Erro:'Problema na exclusão da IMG',err})
+    }
+    
+  }  
 }
 
 module.exports = FileController

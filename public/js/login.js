@@ -1,4 +1,3 @@
-var url ='https://api-mor.herokuapp.com'
 
   // SE JA ESTIVER LOGADO, DESCONSIDERA TELA DE LOGIN
 
@@ -9,31 +8,28 @@ var url ='https://api-mor.herokuapp.com'
     window.location.replace("pag/principal");
   }
 }
-  //CHAMA A FUNCAO 
+  //CHAMA A FUNCAO A TODOS OS  LOADING DAS PAGINAS
 verificaLogado()
 
   // FUNCAO DE LOGAR NO SISTEMA
-async function logar() {
- 
+async function logar() { 
   event.preventDefault()
 
   const password = document.getElementById('password').value
   const email = document.getElementById('email').value
-  const progresso = document.getElementById('progresso')
-
-  //progresso.className="progress"
+  
  
   await axios.post('/sessions', {"password":`${password}`,"email":`${email}`})
-
+  
   .then(function (response) {
-  // CARREGA OS DADOS VINDO BACKEND
+  //CARREGA OS DADOS VINDO BACKEND
     const bi = response.data.empresas.bi
     var empresa = response.data.empresas.empresa
     const sessao = response.data.token.token
-    const user = response.data.user
-    const usuario = JSON.stringify(user)
- 
-
+    let user = response.data.user
+    let usuario = JSON.stringify(user)
+    
+    
       // QUANDO O STATUS VINDO DO BACKEND FOR 200, AI FAZ O LOGIN
     if(response.status === 200){
 
@@ -52,7 +48,7 @@ async function logar() {
   .catch(function (error) {
     console.log(error)
     alert("Problema na autenticação !")
-    //progresso.className=""
+    
     
   })
 
