@@ -145,7 +145,7 @@ async function alterarUsuario() {
 
 
   console.log("img ID no altera"+ urlID)
-  console.log("url no altera"+ url)
+  console.log("url no altera "+ url)
   if (!imgAltera == ''){
 
   await axios.delete("/files/" + urlID)

@@ -19,9 +19,7 @@ class FileController {
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
-      await upload.fs.writeFile(Helpers.publicPath('uploads'),{
-        name: fileName
-      })
+      await upload.fs.writeFile(filename)
 
       if (!upload.moved()){
         throw upload.error()
