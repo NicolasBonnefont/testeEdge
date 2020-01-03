@@ -20,7 +20,7 @@ class FileController {
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
-      await upload.move(path.join('uploads'),{
+      await upload.move({
         name: fileName
       })
 
