@@ -7,7 +7,6 @@ const fs = require('fs')
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 
-
 class FileController {
 
   async store ({ request, response }) {
@@ -19,7 +18,7 @@ class FileController {
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
-      await upload.move(download(publicPath('uploads')),{
+      await upload.move(publicPath('uploads'),{
         name: fileName
       })
 
