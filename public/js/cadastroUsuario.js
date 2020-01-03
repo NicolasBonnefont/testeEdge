@@ -23,7 +23,6 @@ async function cadastraUsuario() {
     adminOK = 0
   }
 
-
   var conteudo = {
     header: {
       "content-type": "multipart/form-data"
@@ -34,12 +33,11 @@ async function cadastraUsuario() {
     .then(function (response) {
       url = response.data.url
 
-
     }).catch(function (err) {
-      console.log("erro :( ")
+      alert("Verificar log")
+      console.log(err)
 
     });
-
 
   await axios.post('/users', {
       "username": `${username}`,
@@ -67,9 +65,9 @@ async function cadastraUsuario() {
 
     })
     .catch(function (error) {
-      console.log(error)
-      alert('Usário/Email já exite ! !', error)
-
+      alert("Verificar log")
+      console.log(err)
+      
 
     })
 }
@@ -86,8 +84,7 @@ async function buscarUsuario() {
   await axios.get("/users/" + usuarioBusca)
 
     .then(function (response) {
-
-      console.log(usuarioBusca)
+      
       campos.disabled = false
 
       usuarioAltera.value = response.data.name
@@ -97,8 +94,6 @@ async function buscarUsuario() {
       document.getElementById("imageAltera").src = response.data.url     
       urlID = response.data.urlID
       url = response.data.url
-
-      console.log(urlID)
       
 
       if (adminAltera.value == 1) {
@@ -109,9 +104,9 @@ async function buscarUsuario() {
 
 
     })
-    .catch(function (error) {
-      console.log(error)
-      alert("Usuario não encotrado")
+    .catch(function (error) {      
+      console.log(err)
+      alert("Usuario não encotrado, verificar log.")
       campos.disabled = true
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
@@ -143,18 +138,15 @@ async function alterarUsuario() {
     adminAlteraOK = 0
   }
 
-
-  console.log("img ID no altera"+ urlID)
-  console.log("url no altera "+ url)
   if (!imgAltera == ''){
 
   await axios.delete("/files/" + urlID)
   
   .then(function(response){
-    console.log("img deletado")
+    
   })
   .catch(function(error){
-    console.log("problema deletar img")
+  return alert("Houve um problema !")
   })
 
  
@@ -179,6 +171,7 @@ async function alterarUsuario() {
       
 
     }).catch(function (err) {
+      alert("Verificar log")
       console.log(err)
 
     });
@@ -202,8 +195,9 @@ async function alterarUsuario() {
 
     })
     .catch(function (error) {
-
-      alert("Não foi possivel alterar este cadastro")
+      
+      console.log(error)
+      alert("Não foi possivel alterar este cadastro, verificar log")
 
     })
 }
@@ -217,10 +211,16 @@ async function excluirUsuario() {
   await axios.delete("/files/" + urlID)
 
   .then(function(response){
-    console.log("img deletado")
+
+   alert("Usuario excluido com sucesso !")
+   console.log(response)
+
   })
   .catch(function(error){
-    console.log("problema deletar img")
+
+    console.log(error)    
+    alert("Verificar log")
+    
   })
 
   await axios.delete("/users/" + usuarioBusca)
@@ -233,8 +233,9 @@ async function excluirUsuario() {
 
     })
     .catch(function (error) {
+      console.log(error)       
       campos.disabled = true
-      alert("Não foi possivel excluir este cadastro")
+      alert("Não foi possivel excluir este cadastro, verificar log")
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
     })

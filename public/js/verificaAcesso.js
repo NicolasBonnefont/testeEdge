@@ -14,8 +14,6 @@ function verificaAcesso(){
   const linkPrincipal = document.getElementById('linkPrincipal')
   var menuCadastro = document.getElementById('menuCadastro')
   menuCadastro.classList.add("disabled")
-  
-
   var data = sessionStorage.getItem("user")
   const user = JSON.parse(data)
 
