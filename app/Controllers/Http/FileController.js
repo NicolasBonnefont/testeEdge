@@ -2,7 +2,6 @@
 const File = use('App/Models/File')
 const Helpers = use('Helpers')
 const fs = require('fs')
-var path = require('path');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -20,7 +19,7 @@ class FileController {
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
-      await upload.move('img',{
+      await upload.move(download(publicPath('uploads')),{
         name: fileName
       })
 
@@ -50,7 +49,7 @@ class FileController {
   
     const file = await File.findOrFail(params.id)
 
-    return response.download(path.join(`uploads/${file.file}`))
+    return response.download(tmpPath(`uploads/${file.file}`))
   
 
   }
@@ -62,7 +61,7 @@ class FileController {
     try {
 
       await file.delete()
-      fs.unlinkSync(path.join(`uploads/${file.file}`))
+      fs.unlinkSync(tmpPath(`uploads/${file.file}`))
       return response.status(200).send({ok:'IMG Deletado com sucesso'})
     } 
     catch(err) {
