@@ -49,7 +49,7 @@ class FileController {
   
     const file = await File.findOrFail(params.id)
 
-    return response.download(tmpPath(`uploads/${file.file}`))
+    return response.download(publicPath(`uploads/${file.file}`))
   
 
   }
@@ -61,7 +61,7 @@ class FileController {
     try {
 
       await file.delete()
-      fs.unlinkSync(tmpPath(`uploads/${file.file}`))
+      fs.unlinkSync(publicPath(`uploads/${file.file}`))
       return response.status(200).send({ok:'IMG Deletado com sucesso'})
     } 
     catch(err) {
