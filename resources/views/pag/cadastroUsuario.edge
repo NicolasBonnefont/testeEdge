@@ -27,10 +27,10 @@
         <div class="nav-tabs-wrapper">
           <ul class="nav nav-tabs" data-tabs="tabs">
             <li class="nav-item">
-              <a class="nav-link active" href="#Cadastrar" data-toggle="tab"onclick="limparCampos()">Cadastrar</a>
+              <a class="nav-link active" href="#Cadastrar" data-toggle="tab" onclick="limparCampos()">Cadastrar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#Alterar" data-toggle="tab"onclick="limparCampos()">Alterar</a>
+              <a class="nav-link" href="#Alterar" data-toggle="tab" onclick="limparCampos()">Alterar</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#Listagem" data-toggle="tab" onclick="atualizaTabela()">Listagem</a>
@@ -92,8 +92,7 @@
                   </div>
               </div>
             </div>
-     
-           
+
             </form>
           </div>
           <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -127,37 +126,42 @@
                     <label for="exampleInputEmail1">Nome</label>
                     <input type="text" class="form-control" id="usuarioAltera" required>
                   </div>
-              </form>
-              <div class="form-group ">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="emailAltera" required>
-              </div>
-              <div class="form-group ">
-                <label for="exampleInputEmail1">Empresa</label>
-                <input type="text" class="form-control" id="empresaAltera" required>
-              </div>
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input class="form-check-input" id="adminAltera" type="checkbox" value="">
-                  Administrador
-                  <span class="form-check-sign">
-                    <span class="check"></span>
-                  </span>
-                </label>
-              </div>
+
+
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="emailAltera" required>
+                  </div>
+
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Empresa</label>
+                    <input type="text" class="form-control" id="empresaAltera" required>
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" id="adminAltera" type="checkbox" value="">
+                      Administrador
+                      <span class="form-check-sign">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </div>
+
             </div>
             <div class="cold-md-5 text-center tamanhoPerfil ">
               <div class="card  ">
                 <img id="imageAltera" class="card-img-top rounded img-fluid "
                   src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
-                <form><br>
-                  <div class="form-group">
-                    <label for="imgAltera">CARREGAR FOTO<label>
-                        <input onchange="showImageAltera.call(this)" type="file" class="form-control-file" id="imgAltera">                        
-                  </div>
+                <br>
+                <div class="form-group ">
+                  <label for="imgAltera">CARREGAR FOTO<label>
+                      <input onchange="showImageAltera.call(this)" type="file" class="form-control-file" id="imgAltera"disabled>
+                </div>
               </div>
             </div>
-           </div>
+            </form>
+          </div>
 
           <br>
           <button type="submit" class="btn btn-primary" onclick="alterarUsuario()">Alterar</button>

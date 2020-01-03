@@ -80,6 +80,7 @@ async function buscarUsuario() {
   //campos do busca
   const usuarioBusca = document.getElementById('usuarioBusca').value
   const campos = document.getElementById('campos')
+  var imgAltera = document.getElementById('imgAltera')
 
   await axios.get("/users/" + usuarioBusca)
 
@@ -94,6 +95,7 @@ async function buscarUsuario() {
       document.getElementById("imageAltera").src = response.data.url     
       urlID = response.data.urlID
       url = response.data.url
+      imgAltera.attributes.removeNamedItem('disabled')
       
 
       if (adminAltera.value == 1) {
