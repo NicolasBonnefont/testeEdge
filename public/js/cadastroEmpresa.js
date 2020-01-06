@@ -138,7 +138,8 @@ async function alteraEmpresa() {
       });
 
   }
-
+  console.log("urlID: "+urlID)
+  console.log("URL ALTERA:  "+urlAltera)
   await axios.put("/empresa", {
       "empresa": `${empresaAltera}`,
       "bi": `${linkbiAltera}`,
