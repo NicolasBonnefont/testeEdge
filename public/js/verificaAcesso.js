@@ -26,7 +26,7 @@ function verificaAcesso(){
   // colocado o caminho em lowercase para nao gerar problema com servidor online
   var empresalow = caminhoEmpresa.toLocaleLowerCase()
   // CARREGA OS DADOS DA EMPRESA CONFORME USER LOGADO E IM DO PERFIL
-  document.body.style.backgroundImage = "url('/img/empresa/"+empresalow+"/logo.png')"
+  document.body.style.backgroundImage = sessionStorage.getItem("empresaUrl")
   linkPrincipal.text = empresa
   document.getElementById("imgLogin").src = user.url
 

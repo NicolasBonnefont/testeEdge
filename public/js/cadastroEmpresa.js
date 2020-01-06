@@ -26,9 +26,8 @@ async function cadastraEmpresa() {
     }).catch(function (err) {
       alert("Verificar log")
       console.log(err)
-
+      
     });
-
 
   await axios.post('/empresa', {
       "empresa": `${empresa}`,
