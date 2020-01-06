@@ -142,7 +142,7 @@ async function alteraEmpresa() {
       "empresa": `${empresaAltera}`,
       "bi": `${linkbiAltera}`,
       "id": id,
-      "url": urlAltera
+      "urlID": urlAltera
     })
 
     .then(function (response) {
