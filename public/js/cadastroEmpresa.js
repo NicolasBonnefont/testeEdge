@@ -64,10 +64,10 @@ async function buscarEmpresa() {
   //campos do busca
   const empresaBusca = document.getElementById('empresaBusca').value
   const campos = document.getElementById('campos')
-  await axios.get("/empresa/" + empresaBusca)
   var id = ''
 
-
+  await axios.get("/empresa/" + empresaBusca)
+  
     .then(function (response) {
       campos.disabled = false
       empresaAltera.value = response.data.empresa
