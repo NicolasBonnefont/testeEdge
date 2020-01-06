@@ -100,7 +100,7 @@ async function alteraEmpresa() {
   var urlAltera = url
 
   if (!imgAltera == '') {
-    console.log(urlID)
+    console.log(urlAltera)
     await axios.delete("/files/" + urlID)
     
       .then(function (response) {
