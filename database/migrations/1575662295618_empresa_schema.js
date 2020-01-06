@@ -9,6 +9,8 @@ class EmpresaSchema extends Schema {
       table.increments()
       table.string('empresa', 80).notNullable().unique()
       table.string('bi')
+      table.string('url')
+      table.string('urlID')
       table.string('painel')
       table.timestamps()
     })

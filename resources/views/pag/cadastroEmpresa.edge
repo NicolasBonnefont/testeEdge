@@ -9,108 +9,149 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="../css/alinhamentoCadastro.css">
   <link href="../css/alinhamentoImg.css" rel="stylesheet">
+  <link href="../css/perfil/imgPerfil.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
   <title>Cadastro de Clientes</title>
 </head>
+
 <body>
   <!--INICO-->
   @include('nav/nav')
 
-<!-- PARTE MENU-->
-<div class="card card-nav-tabs card-header container ">
-  <div class="card-header card-header-danger">
+  <!-- PARTE MENU-->
+  <div class="card card-nav-tabs card-header container ">
+    <div class="card-header card-header-danger">
       <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
       <div class="nav-tabs-navigation">
-          <div class="nav-tabs-wrapper">
-              <ul class="nav nav-tabs" data-tabs="tabs">
-                  <li class="nav-item">
-                      <a class="nav-link active" href="#Cadastrar" data-toggle="tab">Cadastrar</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#Alterar" data-toggle="tab">Alterar</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#Listagem" data-toggle="tab" onclick="atualizaTabela()" >Listagem</a>
-                </li>                  
-              </ul>
-          </div>
+        <div class="nav-tabs-wrapper">
+          <ul class="nav nav-tabs" data-tabs="tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#Cadastrar" data-toggle="tab">Cadastrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#Alterar" data-toggle="tab">Alterar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#Listagem" data-toggle="tab" onclick="atualizaTabela()">Listagem</a>
+            </li>
+          </ul>
+        </div>
       </div>
-  </div><div class="card-body ">
-      <div class="tab-content col-8 ">
-          <div class="tab-pane active" id="Cadastrar">
-            <form id="form" onsubmit="cadastraEmpresa()" method="POST">
-              <div class="form-group ">
-                <label for="exampleInputEmail1">Empresa</label>
-                <input type="text" class="form-control" id="empresa" required>
+    </div>
+    <div class="card-body ">
+      <div class="tab-content col-12 ">
+        <div class="tab-pane active" id="Cadastrar">
+
+          <div class="row">
+            <div class="col-md-6">
+
+              <form id="form" onsubmit="cadastraEmpresa()" method="POST">
+                <div class="form-group ">
+                  <label for="exampleInputEmail1">Empresa</label>
+                  <input type="text" class="form-control" id="empresa" aria-describedby="emailHelp" required>
+                </div>
+                <div class="form-group ">
+                  <label for="exampleInputEmail1">LINK BI</label>
+                  <input type="email" class="form-control" id="linkbi" aria-describedby="emailHelp" required>
+                </div>
+                <br>
+            </div>
+
+            <div class="cold-md-5 text-center tamanhoPerfil">
+              <div class="card">
+                <img id="imageNovo" class="card-img-top rounded img-fluid "
+                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
+                <form><br>
+                  <div class="form-group">
+                    <label for="imgNovo">CARREGAR LOGO<label>
+                        <input onchange="showImageNovo.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgNovo">
+                  </div>
               </div>
-              <div class="form-group ">
-                <label for="exampleInputEmail1">BI</label>
-                <input type="text" class="form-control" id="linkbi" required>                  
-              </div>             
-              <br>
-              <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </form>             
+            </div>
+
+            </form>
           </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
 
-          <!--               PARTE DE ALTERACAO      -->
+        <!--               PARTE DE ALTERACAO      -->
 
-          <div class="tab-pane" id="Alterar">
+        <div class="tab-pane" id="Alterar">
+          <form class="form-group" id="formBusca" onsubmit="buscarEmpresa()" method="POST">
 
-            <form class="form-group" id="formBusca" onsubmit="buscarEmpresa()" method="POST">
-              <div class="col-8 align-items-center">
-                <label>Empresa</label>
-                <div class="input-group mb-3">
-                  <input type="text" id="empresaBusca" class="form-control"required>
-                  <br>
-                  <button class="btn btn-primary btn-round  btn-sm">
-                    <i class="material-icons">search</i>Buscar
-                  </button>
+            <div class="col-8 align-items-center">
+              <label>Empresa</label>
+              <div class="input-group mb-3">
+                <input type="text" id="empresaBusca" class="form-control" required>
+                <br>
+                <button class="btn btn-primary btn-round  btn-sm">
+                  <i class="material-icons">search</i>Buscar
+                </button>
+              </div>
+            </div>
+            <div class="col-auto">
+            </div>
+          </form>
+
+          <div class="row">
+            <div class="col-md-6">
+
+              <form class=" form-group" id="formAltera" method="POST" class="">
+                <fieldset id="campos" disabled>
+
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Empresa</label>
+                    <input type="text" class="form-control" id="empresaAltera" required>
+                  </div>
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">LINK BI</label>
+                    <input type="text" class="form-control" id="linkbiAltera" required>
+                  </div>                  
+
+
+            </div>
+            <div class="cold-md-5 text-center tamanhoPerfil ">
+              <div class="card  ">
+                <img id="imageAltera" class="card-img-top rounded img-fluid "
+                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
+                <br>
+                <div class="form-group ">
+                  <label for="imgAltera">CARREGAR LOGO<label>
+                      <input onchange="showImageAltera.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgAltera"disabled>
                 </div>
               </div>
-              <div class="col-auto">
-              </div>
-            </form>              
-            
-
-              <form class=" form-group" id="formAltera" method="POST">
-              <fieldset id="campos" disabled>
-              <div class="form-group ">
-                <label for="exampleInputEmail1">Empresa</label>
-                <input type="text" class="form-control" id="empresaAltera"required>              
-              </div>
-               </form>                
-              <div class="form-group ">
-                <label for="exampleInputEmail1">BI</label>
-                <input type="text" class="form-control" id="linkbiAltera"required>
-              </div>                
-            <br>
-              <button type="submit" class="btn btn-primary" onclick="alteraEmpresa()">Alterar</button>
-              </fieldset>
-            </form> 
+            </div>
+            </form>
           </div>
 
-          <div class="tab-pane" id="Listagem">
-            <table id="teste" class="display" style="width:100%">
-              <thead>
-                <tr>
-                  <th>Empresa</th>
-                  <th>Link BI</th>   
-                </tr>
-              </thead>
-            </table>
-          </div>          
+          <br>
+          <button type="submit" class="btn btn-primary" onclick="alteraEmpresa()">Alterar</button>
+          </fieldset>
+          </form>
+        </div>
+
+        <div class="tab-pane" id="Listagem">
+          <table id="teste" class="display" style="width:100%">
+            <thead>
+              <tr>
+                <th>Empresa</th>
+                <th>Link BI</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
       </div>
-    
 
-          </div>
-      </div>
+
+    </div>
   </div>
-</div>
+  </div>
+  </div>
 
   </div>
-</div>
+  </div>
 
 
 
@@ -120,11 +161,11 @@
 
 
 
-<script src="../js/verificaAcesso.js"></script>
-<script src="../js/cadastroEmpresa.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="../js/verificaAcesso.js"></script>
+  <script src="../js/cadastroEmpresa.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 </body>
 

@@ -6,12 +6,35 @@ async function cadastraEmpresa() {
   event.preventDefault()
   const empresa = document.getElementById('empresa').value;
   const linkbi = document.getElementById('linkbi').value;
+  const imgNovo = document.getElementById('imgNovo').files[0]
+  var url = ''
+
+
+  let data = new FormData()
+  data.append("file", imgNovo)
+
+  var conteudo = {
+    header: {
+      "content-type": "multipart/form-data"
+    }
+  }
+  await axios.post('/files', data, conteudo)
+
+    .then(function (response) {
+      url = response.data.url
+
+    }).catch(function (err) {
+      alert("Verificar log")
+      console.log(err)
+
+    });
 
 
   await axios.post('/empresa', {
-    "empresa": `${empresa}`,
-    "bi": `${linkbi}`
-  })
+      "empresa": `${empresa}`,
+      "bi": `${linkbi}`,
+      "url": `${url}`
+    })
 
     .then(function (response) {
 
@@ -44,12 +67,17 @@ async function buscarEmpresa() {
   const campos = document.getElementById('campos')
   await axios.get("/empresa/" + empresaBusca)
 
+
     .then(function (response) {
       campos.disabled = false
       empresaAltera.value = response.data.empresa
       linkbiAltera.value = response.data.bi
       const id = response.data.id
       sessionStorage.setItem('idEmpresa', id)
+      document.getElementById("imageAltera").src = response.data.url
+      imgAltera.attributes.removeNamedItem('disabled')
+      urlID = response.data.urlID
+      url = response.data.url
       console.log(empresaBusca)
     })
     .catch(function (error) {
@@ -69,13 +97,53 @@ async function alteraEmpresa() {
   const empresaAltera = document.getElementById('empresaAltera').value
   const linkbiAltera = document.getElementById('linkbiAltera').value
   const id = sessionStorage.getItem('idEmpresa')
+  const imgAltera = document.getElementById('imgAltera').files[0]
+  var urlAltera = url
 
+  if (!imgAltera == '') {
+
+    await axios.delete("/files/" + urlID)
+
+      .then(function (response) {
+
+      })
+      .catch(function (error) {
+        return alert("Houve um problema !")
+      })
+
+    let dataAltera = new FormData()
+    dataAltera.append("file", imgAltera)
+
+    var conteudo = {
+      header: {
+        "content-type": "multipart/form-data"
+      }
+    }
+    //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
+    // SE ALTERADO, ASSUME A NOVA URL E ID
+
+
+    await axios.post('/files', dataAltera, conteudo)
+
+      .then(function (response) {
+        urlAltera = response.data.url
+        urlID = response.data.id
+
+
+      }).catch(function (err) {
+        alert("Verificar log")
+        console.log(err)
+
+      });
+
+  }
 
   await axios.put("/empresa", {
-    "empresa": `${empresaAltera}`,
-    "bi": `${linkbiAltera}`,
-    "id": id
-  })
+      "empresa": `${empresaAltera}`,
+      "bi": `${linkbiAltera}`,
+      "id": id,
+      "url": urlAltera
+    })
 
     .then(function (response) {
       alert("Empresa alterada com sucesso !")
@@ -83,6 +151,8 @@ async function alteraEmpresa() {
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
       sessionStorage.removeItem('id')
+      campos.disabled = true
+      limparCampos()
 
     })
     .catch(function (error) {
@@ -94,7 +164,25 @@ async function excluirEmpresa() {
   event.preventDefault()
 
   const empresaAltera = document.getElementById('usuarioAltera').value
-  await axios.delet("/empresa/" + empresaAltera)
+
+  await axios.delete("/files/" + urlID)
+
+    .then(function (response) {
+
+      alert("Usuario excluido com sucesso !")
+      console.log(response)
+
+    })
+    .catch(function (error) {
+
+      console.log(error)
+      alert("Verificar log")
+
+    })
+
+
+
+  await axios.delete("/empresa/" + empresaAltera)
 
     .then(function (response) {
       alert("Empresa excluida com sucesso !")
@@ -119,11 +207,11 @@ function mostrarTabela() {
     $('#teste').DataTable({
       "ajax": "../empresa/",
       "columns": [{
-        "data": "empresa"
-      },
-      {
-        "data": "bi"
-      }
+          "data": "empresa"
+        },
+        {
+          "data": "bi"
+        }
       ],
       "language": idioma,
       buttons: [
@@ -164,4 +252,26 @@ function mostrarTabela() {
   }
 }
 
+function showImageNovo() {
+  if (this.files && this.files[0]) {
+    var obj = new FileReader()
+    obj.onload = function (data) {
+      var imgNovo = document.getElementById("imageNovo")
+      imgNovo.src = data.target.result
+    }
+    obj.readAsDataURL(this.files[0])
+  }
+}
+
+function showImageAltera() {
+  console.log("NOVO IMG ")
+  if (this.files && this.files[0]) {
+    var obj = new FileReader()
+    obj.onload = function (data) {
+      var imgAltera = document.getElementById("imageAltera")
+      imgAltera.src = data.target.result
+    }
+    obj.readAsDataURL(this.files[0])
+  }
+}
 mostrarTabela()

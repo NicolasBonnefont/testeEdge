@@ -10,10 +10,6 @@ class EmpresaController {
     return {data}
   }
 
-  async create ({ request  }) {
-
- }
-
   async store ({ request, response }) {
 
     const data = request.all()
@@ -21,11 +17,9 @@ class EmpresaController {
     const empresas = await Empresa.create(data)
 
     return empresas  
-  
-   
+     
   }
   
-
   async show ({ params, request, response }) {
     const empresa = await Empresa.findByOrFail(params)
 
@@ -34,14 +28,11 @@ class EmpresaController {
   }
 
 
-  async edit ({ params, request, response, view }) {
-  }
-
   async update ({ params, request, response }) {
     const {id} = request.all()
 
     const empresas = await Empresa.findByOrFail('id', id)
-    const data = request.only(["empresa", "bi"]);
+    const data = request.only(["empresa", "bi", "url","urlID"]);
   
     empresas.merge(data);
     await empresas.save();
@@ -49,7 +40,6 @@ class EmpresaController {
     return empresas
 
   }
-
 
   async destroy ({ params, request, response }) {
     const empresa = await Empresa.findByOrFail(params)
