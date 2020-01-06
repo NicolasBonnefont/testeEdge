@@ -64,7 +64,6 @@ async function buscarEmpresa() {
   //campos do busca
   const empresaBusca = document.getElementById('empresaBusca').value
   const campos = document.getElementById('campos')
-  var id = ''
 
   await axios.get("/empresa/" + empresaBusca)
   
@@ -147,8 +146,7 @@ async function alteraEmpresa() {
       "empresa": `${empresaAltera}`,
       "bi": `${linkbiAltera}`,
       "url": urlAltera,
-      "urlID": urlID,
-      "id": id
+      "urlID": urlID,      
     })
 
     .then(function (response) {
