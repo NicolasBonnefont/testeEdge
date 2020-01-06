@@ -100,7 +100,7 @@ async function alteraEmpresa() {
   var urlAltera = url
 
   if (!imgAltera == '') {
-    console.log(urlAltera)
+    console.log("url altera =  "+urlAltera)
     await axios.delete("/files/" + urlID)
     
       .then(function (response) {
@@ -157,6 +157,7 @@ async function alteraEmpresa() {
 
     })
     .catch(function (error) {
+      console.log(error)
       alert("Não foi possivel alterar este cadastro")
     })
 }
