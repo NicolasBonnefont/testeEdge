@@ -140,6 +140,7 @@ async function alteraEmpresa() {
   }
   console.log("urlID: "+urlID)
   console.log("URL ALTERA:  "+urlAltera)
+  console.log("empresa altera: "+empresaAltera)
 
   // AQUI OK ! 
   await axios.put("/empresa", {
