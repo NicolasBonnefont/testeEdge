@@ -149,8 +149,8 @@ async function alteraEmpresa() {
     .then(function (response) {
       alert("Empresa alterada com sucesso !")
       campos.disabled = true
-      document.getElementById("formBusca").reset();
-      document.getElementById("formAltera").reset();
+      document.getElementById("formBusca").reset()
+      document.getElementById("formAltera").reset()
       sessionStorage.removeItem('id')
       campos.disabled = true
       limparCampos()
@@ -275,5 +275,13 @@ function showImageAltera() {
     }
     obj.readAsDataURL(this.files[0])
   }
+}
+
+function limparCampos() {
+  document.getElementById("form").reset();
+  document.getElementById("formBusca").reset();
+  document.getElementById("formAltera").reset();
+  document.getElementById("imageNovo").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
+  document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
 }
 mostrarTabela()
