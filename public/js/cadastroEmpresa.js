@@ -140,11 +140,14 @@ async function alteraEmpresa() {
   }
   console.log("urlID: "+urlID)
   console.log("URL ALTERA:  "+urlAltera)
+
+  // AQUI OK ! 
   await axios.put("/empresa", {
       "empresa": `${empresaAltera}`,
       "bi": `${linkbiAltera}`,
       "url": urlAltera,
-      "urlID": urlID
+      "urlID": urlID,
+      "id": id
     })
 
     .then(function (response) {
