@@ -147,7 +147,8 @@ async function alteraEmpresa() {
       "empresa": `${empresaAltera}`,
       "bi": `${linkbiAltera}`,
       "url": urlAltera,
-      "urlID": urlID,      
+      "urlID": urlID,
+      "id":sessionStorage.getItem('idEmpresa')      
     })
 
     .then(function (response) {
