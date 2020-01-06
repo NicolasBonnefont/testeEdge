@@ -77,10 +77,11 @@ async function buscarEmpresa() {
       imgAltera.attributes.removeNamedItem('disabled')
       urlID = response.data.urlID
       url = response.data.url
-      console.log(empresaBusca)
+      
     })
     .catch(function (error) {
-      alert("Empresa não encotrada")
+      console.log(error)
+      alert("Empresa não encotrada, verificar log!")
       campos.disabled = true
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
@@ -101,13 +102,14 @@ async function alteraEmpresa() {
 
   if (!imgAltera == '') {
 
-    await axios.delete("/files/" + id)
+    await axios.delete("/files/" + urlID)
 
       .then(function (response) {
 
       })
       .catch(function (error) {
-        return alert("Houve um problema !")
+        console.log(error)
+        return alert("Houve um problema, verificar log !")
       })
 
     let dataAltera = new FormData()

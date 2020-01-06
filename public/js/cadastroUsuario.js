@@ -148,6 +148,7 @@ async function alterarUsuario() {
     
   })
   .catch(function(error){
+    console.log(error)
   return alert("Houve um problema !")
   })
 
