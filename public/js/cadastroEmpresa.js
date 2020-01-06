@@ -65,13 +65,14 @@ async function buscarEmpresa() {
   const empresaBusca = document.getElementById('empresaBusca').value
   const campos = document.getElementById('campos')
   await axios.get("/empresa/" + empresaBusca)
+  var id = ''
 
 
     .then(function (response) {
       campos.disabled = false
       empresaAltera.value = response.data.empresa
       linkbiAltera.value = response.data.bi
-      const id = response.data.id
+      id = response.data.id
       sessionStorage.setItem('idEmpresa', id)
       document.getElementById("imageAltera").src = response.data.url
       imgAltera.attributes.removeNamedItem('disabled')
