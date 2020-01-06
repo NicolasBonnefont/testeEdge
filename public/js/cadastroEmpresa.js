@@ -26,7 +26,7 @@ async function cadastraEmpresa() {
     }).catch(function (err) {
       alert("Verificar log")
       console.log(err)
-      
+
     });
 
   await axios.post('/empresa', {
@@ -140,8 +140,8 @@ async function alteraEmpresa() {
   await axios.put("/empresa", {
       "empresa": `${empresaAltera}`,
       "bi": `${linkbiAltera}`,
-      "id": id,
-      "urlID": urlAltera
+      "url": urlAltera,
+      "urlID": urlID
     })
 
     .then(function (response) {
