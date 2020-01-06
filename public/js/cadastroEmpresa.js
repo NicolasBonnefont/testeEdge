@@ -96,20 +96,20 @@ async function alteraEmpresa() {
   const campos = document.getElementById('campos')
   const empresaAltera = document.getElementById('empresaAltera').value
   const linkbiAltera = document.getElementById('linkbiAltera').value
-  const id = sessionStorage.getItem('idEmpresa')
   const imgAltera = document.getElementById('imgAltera').files[0]
   var urlAltera = url
 
   if (!imgAltera == '') {
 
     await axios.delete("/files/" + urlID)
-
+    console.log(urlID)
       .then(function (response) {
 
       })
       .catch(function (error) {
         console.log(error)
         return alert("Houve um problema, verificar log !")
+        
       })
 
     let dataAltera = new FormData()
