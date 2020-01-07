@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../css/alinhamentoCadastro.css">
   <link href="../css/alinhamentoImg.css" rel="stylesheet">
   <link href="../css/perfil/imgPerfil.css" rel="stylesheet">
+  <link href="../css/cadastroEmpresa/cardCustom.css" rel="stylesheet">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
@@ -47,7 +48,7 @@
           <div class="row">
             <div class="col-md-6">
 
-              <form id="form" onsubmit="cadastraEmpresa()" method="POST">
+              <form id="form" method="POST">
                 <div class="form-group ">
                   <label for="exampleInputEmail1">Empresa</label>
                   <input type="text" class="form-control" id="empresa" aria-describedby="emailHelp" required>
@@ -69,11 +70,10 @@
                         <input onchange="showImageNovo.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgNovo">
                   </div>
               </div>
-            </div>
-
-            </form>
+            </div>            
+            </form>            
           </div>
-          <button type="submit" class="btn btn-primary">Cadastrar</button>
+          <button type="submit" class="btn btn-primary" onclick="cadastraEmpresa()">Cadastrar</button>                    
         </div>
 
         <!--               PARTE DE ALTERACAO      -->
