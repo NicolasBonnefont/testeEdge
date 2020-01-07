@@ -7,6 +7,7 @@ async function cadastraEmpresa() {
   const imgNovo = document.getElementById('imgNovo').files[0]
   var url = ''
 
+
   let data = new FormData()
   data.append("file", imgNovo)
 
@@ -289,3 +290,10 @@ function limparCampos() {
   document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
 }
 mostrarTabela()
+
+var myobject = {};
+
+var select = document.getElementById("selectBusca");
+for(index in myobject) {
+  select.options[select.options.length] = new Option(myobject[index], index);
+}

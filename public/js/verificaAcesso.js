@@ -20,16 +20,13 @@ function verificaAcesso(){
     // VERIFICA SE ESTA LOGADO
   if (!sessao){
     // NAO LOGADO, REDIRECIONA PARA A TELA DE LOGIN
-    window.location.replace("../#home");    
+    window.location.replace("../home");    
   }
 
-  // colocado o caminho em lowercase para nao gerar problema com servidor online
-  var empresalow = caminhoEmpresa.toLocaleLowerCase()
   // CARREGA OS DADOS DA EMPRESA CONFORME USER LOGADO E IM DO PERFIL
   document.body.style.backgroundImage = "url("+sessionStorage.getItem("empresaUrl")+")"
   linkPrincipal.text = empresa
   document.getElementById("imgLogin").src = user.url
-
 
   // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
   

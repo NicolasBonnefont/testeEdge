@@ -27,7 +27,7 @@ class UserController {
       const {username} = request.all()
 
       const user = await User.findByOrFail('username', username)
-      const data = request.only(["username", "name","email","empresa","admin","url","urlID"]);
+      const data = request.all()
     
       user.merge(data);
       await user.save();
