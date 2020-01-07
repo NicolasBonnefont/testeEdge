@@ -10,3 +10,6 @@ html{
 .senhaCustom{
   width: 200px;
 }
+td{
+  max-width: 700px;
+}

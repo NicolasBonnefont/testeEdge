@@ -255,6 +255,9 @@ function mostrarTabela() {
       }
     }
   }
+  $('#teste').DataTable( {
+    responsive: true
+} )
 }
 
 function showImageNovo() {
