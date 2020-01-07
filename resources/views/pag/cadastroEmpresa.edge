@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -12,15 +10,11 @@
   <link href="../css/perfil/imgPerfil.css" rel="stylesheet">
   <link href="../css/cadastroEmpresa/cardCustom.css" rel="stylesheet">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
   <title>Cadastro de Clientes</title>
 </head>
-
 <body>
   <!--INICO-->
   @include('nav/nav')
-
   <!-- PARTE MENU-->
   <div class="card card-nav-tabs card-header container ">
     <div class="card-header card-header-danger">
@@ -32,7 +26,7 @@
               <a class="nav-link active" href="#Cadastrar" data-toggle="tab">Cadastrar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#Alterar" data-toggle="tab">Alterar</a>
+              <a class="nav-link" href="#Alterar" data-toggle="tab" onclick="limparCampos()">Alterar</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#Listagem" data-toggle="tab" onclick="atualizaTabela()">Listagem</a>
@@ -44,10 +38,8 @@
     <div class="card-body ">
       <div class="tab-content col-12 ">
         <div class="tab-pane active" id="Cadastrar">
-
           <div class="row">
             <div class="col-md-6">
-
               <form id="form" method="POST">
                 <div class="form-group ">
                   <label for="exampleInputEmail1">Empresa</label>
@@ -59,9 +51,8 @@
                 </div>
                 <br>
             </div>
-
             <div class="cold-md-5 text-center tamanhoPerfil">
-              <div class="card">
+              <div class="card cardCustom">
                 <img id="imageNovo" class="card-img-top rounded img-fluid "
                   src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
                 <form><br>
@@ -94,13 +85,10 @@
             <div class="col-auto">
             </div>
           </form>
-
           <div class="row">
             <div class="col-md-6">
-
               <form class=" form-group" id="formAltera" method="POST" class="">
                 <fieldset id="campos" disabled>
-
                   <div class="form-group ">
                     <label for="exampleInputEmail1">Empresa</label>
                     <input type="text" class="form-control" id="empresaAltera" required>
@@ -108,12 +96,10 @@
                   <div class="form-group ">
                     <label for="exampleInputEmail1">LINK BI</label>
                     <input type="text" class="form-control" id="linkbiAltera" required>
-                  </div>                  
-
-
+                  </div>                 
             </div>
             <div class="cold-md-5 text-center tamanhoPerfil ">
-              <div class="card  ">
+              <div class="card cardCustom ">
                 <img id="imageAltera" class="card-img-top rounded img-fluid "
                   src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
                 <br>
@@ -125,13 +111,11 @@
             </div>
             </form>
           </div>
-
           <br>
           <button type="submit" class="btn btn-primary" onclick="alteraEmpresa()">Alterar</button>
           </fieldset>
           </form>
         </div>
-
         <div class="tab-pane" id="Listagem">
           <table id="teste" class="display" style="width:100%">
             <thead>
@@ -143,13 +127,10 @@
           </table>
         </div>
       </div>
-
-
     </div>
   </div>
   </div>
   </div>
-
   </div>
   </div>
 

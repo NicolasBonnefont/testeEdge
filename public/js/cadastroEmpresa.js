@@ -1,5 +1,3 @@
-var url = 'https://api-mor.herokuapp.com'
-
 // FUNCAO QUE CRIA EMPRESA
 async function cadastraEmpresa() {
 
@@ -8,7 +6,6 @@ async function cadastraEmpresa() {
   const linkbi = document.getElementById('linkbi').value;
   const imgNovo = document.getElementById('imgNovo').files[0]
   var url = ''
-
 
   let data = new FormData()
   data.append("file", imgNovo)
@@ -77,7 +74,7 @@ async function buscarEmpresa() {
       imgAltera.attributes.removeNamedItem('disabled')
       urlID = response.data.urlID
       url = response.data.url
-      
+
     })
     .catch(function (error) {
       console.log(error)
@@ -100,16 +97,16 @@ async function alteraEmpresa() {
   var urlAltera = url
 
   if (!imgAltera == '') {
-    console.log("url altera =  "+urlAltera)
+    console.log("url altera =  " + urlAltera)
     await axios.delete("/files/" + urlID)
-    
+
       .then(function (response) {
 
       })
       .catch(function (error) {
         console.log(error)
         return alert("Houve um problema, verificar log !")
-        
+
       })
 
     let dataAltera = new FormData()
@@ -138,9 +135,9 @@ async function alteraEmpresa() {
       });
 
   }
-  console.log("urlID: "+urlID)
-  console.log("URL ALTERA:  "+urlAltera)
-  console.log("empresa altera: "+empresaAltera)
+  console.log("urlID: " + urlID)
+  console.log("URL ALTERA:  " + urlAltera)
+  console.log("empresa altera: " + empresaAltera)
 
   // AQUI OK ! 
   await axios.put("/empresa", {
@@ -148,7 +145,7 @@ async function alteraEmpresa() {
       "bi": `${linkbiAltera}`,
       "url": urlAltera,
       "urlID": urlID,
-      "id":sessionStorage.getItem('idEmpresa')      
+      "id": sessionStorage.getItem('idEmpresa')
     })
 
     .then(function (response) {
@@ -283,6 +280,8 @@ function showImageAltera() {
 }
 
 function limparCampos() {
+  const campos = document.getElementById('campos')
+  campos.disa
   document.getElementById("form").reset();
   document.getElementById("formBusca").reset();
   document.getElementById("formAltera").reset();
