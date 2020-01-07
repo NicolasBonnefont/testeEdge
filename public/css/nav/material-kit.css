@@ -4570,11 +4570,11 @@ tbody.collapse.show {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 0px;
+  min-width: 0;
   word-wrap: break-word;
-  background-color;
+  background-color: #fff;
   background-clip: border-box;
-  border: 10px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0.25rem;
 }
 
@@ -16222,8 +16222,8 @@ footer .pull-center {
   margin-top: 30px;
   border-radius: 6px;
   color: rgba(0, 0, 0, 0.87);
-  background: ;
-  width: 85%;
+  background: #fff;
+  width:90%;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
