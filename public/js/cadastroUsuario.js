@@ -192,6 +192,9 @@ async function alterarUsuario() {
     })
 
     .then(function (response) {
+      sessionStorage.setItem(user.url, urlAltera)
+      
+      console.log(sessionStorage.getItem(user))
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
       limparCampos()
@@ -203,6 +206,7 @@ async function alterarUsuario() {
       alert("Não foi possivel alterar este cadastro, verificar log")
 
     })
+    
 }
 
 async function excluirUsuario() {
