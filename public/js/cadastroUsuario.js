@@ -195,8 +195,9 @@ async function alterarUsuario() {
 
     .then(function (response) {
       var data = sessionStorage.getItem("user")
-      const user = JSON.parse(data)
-      user.url = urlAltera
+      const u = JSON.parse(data)
+      u.url = urlAltera
+      const user = JSON.stringify(u)
       sessionStorage.setItem("user", user)
       
       console.log(sessionStorage.getItem(user))
