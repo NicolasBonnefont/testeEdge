@@ -194,7 +194,7 @@ async function alterarUsuario() {
     })
 
     .then(function (response) {
-      sessionStorage.setItem(user.url, urlAltera)
+      sessionStorage.setItem("user", urlAltera)
       
       console.log(sessionStorage.getItem(user))
       alert("Usuário alterado com sucesso !")
