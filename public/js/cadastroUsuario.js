@@ -128,6 +128,8 @@ async function alterarUsuario() {
   const usuarioBusca = document.getElementById('usuarioBusca').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera')
+  var data = sessionStorage.getItem("user")
+  const user = JSON.parse(data)
   var adminAlteraOK = 0
   var urlAltera = url
   
