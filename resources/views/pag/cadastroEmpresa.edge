@@ -35,8 +35,10 @@
         </div>
       </div>
     </div>
+  
     <div class="card-body ">
       <div class="tab-content col-12 ">
+
         <div class="tab-pane active" id="Cadastrar">
           <div class="row">
             <div class="col-md-6">
@@ -49,23 +51,24 @@
                   <label for="exampleInputEmail1">LINK BI</label>
                   <input type="email" class="form-control" id="linkbi" aria-describedby="emailHelp" required>
                 </div>
+              
                 <br>
             </div>
+            
             <div class="cold-md-5 text-center tamanhoPerfil">
               <div class="card cardCustom">
                 <img id="imageNovo" class="card-img-top rounded img-fluid "
-                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
-                <form><br>
+                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">               
+                  <br>
                   <div class="form-group">
                     <label for="imgNovo">CARREGAR LOGO<label>
                         <input onchange="showImageNovo.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgNovo">
-                  </div>
-              </div>
-            </div>  
-            <button type="submit" class="btn btn-primary" onclick="cadastraEmpresa()">Cadastrar</button>          
-            </form>            
+                  </div>                  
+              </div>              
+            </form>                   
+          </div>          
           </div>
-                              
+          <button type="submit" class="btn btn-primary" onclick="cadastraEmpresa()">Cadastrar</button>
         </div>
 
         <!--               PARTE DE ALTERACAO      -->
@@ -77,7 +80,7 @@
               <select class="form-control selectpicker" data-style="btn btn-link" id="selectBusca">
                 <option></option>         
               </select>             
-              <br>
+    
               <br>
             </div>
             <div class="col-auto">

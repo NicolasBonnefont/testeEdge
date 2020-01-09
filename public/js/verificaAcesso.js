@@ -9,11 +9,9 @@ async function deslogar(){
 function verificaAcesso(){
   
   const sessao = window.sessionStorage.getItem("sessao")
-  var caminhoEmpresa = window.sessionStorage.getItem("empresa")
   var empresa = window.sessionStorage.getItem("empresa")
   const linkPrincipal = document.getElementById('linkPrincipal')
-  var menuCadastro = document.getElementById('menuCadastro')
-  menuCadastro.classList.add("disabled")
+  var habilitaMenuCadastro = document.getElementById('habilitaMenuCadastro')
   var data = sessionStorage.getItem("user")
   const user = JSON.parse(data)
 
@@ -30,10 +28,8 @@ function verificaAcesso(){
 
   // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
   
-  if(user.admin == 1){
-    
-   menuCadastro.classList.remove("disabled")
-   
+  if(!user.admin == 1){
+    habilitaMenuCadastro.remove()
   }
   
 }
