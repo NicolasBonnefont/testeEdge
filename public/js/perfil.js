@@ -5,7 +5,7 @@ const u = JSON.parse(data)
 document.getElementById("imgPerfil").src = u.url
 document.getElementById("nomePerfil").innerHTML = u.name
 document.getElementById("cargoPerfil").innerHTML = u.cargo
-$('#exampleModal').modal(show)
+
 
 }
 

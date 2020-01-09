@@ -9,7 +9,7 @@ async function cadastraUsuario() {
   const email = document.getElementById('email').value
   const empresa = document.getElementById('empresa').value
   const admin = document.getElementById('admin')
-  const cargo = document.getElementById('cargo')
+  const cargo = document.getElementById('cargo').value
   const imgNovo = document.getElementById('imgNovo').files[0]
 
   var url = ''
@@ -130,7 +130,7 @@ async function alterarUsuario() {
   const empresaAltera = document.getElementById('empresaAltera').value
   const usuarioBusca = document.getElementById('usuarioBusca').value
   const imgAltera = document.getElementById('imgAltera').files[0]
-  const adminAltera = document.getElementById('adminAltera')
+  const adminAltera = document.getElementById('adminAltera').value
   const cargoAltera = document.getElementById("cargoAltera").value
   var data = sessionStorage.getItem("user")
   const user = JSON.parse(data)
