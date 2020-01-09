@@ -9,6 +9,7 @@ async function cadastraUsuario() {
   const email = document.getElementById('email').value
   const empresa = document.getElementById('empresa').value
   const admin = document.getElementById('admin')
+  const cargo = document.getElementById('cargo')
   const imgNovo = document.getElementById('imgNovo').files[0]
 
   var url = ''
@@ -44,6 +45,7 @@ async function cadastraUsuario() {
       "name": `${name}`,
       "password": `${password}`,
       "email": `${email}`,
+      "cargo": `${cargo}`,
       "empresa": `${empresa}`,
       "admin": `${adminOK}`,
       "url": url
@@ -92,6 +94,7 @@ async function buscarUsuario() {
       emailAltera.value = response.data.email
       empresaAltera.value = response.data.empresa
       adminAltera.value = response.data.admin
+      cargoAltera.value = response.data.cargo
       document.getElementById("imageAltera").src = response.data.url     
       urlID = response.data.urlID
       url = response.data.url
@@ -128,6 +131,7 @@ async function alterarUsuario() {
   const usuarioBusca = document.getElementById('usuarioBusca').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera')
+  const cargoAltera = document.getElementById("cargoAltera").value
   var data = sessionStorage.getItem("user")
   const user = JSON.parse(data)
   var adminAlteraOK = 0
@@ -188,6 +192,7 @@ async function alterarUsuario() {
       "email": `${emailAltera}`,
       "username": `${usuarioBusca}`,
       "empresa": `${empresaAltera}`,
+      "cargo": `${cargoAltera}`,
       "admin": `${adminAlteraOK}`,
       "url": urlAltera,
       "urlID": urlID

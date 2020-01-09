@@ -14,6 +14,7 @@ class UserSchema extends Schema {
       table.string('empresa', 80)
       table.string('token')
       table.boolean('admin').defaultTo('false')
+      table.boolean('cargo')
       table.string('url')
       table.string('urlID')
       table.timestamp('token_created_at')
