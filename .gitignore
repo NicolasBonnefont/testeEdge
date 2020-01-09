@@ -5,6 +5,7 @@
 #tmp
 
 # Environment variables, never commit this file
+
 env
 
 # The development sqlite file
