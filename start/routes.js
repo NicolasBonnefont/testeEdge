@@ -4,7 +4,6 @@ const Route = use('Route')
 
 
 // ROTAS PARA AS VIEWS
-
 Route.on('/').render('home')
 Route.on('/home').render('home')
 Route.on('/resetpassword').render('resetpassword')
@@ -13,8 +12,7 @@ Route.on('/pag/cadastroEmpresa').render('pag/cadastroEmpresa')
 Route.on('/pag/cadastroUsuario').render('pag/cadastroUsuario')
 Route.on('/pag/dashboard').render('pag/dashboard')
 Route.on('/pag/principal').render('pag/principal')
-
-
+Route.on('/pag/perfil').render('pag/perfil')
 // rotas para as API
 Route.get('users/:username', 'UserController.show')
 Route.get('users', 'UserController.index')
