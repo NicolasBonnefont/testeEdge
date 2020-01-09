@@ -14,7 +14,7 @@ class FileController {
 
       if(!request.file('file')) return response.status(500).send({mensagem:"erro"})
 
-      const upload = request.file('file', { size: '10mb'})
+      const upload = request.file('file', { size: '8mb'})
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
