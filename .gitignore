@@ -6,7 +6,7 @@
 
 # Environment variables, never commit this file
 
-env
+#env
 
 # The development sqlite file
 database/*.sqlite
