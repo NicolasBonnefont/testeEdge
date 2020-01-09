@@ -98,19 +98,20 @@ async function buscarUsuario() {
       document.getElementById("imageAltera").src = response.data.url     
       urlID = response.data.urlID
       url = response.data.url
-      imgAltera.attributes.removeNamedItem('disabled')
+      imgAltera.disabled = false
       
 
       if (adminAltera.value == 1) {
         adminAltera.checked = true
+        console.log("1")
       } else {
         adminAltera.checked = false
       }
 
-
     })
+
     .catch(function (error) {      
-      console.log(err)
+      console.log(error)
       alert("Usuario não encotrado, verificar log.")
       campos.disabled = true
       document.getElementById("formBusca").reset();
@@ -204,8 +205,7 @@ async function alterarUsuario() {
       u.url = urlAltera
       const user = JSON.stringify(u)
       sessionStorage.setItem("user", user)
-      
-      console.log(sessionStorage.getItem(user))
+   
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
       limparCampos()
@@ -334,9 +334,8 @@ function limparCampos() {
   document.getElementById("formAltera").reset();
   document.getElementById("imageNovo").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
   document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
+  document.getElementById("imgAltera").disabled = true
 }
-
-
 
 function showImageNovo() {
   if (this.files && this.files[0]) {
