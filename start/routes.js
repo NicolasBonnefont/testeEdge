@@ -14,7 +14,7 @@ Route.on('/pag/dashboard').render('pag/dashboard')
 Route.on('/pag/principal').render('pag/principal')
 Route.on('/pag/perfil').render('pag/perfil')
 
-Route.on('*').render('404')
+
 
 
 
@@ -42,4 +42,4 @@ Route.delete('files/:id', 'FileController.destroy')
 
 
 
-
+Route.on('*').render('404')
