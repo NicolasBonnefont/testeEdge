@@ -86,7 +86,7 @@ async function alteraUsuario() {
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
       limparCampos()
-      document.location.reload(true);
+      document.location.reload();
     })
     .catch(function (error) {
 
@@ -94,4 +94,12 @@ async function alteraUsuario() {
       alert("Não foi possivel alterar este cadastro, verificar log")
 
     })
+}
+
+
+function limparCampos() {
+  document.getElementById("form").reset();
+  document.getElementById("formAltera").reset();
+  document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
+  document.getElementById("imgAltera").disabled = true
 }
