@@ -98,7 +98,7 @@ async function alteraUsuario() {
 
 
 function limparCampos() {
-  document.getElementById("form").reset();
+
   document.getElementById("formAltera").reset();
   document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
   document.getElementById("imgAltera").disabled = true
