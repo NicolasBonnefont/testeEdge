@@ -25,10 +25,10 @@ async function alteraUsuario() {
   event.preventDefault()
   
   const campos = document.getElementById('campos')
-  const usuarioAltera = document.getElementById('usuarioAltera').value
-  const imgAltera = document.getElementById('imgAltera').files[0]
-  var urlAltera = ''
-
+  var usuarioAltera = document.getElementById('usuarioAltera').value
+  var senhaAltera = document.getElementById('senhaAltera').value
+  var imgAltera = document.getElementById('imgAltera').files[0]
+  var urlAltera = sessionStorage.getItem
   if (!imgAltera == ''){
 
   await axios.delete("/files/" + u.urlID)
@@ -71,9 +71,11 @@ async function alteraUsuario() {
   }
 
   await axios.put("/users", {
+      "username": u.username,
       "name": `${usuarioAltera}`,                   
       "url": urlAltera,
-      "urlID": urlID
+      "urlID": urlID,
+      "password": senhaAltera
     })
 
     .then(function (response) {
