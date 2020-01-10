@@ -7,17 +7,7 @@ document.getElementById("emailPerfil").innerHTML = u.email
 document.getElementById("imageAltera").src = u.url
 document.getElementById("usuarioAltera").value = u.name
 
-function showImageAltera() {
-  console.log("NOVO IMG ")
-  if (this.files && this.files[0]) {
-    var obj = new FileReader()
-    obj.onload = function (data) {
-      var imgAltera = document.getElementById("imageAltera")
-      imgAltera.src = data.target.result
-    }
-    obj.readAsDataURL(this.files[0])
-  }
-}
+
 
 async function alteraUsuario() {
   event.preventDefault()
@@ -105,4 +95,16 @@ function limparCampos() {
   document.getElementById("formAltera").reset();
   document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
   document.getElementById("imgAltera").disabled = true
+}
+
+function showImageAltera() {
+  console.log("NOVO IMG ")
+  if (this.files && this.files[0]) {
+    var obj = new FileReader()
+    obj.onload = function (data) {
+      var imgAltera = document.getElementById("imageAltera")
+      imgAltera.src = data.target.result
+    }
+    obj.readAsDataURL(this.files[0])
+  }
 }
