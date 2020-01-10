@@ -17,6 +17,8 @@ class UserSchema extends Schema {
       table.boolean('cargo')
       table.string('url')
       table.string('urlID')
+      table.string('urlCapa')
+      table.string('idCapa')
       table.timestamp('token_created_at')
       table.timestamps()
     })
