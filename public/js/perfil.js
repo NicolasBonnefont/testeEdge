@@ -28,8 +28,11 @@ async function alteraUsuario() {
   var imgAltera = document.getElementById('imgAltera').files[0]
   var urlAltera = u.url
   var urlID = u.urlID
-  if (!imgAltera == '') {
 
+  if (!imgAltera == '') {
+    console.log("entrou no if")
+
+   
     await axios.delete("/files/" + u.urlID)
 
       .then(function (response) {
@@ -37,7 +40,7 @@ async function alteraUsuario() {
       })
       .catch(function (error) {
         console.log(error)
-        alert("Houve um problema !")
+        
       })
 
 
