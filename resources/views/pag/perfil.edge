@@ -88,8 +88,8 @@
                     </div>
   
                     <div class="form-group ">
-                      <label for="exampleInputEmail1">Senha</label>
-                      <input type="text" class="form-control" id="empresaAltera" required>
+                      <label for="exampleInputEmail1">Nova Senha</label>
+                      <input type="password" class="form-control" id="senhaAltera" required>
                     </div>
                     <br>
                     <br>
@@ -102,7 +102,7 @@
                   <br>
                   <div class="form-group ">
                     <label for="imgAltera">CARREGAR FOTO<label>
-                        <input onchange="showImageAltera.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgAltera"disabled>
+                        <input onchange="showImageAltera.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgAltera">
                   </div>
                 </div>
               </div>
@@ -112,17 +112,29 @@
             </form>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary">Salvar mudanças</button>
+        <br>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary " onclick="limparCampos()" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" onclick="alteraUsuario()">Salvar mudanças</button>
         </div>
       </div>
     </div>
   </div>
 
+  <footer class="footer footer-default">
+    <div class="container">    
+      <div class="copyright float-right">
+        <a href="http://www.morinfo.com.br" target="_blank">MORINFO</a>
+        &copy;
+        <script>
+          document.write(new Date().getFullYear())
+        </script> 
+        
+      </div>
+    </div>
+  </footer>
 
-
-
+  
 
   <script src="../js/perfil.js"></script>
   
