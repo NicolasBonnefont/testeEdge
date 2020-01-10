@@ -19,8 +19,6 @@ function showImageAltera() {
   }
 }
 
-
-
 async function alteraUsuario() {
   event.preventDefault()
 
@@ -53,7 +51,6 @@ async function alteraUsuario() {
     }
     //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
     // SE ALTERADO, ASSUME A NOVA URL E ID
-
 
     await axios.post('/files', dataAltera, conteudo)
 
@@ -88,7 +85,7 @@ async function alteraUsuario() {
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
       limparCampos()
-
+      document.location.reload(true);
     })
     .catch(function (error) {
 
@@ -96,5 +93,4 @@ async function alteraUsuario() {
       alert("Não foi possivel alterar este cadastro, verificar log")
 
     })
-
 }
