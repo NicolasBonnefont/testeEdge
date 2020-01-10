@@ -7,8 +7,6 @@ document.getElementById("emailPerfil").innerHTML = u.email
 document.getElementById("imageAltera").src = u.url
 document.getElementById("usuarioAltera").value = u.name
 
-
-
 async function alteraUsuario() {
   event.preventDefault()
 
@@ -20,7 +18,7 @@ async function alteraUsuario() {
   var urlID = u.urlID
 
   if (!imgAltera == '') {
-    console.log("entrou no if")
+    console.log("entrou no if " + u.urlID)
 
    
     await axios.delete("/files/" + u.urlID)
@@ -73,6 +71,7 @@ async function alteraUsuario() {
       var data = sessionStorage.getItem("user")
       const u = JSON.parse(data)
       u.url = urlAltera
+      u.urlID = urlID
       const user = JSON.stringify(u)
       sessionStorage.setItem("user", user)
 
