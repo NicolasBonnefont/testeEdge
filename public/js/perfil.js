@@ -27,6 +27,7 @@ async function alteraUsuario() {
   var senhaAltera = document.getElementById('senhaAltera').value
   var imgAltera = document.getElementById('imgAltera').files[0]
   var urlAltera = u.url
+  var urlID = u.urlID
   if (!imgAltera == '') {
 
     await axios.delete("/files/" + u.urlID)
