@@ -76,8 +76,7 @@ async function alteraUsuario() {
       sessionStorage.setItem("user", user)
 
       alert("Usuário alterado com sucesso !")
-      campos.disabled = true
-      limparCampos()
+      campos.disabled = true      
       document.location.reload();
     })
     .catch(function (error) {
