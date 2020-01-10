@@ -13,6 +13,11 @@ Route.on('/pag/cadastroUsuario').render('pag/cadastroUsuario')
 Route.on('/pag/dashboard').render('pag/dashboard')
 Route.on('/pag/principal').render('pag/principal')
 Route.on('/pag/perfil').render('pag/perfil')
+
+Route.on('*').render('404')
+
+
+
 // rotas para as API
 Route.get('users/:username', 'UserController.show')
 Route.get('users', 'UserController.index')
@@ -34,4 +39,7 @@ Route.get('empresa','EmpresaController.index')
 Route.post('files', 'FileController.store')
 Route.get('files/:id', 'FileController.show')
 Route.delete('files/:id', 'FileController.destroy')
+
+
+
 
