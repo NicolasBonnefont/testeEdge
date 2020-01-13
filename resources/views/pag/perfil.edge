@@ -27,7 +27,7 @@
 <body class="profile-page sidebar-collapse">
   @include('nav/nav')
 
-  <div class="page-header fundo" data-parallax="true" style="background-image: url('../img/fundo.jpg');"></div>
+  <div class="page-header fundo" data-parallax="true" id="fundoCapa" style="background-image: url('../img/fundo.jpg');"></div>
   <div class="main main-raised">
     <div class="profile-content "style="max-widht:600px">
       <div class="container">
@@ -133,16 +133,18 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body ">
           <div class="tab-pane" id="Alterar">
             <div class="cold-md-5 text-center perfil ">
               <div class="card  ">
-                <img id="imageAltera" class="card-img-top rounded img-fluid"
-                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
+                <img id="imageAlteraCapa" class="card-img-top rounded img-fluid"
+                  src="" alt=" ">
                 <br>
                 <div class="form-group ">
-                  <label for="imgAltera">CARREGAR FOTO<label>
-                      <input onchange="showImageAltera.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgAltera">
+                  <label for="imgAlteraCapa">CARREGAR FOTO<label>
+                    <i class="material-icons">
+                      input
+                      </i> <input onchange="showImageAlteraCapa.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgAlteraCapa">
                 </div>
               </div>
             </div>
@@ -154,7 +156,7 @@
         
         <div class="modal-footer justify-content-center">
           <button type="button" class="btn btn-secondary " onclick="limparCampos()" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary" onclick="alteraUsuario()">Salvar mudanças</button>
+          <button type="button" class="btn btn-primary" onclick="alteraUsuarioCapa()">Salvar mudanças</button>
         </div>
       </div>
     </div>

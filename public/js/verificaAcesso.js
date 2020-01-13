@@ -25,6 +25,7 @@ function verificaAcesso(){
   document.body.style.backgroundImage = "url("+sessionStorage.getItem("empresaUrl")+")"
   linkPrincipal.text = empresa
   document.getElementById("imgLogin").src = user.url
+  
 
   // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
   
