@@ -7,7 +7,7 @@ document.getElementById("emailPerfil").innerHTML = u.email
 document.getElementById("imageAltera").src = u.url
 document.getElementById("usuarioAltera").value = u.name
 document.getElementById("imageAlteraCapa").value = u.urlCapa
-document.getElementById("fundoCapa").style.backgroundImage = u.urlCapa
+document.getElementById("fundoCapa").style.backgroundImage = "url("+u.urlCapa+")";
 
 if(!u.urlCapa){
   document.getElementById("fundoCapa").style.backgroundImage = u.urlCapa
