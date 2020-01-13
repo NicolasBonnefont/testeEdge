@@ -9,7 +9,7 @@ document.getElementById("usuarioAltera").value = u.name
 document.getElementById("imageAlteraCapa").value = u.urlCapa
 document.getElementById("fundoCapa").style.backgroundImage = u.urlCapa
 
-if(u.urlCapa){
+if(!u.urlCapa){
   document.getElementById("fundoCapa").style.backgroundImage = u.urlCapa
   console.log(u.urlCapa)
 }
