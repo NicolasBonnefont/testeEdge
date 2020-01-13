@@ -7,6 +7,6 @@
 # Environment variables, never commit this file
 
 env
-
+public/uploads
 # The development sqlite file
 database/*.sqlite

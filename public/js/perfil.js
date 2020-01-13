@@ -85,6 +85,7 @@ async function alteraUsuario() {
       const u = JSON.parse(data)
       u.url = urlAltera
       u.urlID = urlID
+      u.name = usuarioAltera
       const user = JSON.stringify(u)
       sessionStorage.setItem("user", user)
 
