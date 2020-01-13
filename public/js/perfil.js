@@ -158,9 +158,7 @@ async function alteraUsuarioCapa() {
       u.IDCapa = urlIDCapa
       const user = JSON.stringify(u)
       sessionStorage.setItem("user", user)
-
-      alert("Usuário alterado com sucesso !")
-          console.log(user)
+         
       document.location.reload();
     })
     .catch(function (error) {
