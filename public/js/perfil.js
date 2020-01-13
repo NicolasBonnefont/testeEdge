@@ -6,7 +6,7 @@ document.getElementById("cargoPerfil").innerHTML = u.cargo
 document.getElementById("emailPerfil").innerHTML = u.email
 document.getElementById("imageAltera").src = u.url
 document.getElementById("usuarioAltera").value = u.name
-document.getElementById("imageAlteraCapa").value = u.urlCapa
+document.getElementById("imageAlteraCapa").src = u.urlCapa
 document.getElementById("fundoCapa").style.backgroundImage = "url("+u.urlCapa+")";
 
 if(!u.urlCapa){
@@ -66,14 +66,19 @@ async function alteraUsuario() {
       });
 
   }
-
-  await axios.put("/users", {
+  var dados = {
     "username": u.username,
     "name": `${usuarioAltera}`,
     "url": urlAltera,
-    "urlID": urlID,
-    "password": senhaAltera
-  })
+    "urlID": urlID
+  }
+  if(senhaAltera){
+    dados.push[{
+    "password":`${senhaAltera}`
+    }]
+  }
+  
+  await axios.put("/users", dados)
 
     .then(function (response) {
       var data = sessionStorage.getItem("user")
