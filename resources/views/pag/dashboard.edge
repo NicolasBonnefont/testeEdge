@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../css/alinhamentoImg.css" rel="stylesheet">
+  <link href="../css/dashboard/menuLateral.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Dashboard</title>
@@ -17,9 +18,47 @@
     <!--INICO-->
     @include('nav/nav')
  
-  <iframe id="frame" width="100%" height="92%"  frameborder="0" allowFullScreen="true"></iframe>
+  
 
+  <div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <a href="#">Anotações</a>
+    <div class="card">
+      <div class="card-body">
+        This is some text within a card body.
+        This is some text within a card body.
+        This is some text within a card body.
+        This is some text within a card body.
+        This is some text within a card body.
+        This is some text within a card body.
+        This is some text within a card body.
+        This is some text within a card body.
+        This is some text within a card body.
+    
+      </div>
+    </div>
+  </div>
+  
+  <div id="main">
+    <button class="openbtn" onclick="openNav()">☰</button>     
+  </div>
 
+  <iframe id="frame" width="100%" height="100%"  frameborder="0" allowFullScreen="true"></iframe> 
+  
+  
+
+  
+  <script>
+  function openNav() {
+    document.getElementById("mySidebar").style.width = "300px";
+    document.getElementById("main").style.marginLeft = "300px";
+  }
+  
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+  }
+  </script>
   <script src="../js/verificaAcesso.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../js/dashboard.js"></script>
