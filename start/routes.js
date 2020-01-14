@@ -45,7 +45,7 @@ Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
 
 Route.put('ip',"ConfigIpController.update")
-Route.get('ip',"ConfigIpController.show")
+Route.get('ip',"ConfigIpController.index")
 Route.post('ip',"ConfigIpController.store")
 
 
