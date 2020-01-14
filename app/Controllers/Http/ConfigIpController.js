@@ -34,6 +34,9 @@ class ConfigIpController {
 
 
   async show ({ params, request, response, view }) {
+    const ip = await Ip.findByOrFail(params)
+     
+    return ip    
   }
 
   async edit ({ params, request, response, view }) {
