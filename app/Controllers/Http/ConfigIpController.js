@@ -42,9 +42,9 @@ class ConfigIpController {
   async update ({ params, request, response }) {
     try{
 
-      const {ipBusca} = request.all()
+      const {local} = request.all()
 
-      const ip = await Ip.findByOrFail('ip', ipBusca)
+      const ip = await Ip.findByOrFail('local', local)
       const data = request.all()
     
       ip.merge(data);
