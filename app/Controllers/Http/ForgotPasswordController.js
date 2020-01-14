@@ -12,9 +12,7 @@ class ForgotPasswordController {
 
     try {
       const email = request.input('email')
-
-      
-
+    
       const user = await User.findByOrFail('email', email)
   
       user.token = crypto.randomBytes(10).toString('hex')
@@ -29,7 +27,7 @@ class ForgotPasswordController {
         message =>{
           message
           .to(user.email)
-          .from('nicolas@morinfo.com.br', 'Nicolas', 'MorInfo')
+          .from('suporte@morinfo.com.br', 'Suporte', 'MorInfo')
           .subject('Recuperação de Senha')
         }        
       )

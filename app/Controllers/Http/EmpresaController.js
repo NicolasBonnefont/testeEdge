@@ -10,7 +10,7 @@ class EmpresaController {
     return {data}
   }
 
-  async store ({ request, response }) {
+  async store ({ request }) {
 
     const data = request.all()
 
@@ -20,15 +20,13 @@ class EmpresaController {
      
   }
   
-  async show ({ params, request, response }) {
+  async show ({ params}) {
     const empresa = await Empresa.findByOrFail(params)
-
      
     return empresa
   }
 
-
-  async update ({ params, request, response }) {
+  async update ({ request }) {
     const {id} = request.all()
 
     const empresas = await Empresa.findByOrFail('id', id)
@@ -41,7 +39,7 @@ class EmpresaController {
 
   }
 
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, response }) {
     const empresa = await Empresa.findByOrFail(params)
     await empresa.delete()
      

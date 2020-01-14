@@ -40,6 +40,9 @@ Route.post('files', 'FileController.store')
 Route.get('files/:id', 'FileController.show')
 Route.delete('files/:id', 'FileController.destroy')
 
+Route.post('notificacao', 'NotificacaoController.store')
+Route.get('notificacao',"NotificacaoController.index")
+Route.put('notificacao',"NotificacaoController.update")
 
 
 Route.on('*').render('404')
