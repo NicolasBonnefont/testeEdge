@@ -44,9 +44,9 @@ Route.post('notificacao', 'NotificacaoController.store')
 Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
 
-Route.put('ip',"ConfigIp.update")
-Route.get('ip',"ConfigIp.show")
-Route.post('ip',"ConfigIp.store")
+Route.put('ip',"ConfigIpController.update")
+Route.get('ip',"ConfigIpController.show")
+Route.post('ip',"ConfigIpController.store")
 
 
 Route.on('*').render('404')
