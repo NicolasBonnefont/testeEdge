@@ -8,9 +8,7 @@ const Ip = use('App/Models/ConfigIp')
 class ConfigIpController {
  
   async index ({ request, response, view }) {
-    const ip = await Ip.all()
-
-    return {ip}    
+ 
   }
 
   async create ({ request, response, view }) {
@@ -34,9 +32,12 @@ class ConfigIpController {
 
 
   async show ({ params, request, response, view }) {
-    const ip = await Ip.findByOrFail(params)
-     
-    return ip    
+    
+    const data = await Ip.findByOrFail(params)
+
+    const {ip,local} = data
+
+    return {local,ip} 
   }
 
   async edit ({ params, request, response, view }) {
