@@ -13,6 +13,7 @@ Route.on('/pag/cadastroUsuario').render('pag/cadastroUsuario')
 Route.on('/pag/dashboard').render('pag/dashboard')
 Route.on('/pag/principal').render('pag/principal')
 Route.on('/pag/perfil').render('pag/perfil')
+Route.on('/pag/configuracaoIp').render('pag/configuracaoIp')
 
 
 
@@ -46,6 +47,7 @@ Route.put('notificacao',"NotificacaoController.update")
 
 Route.put('ip',"ConfigIpController.update")
 Route.get('ip/:local',"ConfigIpController.show")
+Route.get('ip',"ConfigIpController.index")
 Route.post('ip',"ConfigIpController.store")
 
 

@@ -8,6 +8,9 @@ const Ip = use('App/Models/ConfigIp')
 class ConfigIpController {
  
   async index ({ request, response, view }) {
+    const data = await Ip.all()
+
+    return {data}    
  
   }
 
