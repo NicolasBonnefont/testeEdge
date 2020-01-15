@@ -1,85 +1,78 @@
-// FUNCAO QUE CRIA EMPRESA
-async function cadastraEmpresa() {
+async function carregaLocal(){
+  
+  var dados
+ 
+  await axios.get('/ip')
+  .then(function(response){
+     dados = response.data.data 
+  })
+  .catch(function(error){
+  })
+  
 
+  for (var i = 0; i < dados.length; i++) {
+    var select = document.getElementById("Select");
+    var option = document.createElement("option");
+    option.text = dados[i].local;
+    select.add(option);
+}
+
+
+}
+
+carregaLocal()
+
+
+
+
+// FUNCAO QUE CRIA IP
+async function cadastraIp() {
   event.preventDefault()
-  const empresa = document.getElementById('empresa').value;
-  const linkbi = document.getElementById('linkbi').value;
-  const imgNovo = document.getElementById('imgNovo').files[0]
-  var url = ''
 
+  const local = document.getElementById('local').value;
+  const ip = document.getElementById('ip').value;
+  
 
-  let data = new FormData()
-  data.append("file", imgNovo)
-
-  var conteudo = {
-    header: {
-      "content-type": "multipart/form-data"
-    }
-  }
-  await axios.post('/files', data, conteudo)
+  await axios.post('/ip', {
+    "local": `${local}`,
+    "ip": `${ip}`
+  })
 
     .then(function (response) {
-      url = response.data.url
-
-    }).catch(function (err) {
-      alert("Verificar log")
-      console.log(err)
-
-    });
-
-  await axios.post('/empresa', {
-      "empresa": `${empresa}`,
-      "bi": `${linkbi}`,
-      "url": `${url}`
-    })
-
-    .then(function (response) {
-
-      if (response.data.err) {
-        console.log(response.data.erro)
-        alert('Empresa já existe')
-      }
-
-      if (response.status === 200) {
-        console.log(response.data)
-        alert('Empresa Cadastrada com Sucesso !')
-        document.getElementById("form").reset();
-
-      }
+      console.log(response.data)
+      alert("Local/IP Cadastrado com sucesso !")
+      campos.disabled = true
+      limparCampos()
+      document.location.reload();
 
     })
     .catch(function (error) {
       console.log(error)
-      alert('Empresa já exite ! !', error)
+      alert('Problema ao cadastrar ! Ver log.')
     })
 }
 
 // FUNCAO QUE BUSCA O USUARIO
 
-async function buscarEmpresa() {
+async function buscarLocal() {
   event.preventDefault()
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var busca = y[x].text
+  
+  
+                                    //func que remove toda acentuação 
 
-  //campos do busca
-  const empresaBusca = document.getElementById('empresaBusca').value
-  const campos = document.getElementById('campos')
-  console.log(empresaBusca)
-  await axios.get("/empresa/" + empresaBusca)
+  await axios.get("/ip/" + busca.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
 
     .then(function (response) {
       campos.disabled = false
-      empresaAltera.value = response.data.empresa
-      linkbiAltera.value = response.data.bi
-      id = response.data.id
-      sessionStorage.setItem('idEmpresa', id)
-      document.getElementById("imageAltera").src = response.data.url
-      imgAltera.attributes.removeNamedItem('disabled')
-      urlID = response.data.urlID
-      url = response.data.url
+      localAltera.value = response.data.local
+      ipAltera.value = response.data.ip
 
     })
     .catch(function (error) {
-      console.log(error)
-      alert("Empresa não encotrada, verificar log!")
+      alert("Local não encontrado, verificar log.")
       campos.disabled = true
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
@@ -89,72 +82,25 @@ async function buscarEmpresa() {
 }
 
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
-async function alteraEmpresa() {
+async function alteraIp() {
   event.preventDefault()
+
   const campos = document.getElementById('campos')
-  const empresaAltera = document.getElementById('empresaAltera').value
-  const linkbiAltera = document.getElementById('linkbiAltera').value
-  const imgAltera = document.getElementById('imgAltera').files[0]
-  var urlAltera = url
-
-  if (!imgAltera == '') {
-    console.log("url altera =  " + urlAltera)
-    await axios.delete("/files/" + urlID)
-
-      .then(function (response) {
-
-      })
-      .catch(function (error) {
-        console.log(error)
-        return alert("Houve um problema, verificar log !")
-
-      })
-
-    let dataAltera = new FormData()
-    dataAltera.append("file", imgAltera)
-
-    var conteudo = {
-      header: {
-        "content-type": "multipart/form-data"
-      }
-    }
-    //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
-    // SE ALTERADO, ASSUME A NOVA URL E ID
+  const localAltera = document.getElementById('localAltera').value
+  const ipAltera = document.getElementById('ipAltera').value
 
 
-    await axios.post('/files', dataAltera, conteudo)
-
-      .then(function (response) {
-        urlAltera = response.data.url
-        urlID = response.data.id
-
-
-      }).catch(function (err) {
-        alert("Verificar log")
-        console.log(err)
-
-      });
-
-  }
-  console.log("urlID: " + urlID)
-  console.log("URL ALTERA:  " + urlAltera)
-  console.log("empresa altera: " + empresaAltera)
 
   // AQUI OK ! 
-  await axios.put("/empresa", {
-      "empresa": `${empresaAltera}`,
-      "bi": `${linkbiAltera}`,
-      "url": urlAltera,
-      "urlID": urlID,
-      "id": sessionStorage.getItem('idEmpresa')
-    })
+  await axios.put("/ip", {
+    "local":`${localAltera}`,
+    "ip": `${ipAltera}` 
+  })
 
     .then(function (response) {
-      alert("Empresa alterada com sucesso !")
-      campos.disabled = true
+      alert("Local / IP alterado com sucesso !")
       document.getElementById("formBusca").reset()
-      document.getElementById("formAltera").reset()
-      sessionStorage.removeItem('id')
+      document.getElementById("formAltera").reset()     
       campos.disabled = true
       limparCampos()
 
@@ -210,13 +156,13 @@ function atualizaTabela() {
 function mostrarTabela() {
   $(document).ready(function () {
     $('#teste').DataTable({
-      "ajax": "../ip/",
+      "ajax": "../ip",
       "columns": [{
-          "data": "empresa"
-        },
-        {
-          "data": "bi"
-        }
+        "data": "local"
+      },
+      {
+        "data": "ip"
+      }
       ],
       "language": idioma,
       buttons: [
@@ -255,9 +201,9 @@ function mostrarTabela() {
       }
     }
   }
-  $('#teste').DataTable( {
+  $('#teste').DataTable({
     responsive: true
-} )
+  })
 }
 
 
@@ -273,9 +219,4 @@ function limparCampos() {
 }
 mostrarTabela()
 
-var myobject = {};
 
-var select = document.getElementById("selectBusca");
-for(index in myobject) {
-  select.options[select.options.length] = new Option(myobject[index], index);
-}

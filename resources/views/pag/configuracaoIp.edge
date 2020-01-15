@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -9,10 +11,11 @@
   <link href="../css/alinhamentoImg.css" rel="stylesheet">
   <link href="../css/perfil/imgPerfil.css" rel="stylesheet">
   <link href="../css/cadastroEmpresa/cardcustom.css" rel="stylesheet">
-  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">  
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configuração de IP</title>
 </head>
+
 <body>
   <!--INICO-->
   @include('nav/nav')
@@ -24,10 +27,10 @@
         <div class="nav-tabs-wrapper">
           <ul class="nav nav-tabs" data-tabs="tabs">
             <li class="nav-item">
-              <a class="nav-link active" href="#Cadastrar" data-toggle="tab">Cadastrar</a>
+              <a class="nav-link active" href="#Alterar" data-toggle="tab" onclick="limparCampos()">Alterar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#Alterar" data-toggle="tab" onclick="limparCampos()">Alterar</a>
+              <a class="nav-link" href="#Cadastrar" data-toggle="tab" onclick="limparCampos()">Cadastrar</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#Listagem" data-toggle="tab" onclick="atualizaTabela()">Listagem</a>
@@ -36,10 +39,10 @@
         </div>
       </div>
     </div>
-  
+    <!--               PARTE CADASTRAR      -->
     <div class="card-body ">
       <div class="tab-content col-12 ">
-        <div class="tab-pane active" id="Cadastrar">
+        <div class="tab-pane " id="Cadastrar">
           <div class="row">
             <div class="col-md-6">
               <form id="form" method="POST">
@@ -50,25 +53,26 @@
                 <div class="form-group ">
                   <label for="exampleInputEmail1">IP:</label>
                   <input type="text" class="form-control" id="ip" aria-describedby="emailHelp" required>
-                </div>              
+                </div>
                 <br>
             </div>
-          </form>         
+            </form>
           </div>
           <button type="submit" class="btn btn-primary" onclick="cadastraIp()">Cadastrar</button>
         </div>
 
         <!--               PARTE DE ALTERACAO      -->
 
-        <div class="tab-pane" id="Alterar">
-          <form class="form-group" id="formBusca" onsubmit="buscarEmpresa()" method="POST">
-            <div class="col-3 align-items-center">
-              <label for="selectBusca">Selecione o Local...</label>
-              <select class="form-control selectpicker" data-style="btn btn-link" id="selectBusca">
-                <option>Homologação</option>
-                <option>Produção</option>          
-              </select>             
-    
+        <div class="tab-pane active" id="Alterar">
+          <form class="form-group" id="formBusca" method="POST">
+            <div class="col-6 align-items-center">
+              <div class="input-group mb-6">                              
+                <select class="form-control selectpicker" data-style="btn btn-link" id="Select">                                  
+                </select>                
+                <button class="btn btn-primary btn-round  btn-sm" onclick="buscarLocal()">
+                  <i class="material-icons">search</i>Buscar
+                </button>
+              </div>
               <br>
             </div>
             <div class="col-auto">
@@ -79,27 +83,29 @@
               <form class=" form-group" id="formAltera" method="POST" class="">
                 <fieldset id="campos" disabled>
                   <div class="form-group ">
-                    <label for="exampleInputEmail1">Local</label>
-                    <input type="text" class="form-control" id="empresaAltera" required>
+                    <label>Local</label>
+                    <input type="text" class="form-control" id="localAltera" required>
                   </div>
                   <div class="form-group ">
-                    <label for="exampleInputEmail1">IP:</label>
-                    <input type="text" class="form-control" id="linkbiAltera" required>
-                  </div>                 
+                    <label>IP:</label>
+                    <input type="text" class="form-control" id="ipAltera" required>
+                  </div>
             </div>
-          </form>
+            </form>
           </div>
           <br>
-          <button type="submit" class="btn btn-primary" onclick="alteraEmpresa()">Alterar</button>
+          <button type="submit" class="btn btn-primary" onclick="alteraIp()">Alterar</button>
           </fieldset>
           </form>
         </div>
+
+
         <div class="tab-pane" id="Listagem">
-          <table id="teste" class="display">
+          <table id="teste" style="width:100%">
             <thead>
               <tr>
-                <th>Empresa</th>
-                <th >Link BI</th>
+                <th>Local</th>
+                <th>IP</th>
               </tr>
             </thead>
           </table>
@@ -112,7 +118,7 @@
   </div>
   </div>
 
-  <script src="../js/cadastroIp.js"></script>
+  <script charset="UTF-8" src="../js/cadastroIp.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
