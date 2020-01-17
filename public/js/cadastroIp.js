@@ -108,43 +108,29 @@ async function alteraIp() {
     })
 }
 
-async function excluirEmpresa() {
+async function excluirIp() {
   event.preventDefault()
 
-  const empresaAltera = document.getElementById('usuarioAltera').value
+  const localAltera = document.getElementById('localAltera').value
 
-  await axios.delete("/files/" + urlID)
+  await axios.delete("/ip/" + localAltera.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))
 
     .then(function (response) {
 
-      alert("Usuario excluido com sucesso !")
-      console.log(response)
+      alert("Local / IP excluido com sucesso !")
+      campos.disabled = true
+      document.getElementById("formBusca").reset();
+      document.getElementById("formAltera").reset();
 
     })
     .catch(function (error) {
 
       console.log(error)
-      alert("Verificar log")
+      alert("Erro, Verificar log")
 
     })
+  }
 
-
-
-  await axios.delete("/empresa/" + empresaAltera)
-
-    .then(function (response) {
-      alert("Empresa excluida com sucesso !")
-      campos.disabled = true
-      document.getElementById("formBusca").reset();
-      document.getElementById("formAltera").reset();
-
-
-    })
-    .catch(function (error) {
-      alert("Não foi possivel excluir")
-
-    })
-}
 
 function atualizaTabela() {
   $('#teste').DataTable().ajax.reload();
@@ -215,5 +201,3 @@ function limparCampos() {
 
 }
 mostrarTabela()
-
-

@@ -16,9 +16,6 @@ Route.on('/pag/perfil').render('pag/perfil')
 Route.on('/pag/configuracaoIp').render('pag/configuracaoIp')
 
 
-
-
-
 // rotas para as API
 Route.get('users/:username', 'UserController.show')
 Route.get('users', 'UserController.index')
@@ -47,6 +44,7 @@ Route.put('notificacao',"NotificacaoController.update")
 
 Route.put('ip',"ConfigIpController.update")
 Route.get('ip/:local',"ConfigIpController.show")
+Route.delete('ip/:local',"ConfigIpController.destroy")
 Route.get('ip',"ConfigIpController.index")
 Route.post('ip',"ConfigIpController.store")
 

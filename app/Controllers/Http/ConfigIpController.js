@@ -69,6 +69,10 @@ class ConfigIpController {
   }
 
   async destroy ({ params, request, response }) {
+    const local = await Ip.findByOrFail(params)
+    await local.delete()
+     
+    return response.status(200).send({ok:'Deletado com sucesso'})    
   }
 }
 

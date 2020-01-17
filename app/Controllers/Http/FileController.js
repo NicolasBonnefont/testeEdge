@@ -9,20 +9,20 @@ const fs = require('fs')
 
 class FileController {
 
-  async store ({ request, response }) {
-    try{
+  async store({ request, response }) {
+    try {
 
-      if(!request.file('file')) return response.status(500).send({mensagem:"erro"})
+      if (!request.file('file')) return response.status(500).send({ mensagem: "erro" })
 
-      const upload = request.file('file', { size: '8mb'})
+      const upload = request.file('file', { size: '8mb' })
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
-      await upload.move(Helpers.publicPath('uploads'),{
+      await upload.move(Helpers.publicPath('uploads'), {
         name: fileName
       })
 
-      if (!upload.moved()){
+      if (!upload.moved()) {
         throw upload.error()
       }
 
@@ -37,37 +37,35 @@ class FileController {
       return file
 
 
-    }catch(err){
+    } catch (err) {
 
-      return response.status(err.status).send({erro: {message:"erro no upload"}})
+      return response.status(err.status).send({ erro: { message: "erro no upload" } })
     }
 
   }
 
-  async show({params,response}){
-  
+  async show({ params, response }) {
+
     const file = await File.findOrFail(params.id)
 
     return response.download(Helpers.publicPath(`uploads/${file.file}`))
-  
+
 
   }
 
-  async destroy ({ params, response }) {
+  async destroy({ params, response }) {
     const file = await File.findByOrFail(params)
-    
+    await file.delete()
 
     try {
-
-      await file.delete()
       fs.unlinkSync(Helpers.publicPath(`uploads/${file.file}`))
-      return response.status(200).send({ok:'IMG Deletado com sucesso'})
-    } 
-    catch(err) {
-      return response.status(500).send({Erro:'Problema na exclusão da IMG',err})
+      return response.status(200).send({ ok: 'IMG Deletado com sucesso' })
     }
-    
-  }  
+    catch (err) {
+      return response.status(500).send({ Erro: 'Problema na exclusão da IMG', err })
+    }
+
+  }
 }
 
 module.exports = FileController
