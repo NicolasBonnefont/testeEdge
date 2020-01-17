@@ -8,7 +8,6 @@ async function carregaLocal(){
   })
   .catch(function(error){
   })
-  
 
   for (var i = 0; i < dados.length; i++) {
     var select = document.getElementById("Select");
@@ -16,8 +15,6 @@ async function carregaLocal(){
     option.text = dados[i].local;
     select.add(option);
 }
-
-
 }
 
 carregaLocal()
