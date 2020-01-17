@@ -69,7 +69,7 @@ async function cadastraUsuario() {
     .catch(function (error) {
       alert("Verificar log")
       console.log(err)
-      
+
 
     })
 }
@@ -87,7 +87,7 @@ async function buscarUsuario() {
   await axios.get("/users/" + usuarioBusca)
 
     .then(function (response) {
-      
+
       campos.disabled = false
 
       usuarioAltera.value = response.data.name
@@ -95,11 +95,11 @@ async function buscarUsuario() {
       empresaAltera.value = response.data.empresa
       adminAltera.value = response.data.admin
       cargoAltera.value = response.data.cargo
-      document.getElementById("imageAltera").src = response.data.url     
+      document.getElementById("imageAltera").src = response.data.url
       urlID = response.data.urlID
       url = response.data.url
       imgAltera.disabled = false
-      
+
 
       if (adminAltera.value == 1) {
         adminAltera.checked = true
@@ -110,7 +110,7 @@ async function buscarUsuario() {
 
     })
 
-    .catch(function (error) {      
+    .catch(function (error) {
       console.log(error)
       alert("Usuario não encotrado, verificar log.")
       campos.disabled = true
@@ -124,7 +124,7 @@ async function buscarUsuario() {
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
 async function alterarUsuario() {
   event.preventDefault()
-  
+
   const campos = document.getElementById('campos')
   const usuarioAltera = document.getElementById('usuarioAltera').value
   const emailAltera = document.getElementById('emailAltera').value
@@ -137,7 +137,7 @@ async function alterarUsuario() {
   const user = JSON.parse(data)
   var adminAlteraOK = 0
   var urlAltera = url
-  
+
 
   if (adminAltera.checked) {
 
@@ -147,44 +147,44 @@ async function alterarUsuario() {
     adminAlteraOK = 0
   }
 
-  if (!imgAltera == ''){
+  if (!imgAltera == '') {
 
-  await axios.delete("/files/" + urlID)
-  
-  .then(function(response){
-    
-  })
-  .catch(function(error){
-    console.log(error)
-  return alert("Houve um problema !")
-  })
+    await axios.delete("/files/" + urlID)
 
- 
+      .then(function (response) {
 
-  let dataAltera = new FormData()
-  dataAltera.append("file", imgAltera)
+      })
+      .catch(function (error) {
+        console.log(error)
+        return alert("Houve um problema !")
+      })
 
-  var conteudo = {
-    header: {
-      "content-type": "multipart/form-data"
+
+
+    let dataAltera = new FormData()
+    dataAltera.append("file", imgAltera)
+
+    var conteudo = {
+      header: {
+        "content-type": "multipart/form-data"
+      }
     }
-  }
-   //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
-   // SE ALTERADO, ASSUME A NOVA URL E ID
-  
-    
+    //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
+    // SE ALTERADO, ASSUME A NOVA URL E ID
+
+
     await axios.post('/files', dataAltera, conteudo)
- 
-    .then(function (response) {
-      urlAltera = response.data.url
-      urlID = response.data.id
-      
 
-    }).catch(function (err) {
-      alert("Verificar log")
-      console.log(err)
+      .then(function (response) {
+        urlAltera = response.data.url
+        urlID = response.data.id
 
-    });
+
+      }).catch(function (err) {
+        alert("Verificar log")
+        console.log(err)
+
+      });
 
   }
 
@@ -206,19 +206,19 @@ async function alterarUsuario() {
       u.urlID = urlID
       const user = JSON.stringify(u)
       sessionStorage.setItem("user", user)
-   
+
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
       limparCampos()
 
     })
     .catch(function (error) {
-      
+
       console.log(error)
       alert("Não foi possivel alterar este cadastro, verificar log")
 
     })
-    
+
 }
 
 async function excluirUsuario() {
@@ -229,18 +229,18 @@ async function excluirUsuario() {
 
   await axios.delete("/files/" + urlID)
 
-  .then(function(response){
+    .then(function (response) {
 
-   alert("Usuario excluido com sucesso !")
-   console.log(response)
+      alert("Usuario excluido com sucesso !")
+      console.log(response)
 
-  })
-  .catch(function(error){
+    })
+    .catch(function (error) {
 
-    console.log(error)    
-    alert("Verificar log")
-    
-  })
+      console.log(error)
+      alert("Verificar log")
+
+    })
 
   await axios.delete("/users/" + usuarioBusca)
 
@@ -252,14 +252,14 @@ async function excluirUsuario() {
 
     })
     .catch(function (error) {
-      console.log(error)       
+      console.log(error)
       campos.disabled = true
       alert("Não foi possivel excluir este cadastro, verificar log")
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
     })
 
-  
+
 }
 
 // FUNCAO QUE REMOVE O EVENTO PADRAO DE SUBMIT DO BOTAO

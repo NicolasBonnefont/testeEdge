@@ -51,7 +51,7 @@ class ConfigIpController {
 
       const {local} = request.all()
 
-      const ip = await Ip.findByOrFail('local', local)
+      const ip = await Ip.findByOrFail('id', local)
       const data = request.all()
     
       ip.merge(data);

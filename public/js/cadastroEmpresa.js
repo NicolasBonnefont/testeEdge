@@ -4,6 +4,7 @@ async function cadastraEmpresa() {
   event.preventDefault()
   const empresa = document.getElementById('empresa').value;
   const linkbi = document.getElementById('linkbi').value;
+  
   const imgNovo = document.getElementById('imgNovo').files[0]
   var url = ''
 
