@@ -29,7 +29,7 @@ async function cadastraIp() {
   const local = document.getElementById('local').value;
   const ip = document.getElementById('ip').value;
   
-
+  if(local && ip){
   await axios.post('/ip', {
     "local": `${local}`,
     "ip": `${ip}`
@@ -47,6 +47,7 @@ async function cadastraIp() {
       console.log(error)
       alert('Problema ao cadastrar ! Ver log.')
     })
+  }
 }
 
 // FUNCAO QUE BUSCA O USUARIO
@@ -119,8 +120,7 @@ async function excluirIp() {
 
       alert("Local / IP excluido com sucesso !")
       campos.disabled = true
-      document.getElementById("formBusca").reset();
-      document.getElementById("formAltera").reset();
+      document.location.reload();
 
     })
     .catch(function (error) {
