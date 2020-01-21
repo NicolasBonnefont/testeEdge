@@ -1,3 +1,24 @@
+async function carregaUsuario(){
+  var dados
+ 
+  await axios.get('/users')
+  .then(function(response){
+     dados = response.data.data
+  })
+  .catch(function(error){
+  })
+
+  for (var i = 0; i < dados.length; i++) {
+    var select = document.getElementById("Select")
+    var option = document.createElement("option")
+    option.text = dados[i].username;
+    select.add(option);
+}
+}
+
+carregaUsuario()
+
+
 // FUNCAO QUE CRIA USUARIO
 async function cadastraUsuario() {
 
@@ -78,9 +99,10 @@ async function cadastraUsuario() {
 
 async function buscarUsuario() {
   event.preventDefault()
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var usuarioBusca = y[x].text
 
-  //campos do busca
-  const usuarioBusca = document.getElementById('usuarioBusca').value
   const campos = document.getElementById('campos')
   var imgAltera = document.getElementById('imgAltera')
 
@@ -124,12 +146,13 @@ async function buscarUsuario() {
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
 async function alterarUsuario() {
   event.preventDefault()
-
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var usuarioBusca = y[x].text
   const campos = document.getElementById('campos')
   const usuarioAltera = document.getElementById('usuarioAltera').value
   const emailAltera = document.getElementById('emailAltera').value
   const empresaAltera = document.getElementById('empresaAltera').value
-  const usuarioBusca = document.getElementById('usuarioBusca').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera').value
   const cargoAltera = document.getElementById("cargoAltera").value
@@ -142,9 +165,6 @@ async function alterarUsuario() {
   if (adminAltera.checked) {
 
     adminAlteraOK = 1
-  } else {
-
-    adminAlteraOK = 0
   }
 
   if (!imgAltera == '') {

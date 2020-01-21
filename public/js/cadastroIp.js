@@ -1,6 +1,6 @@
 async function carregaLocal(){
   
-  var dados
+  var dados = 0
  
   await axios.get('/ip')
   .then(function(response){
@@ -18,9 +18,6 @@ async function carregaLocal(){
 }
 
 carregaLocal()
-
-
-
 
 // FUNCAO QUE CRIA IP
 async function cadastraIp() {

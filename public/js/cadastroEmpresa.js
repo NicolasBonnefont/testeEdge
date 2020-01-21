@@ -1,3 +1,23 @@
+async function carregaEmpresa(){
+  var dados
+ 
+  await axios.get('/empresa')
+  .then(function(response){
+     dados = response.data.data
+  })
+  .catch(function(error){
+  })
+
+  for (var i = 0; i < dados.length; i++) {
+    var select = document.getElementById("Select")
+    var option = document.createElement("option")
+    option.text = dados[i].empresa;
+    select.add(option);
+}
+}
+
+carregaEmpresa()
+
 // FUNCAO QUE CRIA EMPRESA
 async function cadastraEmpresa() {
 
@@ -23,9 +43,7 @@ async function cadastraEmpresa() {
       url = response.data.url
 
     }).catch(function (err) {
-      alert("Verificar log")
       console.log(err)
-
     });
 
   await axios.post('/empresa', {
@@ -45,6 +63,7 @@ async function cadastraEmpresa() {
         console.log(response.data)
         alert('Empresa Cadastrada com Sucesso !')
         document.getElementById("form").reset();
+        document.location.reload();
 
       }
 
@@ -59,11 +78,11 @@ async function cadastraEmpresa() {
 
 async function buscarEmpresa() {
   event.preventDefault()
-
-  //campos do busca
-  const empresaBusca = document.getElementById('empresaBusca').value
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var empresaBusca = y[x].text
   const campos = document.getElementById('campos')
-  console.log(empresaBusca)
+
   await axios.get("/empresa/" + empresaBusca)
 
     .then(function (response) {
@@ -72,8 +91,7 @@ async function buscarEmpresa() {
       linkbiAltera.value = response.data.bi
       id = response.data.id
       sessionStorage.setItem('idEmpresa', id)
-      document.getElementById("imageAltera").src = response.data.url
-      imgAltera.attributes.removeNamedItem('disabled')
+      document.getElementById("imageAltera").src = response.data.url      
       urlID = response.data.urlID
       url = response.data.url
 
@@ -92,6 +110,9 @@ async function buscarEmpresa() {
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
 async function alteraEmpresa() {
   event.preventDefault()
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var empresaBusca = y[x].text
   const campos = document.getElementById('campos')
   const empresaAltera = document.getElementById('empresaAltera').value
   const linkbiAltera = document.getElementById('linkbiAltera').value
@@ -137,13 +158,8 @@ async function alteraEmpresa() {
       });
 
   }
-  console.log("urlID: " + urlID)
-  console.log("URL ALTERA:  " + urlAltera)
-  console.log("empresa altera: " + empresaAltera)
-
-  // AQUI OK ! 
   await axios.put("/empresa", {
-      "empresa": `${empresaAltera}`,
+      "empresa": empresaBusca,
       "bi": `${linkbiAltera}`,
       "url": urlAltera,
       "urlID": urlID,
@@ -157,6 +173,7 @@ async function alteraEmpresa() {
       document.getElementById("formAltera").reset()
       sessionStorage.removeItem('id')
       campos.disabled = true
+      document.location.reload();
       limparCampos()
 
     })

@@ -6,7 +6,6 @@ const fs = require('fs')
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-
 class FileController {
 
   async store({ request, response }) {
@@ -14,7 +13,7 @@ class FileController {
 
       if (!request.file('file')) return response.status(500).send({ mensagem: "erro" })
 
-      const upload = request.file('file', { size: '50mb' })
+      const upload = request.file('file', { size: '10mb' })
 
       const fileName = `${Date.now()}.${upload.subtype}`
 
