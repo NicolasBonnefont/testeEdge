@@ -87,6 +87,7 @@ async function buscarEmpresa() {
 
     .then(function (response) {
       imgAltera.disabled = false
+      campos.disabled = false
       empresaAltera.value = response.data.empresa
       linkbiAltera.value = response.data.bi
       id = response.data.id
