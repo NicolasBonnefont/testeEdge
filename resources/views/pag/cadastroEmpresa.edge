@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,11 @@
   <link href="../css/alinhamentoImg.css" rel="stylesheet">
   <link href="../css/perfil/imgPerfil.css" rel="stylesheet">
   <link href="../css/cadastroEmpresa/cardcustom.css" rel="stylesheet">
-  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">  
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro de Clientes</title>
 </head>
+
 <body>
   <!--INICO-->
   @include('nav/nav')
@@ -36,12 +38,13 @@
         </div>
       </div>
     </div>
-  
+
     <div class="card-body ">
       <div class="tab-content col-12 ">
 
         <div class="tab-pane active" id="Cadastrar">
           <div class="row">
+
             <div class="col-sm-6">
               <form id="form" method="POST" onsubmit="cadastraEmpresa()">
                 <div class="form-group ">
@@ -52,24 +55,30 @@
                   <label for="exampleInputEmail1">LINK BI</label>
                   <input type="text" class="form-control" id="linkbi" aria-describedby="emailHelp" required>
                 </div>
-              
                 <br>
             </div>
-            
-            <div class="cold-sm- text-center tamanhoPerfil">
-              <div class="card cardCustom">
+
+            <div class="cold-sm-6 text-center tamanhoPerfil">
+              <div class="card cardCustom ">
                 <img id="imageNovo" class="card-img-top rounded img-fluid "
-                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">               
-                  <br>
-                  <div class="form-group">
-                    <label for="imgNovo">CARREGAR LOGO<label>
-                        <input onchange="showImageNovo.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgNovo">
-                  </div>                  
-              </div>                                            
-          </div>          
+                  src="https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg" alt=" Thumbnail Image ">
+                <br>
+                <div class="form-group ">
+                  <label for="imgNovo">CARREGAR LOGO<label>
+                      <input onchange="showImageNovo.call(this)" accept=".jpg,.jpeg,.png" type="file"
+                        class="form-control-file" id="imgNovo">
+
+                </div>
+              </div>
+
+            </div>
+
           </div>
-          <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </form> 
+          <div class="row">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+          </div>
+
+          </form>
         </div>
 
         <!--               PARTE DE ALTERACAO      -->
@@ -84,8 +93,8 @@
                 <button class="btn btn-primary btn-round  btn-sm" type="submit">
                   <i class="material-icons">search</i>Buscar
                 </button>
-              </div>           
-    
+              </div>
+
               <br>
             </div>
           </form>
@@ -100,7 +109,7 @@
                   <div class="form-group ">
                     <label for="exampleInputEmail1">LINK BI</label>
                     <input type="text" class="form-control" id="linkbiAltera" required>
-                  </div>                 
+                  </div>
             </div>
             <div class="cold-sm-6 text-center tamanhoPerfil ">
               <div class="card cardCustom ">
@@ -109,7 +118,8 @@
                 <br>
                 <div class="form-group ">
                   <label for="imgAltera">CARREGAR LOGO<label>
-                      <input onchange="showImageAltera.call(this)" accept=".jpg,.jpeg,.png" type="file" class="form-control-file" id="imgAltera"disabled>
+                      <input onchange="showImageAltera.call(this)" accept=".jpg,.jpeg,.png" type="file"
+                        class="form-control-file" id="imgAltera" disabled>
                 </div>
               </div>
             </div>
@@ -126,7 +136,7 @@
             <thead>
               <tr>
                 <th>Empresa</th>
-                <th >Link BI</th>
+                <th>Link BI</th>
               </tr>
             </thead>
           </table>
@@ -147,7 +157,7 @@
 
 
 
-  
+
   <script src="../js/cadastroEmpresa.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
