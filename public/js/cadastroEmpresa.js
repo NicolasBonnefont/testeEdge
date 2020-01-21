@@ -173,9 +173,9 @@ async function alteraEmpresa() {
       document.getElementById("formBusca").reset()
       document.getElementById("formAltera").reset()
       sessionStorage.removeItem('id')
-      campos.disabled = true
-      document.location.reload();
+      campos.disabled = true      
       limparCampos()
+      document.location.reload();
 
     })
     .catch(function (error) {
@@ -186,15 +186,13 @@ async function alteraEmpresa() {
 
 async function excluirEmpresa() {
   event.preventDefault()
-
-  const empresaAltera = document.getElementById('usuarioAltera').value
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var empresaBusca = y[x].text
 
   await axios.delete("/files/" + urlID)
 
-    .then(function (response) {
-
-      alert("Usuario excluido com sucesso !")
-      console.log(response)
+    .then(function (response) {    
 
     })
     .catch(function (error) {
@@ -206,14 +204,14 @@ async function excluirEmpresa() {
 
 
 
-  await axios.delete("/empresa/" + empresaAltera)
+  await axios.delete("/empresa/" + empresaBusca)
 
     .then(function (response) {
       alert("Empresa excluida com sucesso !")
       campos.disabled = true
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
-
+      document.location.reload();
 
     })
     .catch(function (error) {
