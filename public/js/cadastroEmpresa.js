@@ -311,9 +311,3 @@ function limparCampos() {
 }
 mostrarTabela()
 
-var myobject = {};
-
-var select = document.getElementById("selectBusca");
-for(index in myobject) {
-  select.options[select.options.length] = new Option(myobject[index], index);
-}
