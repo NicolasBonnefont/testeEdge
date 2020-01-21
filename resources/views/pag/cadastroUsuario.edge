@@ -52,9 +52,11 @@
                   <label for="exampleInputEmail1">Email</label>
                   <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
                 </div>
+                <br>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Empresa</label>
-                  <input type="text" class="form-control" id="empresa" required>
+                  <select class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresa">
+                    <option>Selecione a Empresa...</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Cargo</label>
@@ -153,6 +155,7 @@
           </div>
           <br>
           <button type="submit" class="btn btn-primary" onclick="alterarUsuario()">Alterar</button>
+          <button type="submit" class="btn btn-danger" onclick="excluirUsuario()">Excluir</button>
           </fieldset>
           </form>
         </div>

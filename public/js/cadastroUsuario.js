@@ -16,19 +16,38 @@ async function carregaUsuario(){
 }
 }
 
+async function carregaEmpresa(){
+  var dadosEmpresa
+ 
+  await axios.get('/empresa')
+  .then(function(response){
+    dadosEmpresa = response.data.data
+  })
+  .catch(function(error){
+  })
+
+  for (var i = 0; i < dadosEmpresa.length; i++) {
+    var SelectEmpresa = document.getElementById("SelectEmpresa")
+    var optionEmpresa = document.createElement("option")
+    optionEmpresa.text = dadosEmpresa[i].empresa;
+    SelectEmpresa.add(optionEmpresa);
+}
+}
+carregaEmpresa()
 carregaUsuario()
 
 
 // FUNCAO QUE CRIA USUARIO
 async function cadastraUsuario() {
-
   event.preventDefault()
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var empresa = y[x].text
 
   const username = document.getElementById('username').value;
   const name = document.getElementById('name').value;
   const password = document.getElementById('password').value
   const email = document.getElementById('email').value
-  const empresa = document.getElementById('empresa').value
   const admin = document.getElementById('admin')
   const cargo = document.getElementById('cargo').value
   const imgNovo = document.getElementById('imgNovo').files[0]
@@ -56,7 +75,7 @@ async function cadastraUsuario() {
       url = response.data.url
 
     }).catch(function (err) {
-      alert("Verificar log")
+
       console.log(err)
 
     });
@@ -82,14 +101,14 @@ async function cadastraUsuario() {
       if (response.status === 200) {
         alert('Usuario Cadastrado com Sucesso !')
         document.getElementById("form").reset();
-        document.getElementById("image").src = 'https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg';
+        document.location.reload();
 
       }
 
     })
     .catch(function (error) {
       alert("Verificar log")
-      console.log(err)
+      console.log(error)
 
 
     })
@@ -201,7 +220,7 @@ async function alterarUsuario() {
 
 
       }).catch(function (err) {
-        alert("Verificar log")
+        
         console.log(err)
 
       });
@@ -230,6 +249,7 @@ async function alterarUsuario() {
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
       limparCampos()
+      document.location.reload();
 
     })
     .catch(function (error) {
@@ -243,22 +263,23 @@ async function alterarUsuario() {
 
 async function excluirUsuario() {
   event.preventDefault()
-
+  var x = document.getElementById("Select").selectedIndex;
+  var y = document.getElementById("Select").options;
+  var usuarioBusca = y[x].text
   const campos = document.getElementById('campos')
-  const usuarioBusca = document.getElementById('usuarioBusca').value
+
 
   await axios.delete("/files/" + urlID)
 
     .then(function (response) {
 
-      alert("Usuario excluido com sucesso !")
       console.log(response)
 
     })
     .catch(function (error) {
 
       console.log(error)
-      alert("Verificar log")
+  
 
     })
 
@@ -269,6 +290,7 @@ async function excluirUsuario() {
       campos.disabled = true
       document.getElementById("formBusca").reset();
       document.getElementById("formAltera").reset();
+      document.location.reload();
 
     })
     .catch(function (error) {
