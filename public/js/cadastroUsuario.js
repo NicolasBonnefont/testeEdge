@@ -33,13 +33,19 @@ async function carregaEmpresa(){
     dadosEmpresa = response.data.data
   })
   .catch(function(error){
-  })
+  })  
 
   for (var i = 0; i < dadosEmpresa.length; i++) {
     var SelectEmpresa = document.getElementById("SelectEmpresa")
     var optionEmpresa = document.createElement("option")
     optionEmpresa.text = dadosEmpresa[i].empresa;
     SelectEmpresa.add(optionEmpresa);
+}
+  for (var i = 0; i < dadosEmpresa.length; i++) {
+    var SelectAltera = document.getElementById("SelectAltera")
+    var optionEmpresaAltera = document.createElement("option")
+    optionEmpresaAltera.text = dadosEmpresa[i].empresa;
+    SelectAltera.add(optionEmpresaAltera);
 }
 }
 carregaEmpresa()
@@ -122,10 +128,15 @@ carregaUsuario()
 
 async function buscarUsuario() {
   event.preventDefault()
+  
+  var a = document.getElementById("SelectAltera").selectedIndex;
+  var b = document.getElementById("SelectAltera").options;
+  
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
-  var usuarioBusca = y[x].text
 
+  var usuarioBusca = y[x].text
+  
   const campos = document.getElementById('campos')
   var imgAltera = document.getElementById('imgAltera')
 
@@ -137,7 +148,9 @@ async function buscarUsuario() {
 
       usuarioAltera.value = response.data.name
       emailAltera.value = response.data.email
-      empresaAltera.value = response.data.empresa
+      a.selectedIndex = 0
+      b[a].text = response.data.empresa       
+      console.log(y,x)
       adminAltera.value = response.data.admin
       cargoAltera.value = response.data.cargo
       document.getElementById("imageAltera").src = response.data.url
@@ -172,8 +185,13 @@ async function alterarUsuario() {
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
-  const campos = document.getElementById('campos')
-  const usuarioAltera = document.getElementById('usuarioAltera').value
+  
+  var a = document.getElementById("SelectAtera").selectedIndex;
+  var b = document.getElementById("SelectAltera").options;
+  var usuarioAltera = a[b].text
+
+
+  const campos = document.getElementById('campos') 
   const emailAltera = document.getElementById('emailAltera').value
   const empresaAltera = document.getElementById('empresaAltera').value
   const imgAltera = document.getElementById('imgAltera').files[0]
