@@ -139,7 +139,7 @@ async function buscarUsuario() {
   
   const campos = document.getElementById('campos')
   var imgAltera = document.getElementById('imgAltera')
-
+  if(!x == 0){
   await axios.get("/users/" + usuarioBusca, config)
 
     .then(function (response) {
@@ -148,7 +148,7 @@ async function buscarUsuario() {
 
       usuarioAltera.value = response.data.name
       emailAltera.value = response.data.email
-      a.selectedIndex = 0
+      a = 0
       b[a].text = response.data.empresa       
       console.log(y,x)
       adminAltera.value = response.data.admin
@@ -176,7 +176,7 @@ async function buscarUsuario() {
       document.getElementById("formAltera").reset();
 
     })
-
+  }
 }
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
 
@@ -185,7 +185,7 @@ async function alterarUsuario() {
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
-  
+
   var a = document.getElementById("SelectAtera").selectedIndex;
   var b = document.getElementById("SelectAltera").options;
   var usuarioAltera = a[b].text
@@ -299,7 +299,7 @@ async function excluirUsuario() {
   
 
     })
-
+  if(!x == 0){
   await axios.delete("/users/" + usuarioBusca, config)
 
     .then(function (response) {
@@ -318,7 +318,7 @@ async function excluirUsuario() {
       document.getElementById("formAltera").reset();
     })
 
-
+  }
 }
 
 // FUNCAO QUE REMOVE O EVENTO PADRAO DE SUBMIT DO BOTAO

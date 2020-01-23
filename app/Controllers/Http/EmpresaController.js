@@ -30,13 +30,17 @@ class EmpresaController {
     const {id} = request.all()
 
     const empresas = await Empresa.findByOrFail('id', id)
-    const data = request.only(["empresa", "bi", "url","urlID"]);
+    try{
+    const data = request.all();
   
     empresas.merge(data);
     await empresas.save();
 
     return empresas
-
+    }
+    catch(err){
+      return response.status(200).send(err)
+    }
   }
 
   async destroy ({ params, response }) {
