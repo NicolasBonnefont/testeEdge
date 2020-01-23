@@ -27,14 +27,13 @@ Route.get('ip',"ConfigIpController.index")
 Route.post('ip',"ConfigIpController.store")
 
 
-
+Route.get('files/:id', 'FileController.show')
 
 
 
 // GRUPO DE ROTAS PERMITIDAS SOMENTE QUANDO O USUARIO ESTIVER LOGADO
 Route.group(() => {
 Route.post('files', 'FileController.store')
-Route.get('files/:id', 'FileController.show')
 Route.delete('files/:id', 'FileController.destroy')
 
 Route.get('users', 'UserController.index')
