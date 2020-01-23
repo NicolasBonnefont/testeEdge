@@ -1,4 +1,3 @@
-var url ='https://api-mor.herokuapp.com'
 
   //ACESSA A ROTA QUE ENVIA POR EMAIL O TOKEN PARA RESETAR O ACESSO
 async function recuperar() {

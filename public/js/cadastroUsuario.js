@@ -1,4 +1,4 @@
-import {config} from './api.js';
+import {config} from './api.js'
 
 async function carregaUsuario(){
   var dados

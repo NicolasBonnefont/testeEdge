@@ -1,4 +1,4 @@
-import {config} from './api'
+import {config} from './api.js'
 
 var data = sessionStorage.getItem("user")
 const u = JSON.parse(data)
