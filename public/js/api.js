@@ -1,6 +1,7 @@
 const token = sessionStorage.getItem('sessao')
-export const config = {
+const config = {
   headers: { 
-    Authorization: 'Bearer ' + token
+    Authorization: 'Bearer ' + token,
+    'Content-Type': 'multipart/form-data'
   }
 }

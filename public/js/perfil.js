@@ -1,4 +1,11 @@
-import {config} from './api.js'
+const token = sessionStorage.getItem('sessao')
+const config = {
+  headers: { 
+    Authorization: 'Bearer ' + token,
+    'Content-Type': 'multipart/form-data'
+  }
+}
+
 
 var data = sessionStorage.getItem("user")
 const u = JSON.parse(data)

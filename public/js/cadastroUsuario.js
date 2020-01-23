@@ -1,4 +1,11 @@
-import {config} from './api.js'
+const token = sessionStorage.getItem('sessao')
+const config = {
+  headers: { 
+    Authorization: 'Bearer ' + token,
+    'Content-Type': 'multipart/form-data'
+  }
+}
+
 
 async function carregaUsuario(){
   var dados
@@ -40,7 +47,7 @@ carregaUsuario()
 
 
 // FUNCAO QUE CRIA USUARIO
-async function cadastraUsuario() {
+  async function cadastraUsuario() {
   event.preventDefault()
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
@@ -119,7 +126,7 @@ async function cadastraUsuario() {
 // FUNCAO QUE BUSCA O USUARIO
 
 async function buscarUsuario() {
-  event.preventDefault()
+  
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
@@ -163,8 +170,9 @@ async function buscarUsuario() {
     })
 
 }
-
+document.getElementById('btnBuscar').addEventListener("click", buscarUsuario())
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
+
 async function alterarUsuario() {
   event.preventDefault()
   var x = document.getElementById("Select").selectedIndex;
