@@ -7,8 +7,7 @@ const config = {
 }
 
 
-async function carregaUsuario(){
-  event.preventDefault()
+async function carregaUsuario(){  
   var dados
  
   await axios.get('/users', config)
@@ -127,7 +126,7 @@ carregaUsuario()
 // FUNCAO QUE BUSCA O USUARIO
 
 async function buscarUsuario() {
-  
+  event.preventDefault()
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
