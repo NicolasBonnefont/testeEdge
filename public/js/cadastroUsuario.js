@@ -170,7 +170,6 @@ async function buscarUsuario() {
     })
 
 }
-document.getElementById('btnBuscar').addEventListener("click", buscarUsuario())
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
 
 async function alterarUsuario() {
