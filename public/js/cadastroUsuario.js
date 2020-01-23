@@ -8,6 +8,7 @@ const config = {
 
 
 async function carregaUsuario(){
+  event.preventDefault()
   var dados
  
   await axios.get('/users', config)
@@ -158,7 +159,7 @@ async function buscarUsuario() {
         adminAltera.checked = false
       }
 
-    })
+    }, config)
 
     .catch(function (error) {
       console.log(error)
@@ -197,7 +198,7 @@ async function alterarUsuario() {
 
   if (!imgAltera == '') {
 
-    await axios.delete("/files/" + urlID)
+    await axios.delete("/files/" + urlID, config)
 
       .then(function (response) {
 
@@ -212,16 +213,11 @@ async function alterarUsuario() {
     let dataAltera = new FormData()
     dataAltera.append("file", imgAltera)
 
-    var conteudo = {
-      header: {
-        "content-type": "multipart/form-data"
-      }
-    }
     //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
 
-    await axios.post('/files', dataAltera, conteudo)
+    await axios.post('/files', dataAltera, config)
 
       .then(function (response) {
         urlAltera = response.data.url
@@ -245,7 +241,7 @@ async function alterarUsuario() {
       "admin": `${adminAlteraOK}`,
       "url": urlAltera,
       "urlID": urlID
-    })
+    }, config)
 
     .then(function (response) {
       var data = sessionStorage.getItem("user")
@@ -278,7 +274,7 @@ async function excluirUsuario() {
   const campos = document.getElementById('campos')
 
 
-  await axios.delete("/files/" + urlID)
+  await axios.delete("/files/" + urlID, config)
 
     .then(function (response) {
 
@@ -292,7 +288,7 @@ async function excluirUsuario() {
 
     })
 
-  await axios.delete("/users/" + usuarioBusca)
+  await axios.delete("/users/" + usuarioBusca, config)
 
     .then(function (response) {
       alert("Usuário excluido com sucesso !")
@@ -324,9 +320,7 @@ function atualizaTabela() {
 }
 
 function mostrarTabela() {
-  var token = sessionStorage.getItem('sessao')
   
-
   $(document).ready(function () {
     
     $('#teste').DataTable({

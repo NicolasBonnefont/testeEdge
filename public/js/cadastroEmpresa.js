@@ -224,9 +224,7 @@ function atualizaTabela() {
 }
 
 function mostrarTabela() {
-  var token = sessionStorage.getItem('sessao')
   $(document).ready(function () {
-    
     $('#teste').DataTable({
       "ajax": {
         "url": '../empresa',
