@@ -186,14 +186,13 @@ async function alterarUsuario() {
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
 
-  var a = document.getElementById("SelectAtera").selectedIndex;
+  var a = document.getElementById("SelectAltera").selectedIndex;
   var b = document.getElementById("SelectAltera").options;
-  var usuarioAltera = b[a].text
+  var empresaAltera = b[a].text
 
-
+  console.log(empresaAltera)
   const campos = document.getElementById('campos') 
   const emailAltera = document.getElementById('emailAltera').value
-  const empresaAltera = document.getElementById('empresaAltera').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera').value
   const cargoAltera = document.getElementById("cargoAltera").value
