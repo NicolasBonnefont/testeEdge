@@ -139,6 +139,7 @@ async function buscarUsuario() {
   
   const campos = document.getElementById('campos')
   var imgAltera = document.getElementById('imgAltera')
+
   if(!x == 0){
   await axios.get("/users/" + usuarioBusca, config)
 
@@ -150,7 +151,7 @@ async function buscarUsuario() {
       emailAltera.value = response.data.email
       a = 0
       b[a].text = response.data.empresa       
-      console.log(y,x)
+     
       adminAltera.value = response.data.admin
       cargoAltera.value = response.data.cargo
       document.getElementById("imageAltera").src = response.data.url
@@ -190,11 +191,12 @@ async function alterarUsuario() {
   var b = document.getElementById("SelectAltera").options;
   var empresaAltera = b[a].text
 
-  console.log(empresaAltera)
+  
   const campos = document.getElementById('campos') 
   const emailAltera = document.getElementById('emailAltera').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera').value
+  const usuarioAltera = document.getElementById('usuarioAltera').value
   const cargoAltera = document.getElementById("cargoAltera").value
   var data = sessionStorage.getItem("user")
   const user = JSON.parse(data)
@@ -242,7 +244,7 @@ async function alterarUsuario() {
       });
 
   }
-
+console.log(usu)
   await axios.put("/users", {
       "name": `${usuarioAltera}`,
       "email": `${emailAltera}`,
