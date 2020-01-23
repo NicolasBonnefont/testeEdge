@@ -1,7 +1,9 @@
+import {config} from './api.js';
+
 async function carregaUsuario(){
   var dados
  
-  await axios.get('/users')
+  await axios.get('/users', config)
   .then(function(response){
      dados = response.data.data
   })
@@ -19,7 +21,7 @@ async function carregaUsuario(){
 async function carregaEmpresa(){
   var dadosEmpresa
  
-  await axios.get('/empresa')
+  await axios.get('/empresa', config)
   .then(function(response){
     dadosEmpresa = response.data.data
   })
@@ -315,17 +317,28 @@ function atualizaTabela() {
 }
 
 function mostrarTabela() {
+  var token = sessionStorage.getItem('sessao')
+  
+
   $(document).ready(function () {
+    
     $('#teste').DataTable({
-      "ajax": "../users",
-      "columns": [{
-          "data": "username"
-        },
-        {
+      "ajax": {
+        "url": '../users',
+        "type": "GET",        
+        "beforeSend": function (xhr) {
+        xhr.setRequestHeader("Authorization",
+        "Bearer " + token)
+        }},
+
+       "columns": [{
           "data": "name"
         },
         {
           "data": "email"
+        },
+        {
+          "data": "cargo"
         },
         {
           "data": "admin"

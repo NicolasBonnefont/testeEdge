@@ -1,7 +1,9 @@
+import {config} from './api.js'
+
 async function carregaEmpresa(){
   var dados
  
-  await axios.get('/empresa')
+  await axios.get('/empresa',config)
   .then(function(response){
      dados = response.data.data
   })
@@ -32,12 +34,7 @@ async function cadastraEmpresa() {
   let data = new FormData()
   data.append("file", imgNovo)
 
-  var conteudo = {
-    header: {
-      "content-type": "multipart/form-data"
-    }
-  }
-  await axios.post('/files', data, conteudo)
+  await axios.post('/files', data, config)
 
     .then(function (response) {
       url = response.data.url
@@ -50,7 +47,7 @@ async function cadastraEmpresa() {
       "empresa": `${empresa}`,
       "bi": `${linkbi}`,
       "url": `${url}`
-    })
+    },config)
 
     .then(function (response) {
 
@@ -83,7 +80,7 @@ async function buscarEmpresa() {
   var empresaBusca = y[x].text
   const campos = document.getElementById('campos')
 
-  await axios.get("/empresa/" + empresaBusca)
+  await axios.get("/empresa/" + empresaBusca, config)
 
     .then(function (response) {
       imgAltera.disabled = false
@@ -121,8 +118,8 @@ async function alteraEmpresa() {
   var urlAltera = url
 
   if (!imgAltera == '') {
-    console.log("url altera =  " + urlAltera)
-    await axios.delete("/files/" + urlID)
+    
+    await axios.delete("/files/" + urlID, config)
 
       .then(function (response) {
 
@@ -136,16 +133,11 @@ async function alteraEmpresa() {
     let dataAltera = new FormData()
     dataAltera.append("file", imgAltera)
 
-    var conteudo = {
-      header: {
-        "content-type": "multipart/form-data"
-      }
-    }
     //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
 
-    await axios.post('/files', dataAltera, conteudo)
+    await axios.post('/files', dataAltera, config)
 
       .then(function (response) {
         urlAltera = response.data.url
@@ -165,7 +157,7 @@ async function alteraEmpresa() {
       "url": urlAltera,
       "urlID": urlID,
       "id": sessionStorage.getItem('idEmpresa')
-    })
+    },config)
 
     .then(function (response) {
       alert("Empresa alterada com sucesso !")
@@ -190,7 +182,7 @@ async function excluirEmpresa() {
   var y = document.getElementById("Select").options;
   var empresaBusca = y[x].text
 
-  await axios.delete("/files/" + urlID)
+  await axios.delete("/files/" + urlID, config)
 
     .then(function (response) {    
 
@@ -204,7 +196,7 @@ async function excluirEmpresa() {
 
 
 
-  await axios.delete("/empresa/" + empresaBusca)
+  await axios.delete("/empresa/" + empresaBusca, config)
 
     .then(function (response) {
       alert("Empresa excluida com sucesso !")
@@ -225,9 +217,18 @@ function atualizaTabela() {
 }
 
 function mostrarTabela() {
+  var token = sessionStorage.getItem('sessao')
   $(document).ready(function () {
+    
     $('#teste').DataTable({
-      "ajax": "../empresa/",
+      "ajax": {
+        "url": '../empresa',
+        "type": "GET",        
+        "beforeSend": function (xhr) {
+        xhr.setRequestHeader("Authorization",
+        "Bearer " + token)
+        }},  
+
       "columns": [{
           "data": "empresa"
         },

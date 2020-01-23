@@ -15,19 +15,31 @@ Route.on('/pag/principal').render('pag/principal')
 Route.on('/pag/perfil').render('pag/perfil')
 Route.on('/pag/configuracaoIp').render('pag/configuracaoIp')
 
-
 // rotas para as API
-Route.get('users/:username', 'UserController.show')
-Route.get('users', 'UserController.index')
-Route.delete('users/:username', 'UserController.destroy')
-Route.put('users','UserController.update')
-Route.post('users','UserController.store')
-
 Route.post('sessions','SessionController.store')
-
 Route.post('passwords','ForgotPasswordController.store')
 Route.put('passwords','ForgotPasswordController.update')
 
+Route.put('ip',"ConfigIpController.update")
+Route.get('ip/:local',"ConfigIpController.show")
+Route.delete('ip/:local',"ConfigIpController.destroy")
+Route.get('ip',"ConfigIpController.index")
+Route.post('ip',"ConfigIpController.store")
+
+
+
+
+
+// GRUPO DE ROTAS PERMITIDAS SOMENTE QUANDO O USUARIO ESTIVER LOGADO
+Route.group(() => {
+  
+Route.get('users', 'UserController.index')
+Route.get('users/:username', 'UserController.show')
+
+Route.delete('users/:username', 'UserController.destroy')
+
+Route.put('users','UserController.update')
+Route.post('users','UserController.store')
 Route.post('empresa','EmpresaController.store')
 Route.get('empresa/:empresa','EmpresaController.show')
 Route.put('empresa','EmpresaController.update')
@@ -42,11 +54,6 @@ Route.post('notificacao', 'NotificacaoController.store')
 Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
 
-Route.put('ip',"ConfigIpController.update")
-Route.get('ip/:local',"ConfigIpController.show")
-Route.delete('ip/:local',"ConfigIpController.destroy")
-Route.get('ip',"ConfigIpController.index")
-Route.post('ip',"ConfigIpController.store")
-
+}).middleware('auth')
 
 Route.on('*').render('404')

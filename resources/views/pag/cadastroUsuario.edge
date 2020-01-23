@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../css/alinhamentoCadastro.css">
   <link href="../css/alinhamentoImg.css" rel="stylesheet">
   <link href="../css/perfil/imgPerfil.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro de Clientes</title>
 </head>
@@ -122,8 +123,9 @@
                     <input type="email" class="form-control" id="emailAltera" required>
                   </div>
                   <div class="form-group ">
-                    <label for="exampleInputEmail1">Empresa</label>
-                    <input type="text" class="form-control" id="empresaAltera" required>
+                    <select class="form-control selectpicker" data-style="btn btn-link" id="SelectAltera">
+                      <option>Selecione o Usuário...</option>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Cargo</label>
@@ -159,13 +161,14 @@
           </fieldset>
           </form>
         </div>
-        <div class="tab-pane table table-striped table-bordered" id="Listagem">
+
+        <div class="tab-pane " id="Listagem">
           <table id="teste" class="display" style="width:100%">
             <thead>
               <tr>
-                <th>Usuario</th>
                 <th>Nome</th>
                 <th>Email</th>
+                <th>Cargo</th>
                 <th>Admin</th>
               </tr>
             </thead>
@@ -175,7 +178,8 @@
     </div>
   </div>
   </div>
-  <script src="../js/cadastroUsuario.js"></script>
+  <script type="module" src="../js/api.js"></script>
+  <script type="module" src="../js/cadastroUsuario.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

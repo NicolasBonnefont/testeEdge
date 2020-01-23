@@ -1,3 +1,5 @@
+import {config} from './api'
+
 var data = sessionStorage.getItem("user")
 const u = JSON.parse(data)
 document.getElementById("imgPerfil").src = u.url
@@ -26,10 +28,8 @@ async function alteraUsuario() {
   var urlID = u.urlID
 
   if (!imgAltera == '') {
-    console.log("entrou no if " + u.urlID)
 
-   
-    await axios.delete("/files/" + u.urlID)
+    await axios.delete("/files/" + u.urlID, config)
 
       .then(function (response) {
         console.log(response.data)
@@ -39,20 +39,13 @@ async function alteraUsuario() {
         
       })
 
-
-
     let dataAltera = new FormData()
     dataAltera.append("file", imgAltera)
 
-    var conteudo = {
-      header: {
-        "content-type": "multipart/form-data"
-      }
-    }
     //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
-    await axios.post('/files', dataAltera, conteudo)
+    await axios.post('/files', dataAltera, config)
 
       .then(function (response) {
         urlAltera = response.data.url
@@ -78,7 +71,7 @@ async function alteraUsuario() {
     }]
   }
   
-  await axios.put("/users", dados)
+  await axios.put("/users", dados, config)
 
     .then(function (response) {
       var data = sessionStorage.getItem("user")
@@ -112,7 +105,7 @@ async function alteraUsuarioCapa() {
     console.log("entrou no if " + u.urlCapa)
 
    
-    await axios.delete("/files/" + u.urlCapa)
+    await axios.delete("/files/" + u.urlCapa, config)
 
       .then(function (response) {
         console.log(response.data)
@@ -127,15 +120,10 @@ async function alteraUsuarioCapa() {
     let dataAltera = new FormData()
     dataAltera.append("file", imgAlteraCapa)
 
-    var conteudo = {
-      header: {
-        "content-type": "multipart/form-data"
-      }
-    }
     //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
-    await axios.post('/files', dataAltera, conteudo)
+    await axios.post('/files', dataAltera, config)
 
       .then(function (response) {
         urlAlteraCapa = response.data.url
@@ -155,7 +143,7 @@ async function alteraUsuarioCapa() {
     "username": u.username,
     "urlCapa": urlAlteraCapa,
     "IDCapa": urlIDCapa,
-  })
+  },config)
 
     .then(function (response) {
       var data = sessionStorage.getItem("user")
