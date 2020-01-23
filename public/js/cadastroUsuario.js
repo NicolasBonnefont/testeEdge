@@ -73,12 +73,7 @@ carregaUsuario()
     adminOK = 0
   }
 
-  var conteudo = {
-    header: {
-      "content-type": "multipart/form-data"
-    }
-  }
-  await axios.post('/files', data, conteudo)
+  await axios.post('/files', data, config)
 
     .then(function (response) {
       url = response.data.url
@@ -98,7 +93,7 @@ carregaUsuario()
       "empresa": `${empresa}`,
       "admin": `${adminOK}`,
       "url": url
-    })
+    }, config)
 
     .then(function (response) {
 
@@ -134,7 +129,7 @@ async function buscarUsuario() {
   const campos = document.getElementById('campos')
   var imgAltera = document.getElementById('imgAltera')
 
-  await axios.get("/users/" + usuarioBusca)
+  await axios.get("/users/" + usuarioBusca, config)
 
     .then(function (response) {
 
