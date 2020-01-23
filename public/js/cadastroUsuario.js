@@ -188,7 +188,7 @@ async function alterarUsuario() {
 
   var a = document.getElementById("SelectAtera").selectedIndex;
   var b = document.getElementById("SelectAltera").options;
-  var usuarioAltera = a[b].text
+  var usuarioAltera = b[a].text
 
 
   const campos = document.getElementById('campos') 
