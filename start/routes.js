@@ -42,9 +42,9 @@ Route.get('users', 'UserController.index')
 Route.get('users/:username', 'UserController.show')
 Route.delete('users/:username', 'UserController.destroy')
 Route.put('users','UserController.update')
-
-
 Route.post('users','UserController.store')
+
+
 Route.post('empresa','EmpresaController.store')
 Route.get('empresa','EmpresaController.show')
 Route.put('empresa','EmpresaController.update')
