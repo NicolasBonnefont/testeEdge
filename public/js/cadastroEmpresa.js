@@ -14,7 +14,7 @@ const config = {
 async function carregaEmpresa() {
   var dados
 
-  await axios.get('/empresa', config)
+  await axios.get('/empresas', config)
     .then(function (response) {
       dados = response.data.data
     })

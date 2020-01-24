@@ -36,7 +36,7 @@ async function carregaUsuario(){
 async function carregaEmpresa(){
   var dadosEmpresa
  
-  await axios.get('/empresa', config)
+  await axios.get('/empresas', config)
   .then(function(response){
     dadosEmpresa = response.data.data
   })
@@ -306,7 +306,7 @@ async function excluirUsuario() {
       console.log(error)
   
     })
-    
+
   if(!x == 0){
   await axios.delete("/users/" + usuarioBusca, config)
 
