@@ -91,7 +91,7 @@ async function buscarEmpresa() {
   if (!x == 0) {
     await axios.get("/empresa", {
       "empresa": `${empresaBusca}`
-    }, conifg)
+    }, config)
 
       .then(function (response) {
         imgAltera.disabled = false
