@@ -18,7 +18,7 @@ async function carregaEmpresa() {
     .then(function (response) {
       dados = response.data.data
     })
-    .catch(function (error) {})
+    .catch(function (error) { })
 
   for (var i = 0; i < dados.length; i++) {
     var select = document.getElementById("Select")
@@ -51,10 +51,10 @@ async function cadastraEmpresa() {
     });
 
   await axios.post('/empresa', {
-      "empresa": `${empresa}`,
-      "bi": `${linkbi}`,
-      "url": `${url}`
-    }, config)
+    "empresa": `${empresa}`,
+    "bi": `${linkbi}`,
+    "url": `${url}`
+  }, config)
 
     .then(function (response) {
 
@@ -86,9 +86,12 @@ async function buscarEmpresa() {
   var y = document.getElementById("Select").options;
   var empresaBusca = y[x].text
   const campos = document.getElementById('campos')
-  
+  console.log(config)
+
   if (!x == 0) {
-    await axios.get("/empresa",{"empresa":empresaBusca} , config)
+    await axios.get("/empresa", {
+      "empresa": `${empresaBusca}`
+    }, conifg)
 
       .then(function (response) {
         imgAltera.disabled = false
@@ -161,12 +164,12 @@ async function alteraEmpresa() {
   }
 
   await axios.put("/empresa", {
-      "empresa": `${empresaAltera}`,
-      "bi": `${linkbiAltera}`,
-      "url": urlAltera,
-      "urlID": urlID,
-      "id": sessionStorage.getItem('idEmpresa')
-    }, config)
+    "empresa": `${empresaAltera}`,
+    "bi": `${linkbiAltera}`,
+    "url": urlAltera,
+    "urlID": urlID,
+    "id": sessionStorage.getItem('idEmpresa')
+  }, config)
 
     .then(function (response) {
       alert("Empresa alterada com sucesso !")
@@ -239,11 +242,11 @@ function mostrarTabela() {
       },
 
       "columns": [{
-          "data": "empresa"
-        },
-        {
-          "data": "bi"
-        }
+        "data": "empresa"
+      },
+      {
+        "data": "bi"
+      }
       ],
       "language": idioma,
       buttons: [
