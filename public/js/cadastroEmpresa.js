@@ -1,8 +1,13 @@
 const token = sessionStorage.getItem('sessao')
-const config = {
+const configMultipart = {
   headers: {
     Authorization: 'Bearer ' + token,
     'Content-Type': 'multipart/form-data'
+  }
+}
+const config = {
+  headers: {
+    Authorization: 'Bearer ' + token
   }
 }
 
@@ -36,7 +41,7 @@ async function cadastraEmpresa() {
   let data = new FormData()
   data.append("file", imgNovo)
 
-  await axios.post('/files', data, config)
+  await axios.post('/files', data, configMultipart)
 
     .then(function (response) {
       url = response.data.url
@@ -122,7 +127,7 @@ async function alteraEmpresa() {
 
   if (!imgAltera == '') {
 
-    await axios.delete("/files/" + urlID, config)
+    await axios.delete("/files/" + urlID, configMultipart)
 
       .then(function (response) {
 
@@ -140,7 +145,7 @@ async function alteraEmpresa() {
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
 
-    await axios.post('/files', dataAltera, config)
+    await axios.post('/files', dataAltera, configMultipart)
 
       .then(function (response) {
         urlAltera = response.data.url
@@ -154,7 +159,7 @@ async function alteraEmpresa() {
       });
 
   }
-  console.log(urlID)
+
   await axios.put("/empresa", {
       "empresa": `${empresaAltera}`,
       "bi": `${linkbiAltera}`,
@@ -186,7 +191,7 @@ async function excluirEmpresa() {
   var y = document.getElementById("Select").options;
   var empresaBusca = y[x].text
 
-  await axios.delete("/files/" + urlID, config)
+  await axios.delete("/files/" + urlID, configMultipart)
 
     .then(function (response) {
 
