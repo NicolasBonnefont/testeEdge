@@ -168,9 +168,8 @@ async function buscarUsuario() {
       imgAltera.disabled = false
 
 
-      if (adminAltera == 1) {
-        adminAltera.checked = true
-        console.log("1")
+      if (adminAltera.value == 1) {
+        adminAltera.checked = true        
       } else {
         adminAltera.checked = false
       }
@@ -216,7 +215,7 @@ async function alterarUsuario() {
 
     adminAlteraOK = 1
   }
-  console.log(adminAltera.checked)
+  console.log(adminAlteraOK)
   if (!imgAltera == '') {
 
     await axios.delete("/files/" + urlID, config)
