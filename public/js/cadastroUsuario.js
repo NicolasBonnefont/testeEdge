@@ -150,7 +150,7 @@ async function buscarUsuario() {
 
   if(!x == 0){
     await axios.get('/user',{
-      params: {'empresa':`${usuarioBusca}`}
+      params: {'username':`${usuarioBusca}`}
     }, config)
 
     .then(function (response) {
