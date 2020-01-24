@@ -1,8 +1,16 @@
+// CONFIG PARA ENVIAR DADOS DO TIPO ARQUIVO COM TOKEN
 const token = sessionStorage.getItem('sessao')
-const config = {
+const configMultipart = {
   headers: { 
     Authorization: 'Bearer ' + token,
     'Content-Type': 'multipart/form-data'
+  }
+}
+// CONFIG PARA ENVIAR DADOS COM TOKEN
+const config = {
+  headers: { 
+    Authorization: 'Bearer ' + token
+   
   }
 }
 
@@ -244,8 +252,8 @@ async function alterarUsuario() {
       });
 
   }
-console.log(usu)
-  await axios.put("/users", {
+console.log(config)
+  await axios.put('/users', {
       "name": `${usuarioAltera}`,
       "email": `${emailAltera}`,
       "username": `${usuarioBusca}`,
@@ -254,7 +262,7 @@ console.log(usu)
       "admin": `${adminAlteraOK}`,
       "url": urlAltera,
       "urlID": urlID
-    }, config)
+    },config)
 
     .then(function (response) {
       var data = sessionStorage.getItem("user")

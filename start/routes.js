@@ -30,17 +30,18 @@ Route.post('ip',"ConfigIpController.store")
 Route.get('files/:id', 'FileController.show')
 
 
-
+Route.get('users', 'UserController.index')
+Route.get('users/:username', 'UserController.show')
+Route.delete('users/:username', 'UserController.destroy')
+Route.put('users','UserController.update')
 // GRUPO DE ROTAS PERMITIDAS SOMENTE QUANDO O USUARIO ESTIVER LOGADO
 Route.group(() => {
 Route.post('files', 'FileController.store')
 Route.delete('files/:id', 'FileController.destroy')
 
-Route.get('users', 'UserController.index')
-Route.get('users/:username', 'UserController.show')
-Route.delete('users/:username', 'UserController.destroy')
 
-Route.put('users','UserController.update')
+
+
 Route.post('users','UserController.store')
 Route.post('empresa','EmpresaController.store')
 Route.get('empresa/:empresa','EmpresaController.show')
