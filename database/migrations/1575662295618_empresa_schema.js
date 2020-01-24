@@ -7,7 +7,7 @@ class EmpresaSchema extends Schema {
   up () {
     this.create('empresas', (table) => {
       table.increments()
-      table.string('empresa', 80).notNullable()
+      table.string('empresa', 80).notNullable().unique()
       table.string('bi')
       table.string('url')
       table.string('urlID')
