@@ -43,10 +43,10 @@ class UserController {
     }
   }
 
-  async show ({ params }){
+  async show ({ request,params }){
 
     const {username} = request.all(params)
-      
+    console.log(username)
     const user = await User.findByOrFail('username', username)
 
     return user
