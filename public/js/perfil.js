@@ -1,4 +1,10 @@
 const token = sessionStorage.getItem('sessao')
+const configMultipart = {
+  headers: { 
+    Authorization: 'Bearer ' + token,
+    'Content-Type': 'multipart/form-data'
+  }
+}
 const config = {
   headers: { 
     Authorization: 'Bearer ' + token,
@@ -36,7 +42,7 @@ async function alteraUsuario() {
 
   if (!imgAltera == '') {
 
-    await axios.delete("/files/" + u.urlID, config)
+    await axios.delete("/files/" + u.urlID, configMultipart)
 
       .then(function (response) {
         console.log(response.data)
@@ -52,7 +58,7 @@ async function alteraUsuario() {
     //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
-    await axios.post('/files', dataAltera, config)
+    await axios.post('/files', dataAltera, configMultipart)
 
       .then(function (response) {
         urlAltera = response.data.url
@@ -112,7 +118,7 @@ async function alteraUsuarioCapa() {
     console.log("entrou no if " + u.urlCapa)
 
    
-    await axios.delete("/files/" + u.urlCapa, config)
+    await axios.delete("/files/" + u.urlCapa, configMultipart)
 
       .then(function (response) {
         console.log(response.data)
@@ -130,7 +136,7 @@ async function alteraUsuarioCapa() {
     //CHECA SE FOI FEITO ALTERAÇÃO NA IMG
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
-    await axios.post('/files', dataAltera, config)
+    await axios.post('/files', dataAltera, configMultipart)
 
       .then(function (response) {
         urlAlteraCapa = response.data.url

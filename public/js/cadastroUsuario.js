@@ -87,7 +87,7 @@ carregaUsuario()
     adminOK = 0
   }
 
-  await axios.post('/files', data, config)
+  await axios.post('/files', data, configMultipart)
 
     .then(function (response) {
       url = response.data.url
@@ -218,7 +218,7 @@ async function alterarUsuario() {
   console.log(adminAlteraOK)
   if (!imgAltera == '') {
 
-    await axios.delete("/files/" + urlID, config)
+    await axios.delete("/files/" + urlID, configMultipart)
 
       .then(function (response) {
 
@@ -237,7 +237,7 @@ async function alterarUsuario() {
     // SE ALTERADO, ASSUME A NOVA URL E ID
 
 
-    await axios.post('/files', dataAltera, config)
+    await axios.post('/files', dataAltera, configMultipart)
 
       .then(function (response) {
         urlAltera = response.data.url
@@ -294,7 +294,7 @@ async function excluirUsuario() {
   const campos = document.getElementById('campos')
 
 
-  await axios.delete("/files/" + urlID, config)
+  await axios.delete("/files/" + urlID, configMultipart)
 
     .then(function (response) {
 
@@ -305,8 +305,8 @@ async function excluirUsuario() {
 
       console.log(error)
   
-
     })
+    
   if(!x == 0){
   await axios.delete("/users/" + usuarioBusca, config)
 
