@@ -168,7 +168,7 @@ async function buscarUsuario() {
       imgAltera.disabled = false
 
 
-      if (adminAltera.value == 1) {
+      if (adminAltera == 1) {
         adminAltera.checked = true
         console.log("1")
       } else {
@@ -203,7 +203,7 @@ async function alterarUsuario() {
   const campos = document.getElementById('campos') 
   const emailAltera = document.getElementById('emailAltera').value
   const imgAltera = document.getElementById('imgAltera').files[0]
-  const adminAltera = document.getElementById('adminAltera').value
+  const adminAltera = document.getElementById('adminAltera')
   const usuarioAltera = document.getElementById('usuarioAltera').value
   const cargoAltera = document.getElementById("cargoAltera").value
   var data = sessionStorage.getItem("user")
@@ -216,7 +216,7 @@ async function alterarUsuario() {
 
     adminAlteraOK = 1
   }
-
+  console.log(adminAltera.checked)
   if (!imgAltera == '') {
 
     await axios.delete("/files/" + urlID, config)
@@ -252,7 +252,7 @@ async function alterarUsuario() {
       });
 
   }
-console.log(config)
+  
   await axios.put('/users', {
       "name": `${usuarioAltera}`,
       "email": `${emailAltera}`,
