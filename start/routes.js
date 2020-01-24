@@ -40,7 +40,7 @@ Route.post('files', 'FileController.store')
 Route.delete('files/:id', 'FileController.destroy')
 
 Route.get('users', 'UserController.index')
-Route.get('users/:username', 'UserController.show')
+Route.get('user', 'UserController.show')
 Route.delete('users/:username', 'UserController.destroy')
 Route.put('users','UserController.update')
 Route.post('users','UserController.store')

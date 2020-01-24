@@ -149,7 +149,9 @@ async function buscarUsuario() {
   var imgAltera = document.getElementById('imgAltera')
 
   if(!x == 0){
-  await axios.get("/users/" + usuarioBusca, config)
+    await axios.get('/user',{
+      params: {'empresa':`${usuarioBusca}`}
+    }, config)
 
     .then(function (response) {
 

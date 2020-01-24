@@ -43,22 +43,13 @@ class UserController {
     }
   }
 
-  async show ({request, response, params}){
-    try{
-   
+  async show ({ params }){
 
-      //const user = await Database.from('users').where(params)
+    const {username} = request.all(params)
       
-      const user = await User.findByOrFail(params)
+    const user = await User.findByOrFail('username', username)
 
-     
-      return user
-    
-    }
-    catch (err){
-      return response.status(404).send({error: { message: 'Usuario ão cadastrado!' } } )
-
-    }
+    return user
   }
 
   async destroy ({ params, request, response }) {
