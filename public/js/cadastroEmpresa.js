@@ -88,7 +88,7 @@ async function buscarEmpresa() {
   const campos = document.getElementById('campos')
   
   if (!x == 0) {
-    await axios.get("/empresa/",{"empresa":empresaBusca} , config)
+    await axios.get("/empresa",{"empresa":empresaBusca} , config)
 
       .then(function (response) {
         imgAltera.disabled = false
@@ -230,7 +230,7 @@ function mostrarTabela() {
   $(document).ready(function () {
     $('#teste').DataTable({
       "ajax": {
-        "url": '../empresa',
+        "url": '../empresas',
         "type": "GET",
         "beforeSend": function (xhr) {
           xhr.setRequestHeader("Authorization",

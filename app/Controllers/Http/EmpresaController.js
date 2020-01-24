@@ -20,11 +20,11 @@ class EmpresaController {
      
   }
   
-  async show ({request}) {
+  async show ({ request}) {
     const {empresa} = request.all()
 
     const empresas = await Empresa.findByOrFail('empresa', empresa)
-     
+
     return empresas
   }
 
