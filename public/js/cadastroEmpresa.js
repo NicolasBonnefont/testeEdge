@@ -6,8 +6,10 @@ const configMultipart = {
   }
 }
 const config = {
-  headers: {
-    Authorization: 'Bearer ' + token
+  headers: {        
+    Authorization: 'Bearer ' + token,
+    //ContentType: application/json
+   // 'Content-Type': 'charset=utf-8'
   }
 }
 
@@ -82,15 +84,16 @@ async function cadastraEmpresa() {
 
 async function buscarEmpresa() {
   event.preventDefault()
+
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var empresaBusca = y[x].text
   const campos = document.getElementById('campos')
-  console.log(config)
+
 
   if (!x == 0) {
-    await axios.get("/empresa", {
-      "empresa": `${empresaBusca}`
+    await axios.get('/empresa',{
+      params: {'empresa':`${empresaBusca}`}
     }, config)
 
       .then(function (response) {

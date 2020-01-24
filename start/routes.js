@@ -32,6 +32,7 @@ Route.get('files/:id', 'FileController.show')
 
 
 // GRUPO DE ROTAS PERMITIDAS SOMENTE QUANDO O USUARIO ESTIVER LOGADO
+Route.get('empresa','EmpresaController.show')
 
 Route.group(() => {
 
@@ -46,8 +47,9 @@ Route.post('users','UserController.store')
 
 
 Route.post('empresa','EmpresaController.store')
-Route.get('empresa','EmpresaController.show')
+
 Route.get('empresas','EmpresaController.index')
+
 Route.put('empresa','EmpresaController.update')
 Route.delete('empresa/:empresa','EmpresaController.destroy')
 
