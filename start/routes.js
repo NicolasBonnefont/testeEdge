@@ -47,9 +47,10 @@ Route.post('users','UserController.store')
 
 Route.post('empresa','EmpresaController.store')
 Route.get('empresa','EmpresaController.show')
+Route.get('empresas','EmpresaController.index')
 Route.put('empresa','EmpresaController.update')
 Route.delete('empresa/:empresa','EmpresaController.destroy')
-Route.get('empresas','EmpresaController.index')
+
 
 
 Route.post('notificacao', 'NotificacaoController.store')
