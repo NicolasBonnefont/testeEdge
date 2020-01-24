@@ -78,11 +78,15 @@ async function alteraUsuario() {
     "urlID": urlID
   }
   if(senhaAltera){
-    dados.push[{
-    "password":`${senhaAltera}`
-    }]
+    dados = {
+      "username": u.username,
+      "name": `${usuarioAltera}`,
+      "url": urlAltera,
+      "urlID": urlID,
+      "password": senhaAltera
+    }
   }
-  
+ 
   await axios.put("/users", dados, config)
 
     .then(function (response) {
