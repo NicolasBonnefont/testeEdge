@@ -30,16 +30,18 @@ Route.post('ip',"ConfigIpController.store")
 Route.get('files/:id', 'FileController.show')
 
 
+
+// GRUPO DE ROTAS PERMITIDAS SOMENTE QUANDO O USUARIO ESTIVER LOGADO
+
+Route.group(() => {
+
+Route.post('files', 'FileController.store')
+Route.delete('files/:id', 'FileController.destroy')
+
 Route.get('users', 'UserController.index')
 Route.get('users/:username', 'UserController.show')
 Route.delete('users/:username', 'UserController.destroy')
 Route.put('users','UserController.update')
-// GRUPO DE ROTAS PERMITIDAS SOMENTE QUANDO O USUARIO ESTIVER LOGADO
-Route.group(() => {
-Route.post('files', 'FileController.store')
-Route.delete('files/:id', 'FileController.destroy')
-
-
 
 
 Route.post('users','UserController.store')
@@ -54,6 +56,7 @@ Route.post('notificacao', 'NotificacaoController.store')
 Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
 
-}).middleware('auth')
+}).middleware('auth') // FUNÇÃO QUE REQUER AS ROTAS AUTENTICADAS 
 
-Route.on('*').render('404')
+// ROTA CORINGA PARA MOSTRAR CASO NAO ENCONTRE AS DEMAIS
+Route.on('*').render('404') 
