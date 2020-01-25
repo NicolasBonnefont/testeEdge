@@ -1,5 +1,4 @@
 // SE JA ESTIVER LOGADO, DESCONSIDERA TELA DE LOGIN
-
 function verificaLogado() {
   const on = sessionStorage.getItem('sessao')
 

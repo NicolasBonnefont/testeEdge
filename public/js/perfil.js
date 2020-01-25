@@ -1,17 +1,3 @@
-const token = sessionStorage.getItem('sessao')
-const configMultipart = {
-  headers: { 
-    Authorization: 'Bearer ' + token,
-    'Content-Type': 'multipart/form-data'
-  }
-}
-const config = {
-  headers: { 
-    Authorization: 'Bearer ' + token    
-  }
-}
-
-
 var data = sessionStorage.getItem("user")
 const u = JSON.parse(data)
 document.getElementById("imgPerfil").src = u.url

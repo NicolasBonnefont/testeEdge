@@ -1,18 +1,3 @@
-const token = sessionStorage.getItem('sessao')
-const configMultipart = {
-  headers: {
-    Authorization: 'Bearer ' + token,
-    'Content-Type': 'multipart/form-data'
-  }
-}
-const config = {
-  headers: {        
-    Authorization: 'Bearer ' + token,
-    //ContentType: application/json
-   // 'Content-Type': 'charset=utf-8'
-  }
-}
-
 async function carregaEmpresa() {
   var dados
 
@@ -92,9 +77,7 @@ async function buscarEmpresa() {
 
 
   if (!x == 0) {
-    await axios.get('/empresa',{
-      params: {'empresa':`${empresaBusca}`}
-    }, config)
+    await axios.post('/empresas',{'empresa':`${empresaBusca}`}, config)
 
       .then(function (response) {
         imgAltera.disabled = false
@@ -233,6 +216,8 @@ function atualizaTabela() {
 }
 
 function mostrarTabela() {
+  var token = sessionStorage.getItem('sessao')
+  console.log(token)
   $(document).ready(function () {
     $('#teste').DataTable({
       "ajax": {

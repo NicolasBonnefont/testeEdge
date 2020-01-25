@@ -47,6 +47,7 @@ class UserController {
 
     const {username} = request.all(params)
     console.log(username)
+
     const user = await User.findByOrFail('username', username)
 
     return user
@@ -65,7 +66,9 @@ class UserController {
 
     return {data}
   }
-
+  async acesso({response, auth}){
+      await auth.check()
+  }
 
 }
 

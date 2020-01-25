@@ -32,22 +32,24 @@ Route.get('files/:id', 'FileController.show')
 
 
 // GRUPO DE ROTAS PERMITIDAS SOMENTE QUANDO O USUARIO ESTIVER LOGADO
-Route.get('empresa','EmpresaController.show')
+
 
 Route.group(() => {
+Route.get('acesso','UserController.acesso')
 
 Route.post('files', 'FileController.store')
 Route.delete('files/:id', 'FileController.destroy')
 
 Route.get('users', 'UserController.index')
-Route.get('user', 'UserController.show')
+Route.post('user', 'UserController.show')
 Route.delete('users/:username', 'UserController.destroy')
 Route.put('users','UserController.update')
 Route.post('users','UserController.store')
 
 
-Route.post('empresa','EmpresaController.store')
 
+Route.post('empresa','EmpresaController.store')
+Route.post('empresas','EmpresaController.show')
 Route.get('empresas','EmpresaController.index')
 
 Route.put('empresa','EmpresaController.update')
@@ -58,6 +60,8 @@ Route.delete('empresa/:empresa','EmpresaController.destroy')
 Route.post('notificacao', 'NotificacaoController.store')
 Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
+
+
 
 }).middleware('auth') // FUNÇÃO QUE REQUER AS ROTAS AUTENTICADAS 
 

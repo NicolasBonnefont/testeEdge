@@ -1,20 +1,3 @@
-// CONFIG PARA ENVIAR DADOS DO TIPO ARQUIVO COM TOKEN
-const token = sessionStorage.getItem('sessao')
-const configMultipart = {
-  headers: { 
-    Authorization: 'Bearer ' + token,
-    'Content-Type': 'multipart/form-data'
-  }
-}
-// CONFIG PARA ENVIAR DADOS COM TOKEN
-const config = {
-  headers: { 
-    Authorization: 'Bearer ' + token
-   
-  }
-}
-
-
 async function carregaUsuario(){  
   var dados
  
@@ -147,11 +130,9 @@ async function buscarUsuario() {
   
   const campos = document.getElementById('campos')
   var imgAltera = document.getElementById('imgAltera')
-
+console.log(usuarioBusca)
   if(!x == 0){
-    await axios.get('/user',{
-      params: {'username':`${usuarioBusca}`}
-    }, config)
+    await axios.post('/user', {'username':`${usuarioBusca}`}, config)
 
     .then(function (response) {
 
