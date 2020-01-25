@@ -47,9 +47,12 @@ class EmpresaController {
     }
   }
 
-  async destroy ({ params, response }) {
-    const empresa = await Empresa.findByOrFail(params)
-    await empresa.delete()
+  async destroy ({ params, response, request }) {
+    const {empresa} = request.all(params)
+  
+    const del = await User.findByOrFail('empresa', empresa)
+    
+    await del.delete()
      
     return response.status(200).send({ok:'Deletado com sucesso'})
   }

@@ -291,9 +291,11 @@ async function excluirUsuario() {
     })
 
   if(!x == 0){
-  await axios.delete("/users/" + usuarioBusca, config)
+
+    await axios.post('/userDelete', {'username':`${usuarioBusca}`}, config)
 
     .then(function (response) {
+      console.log(usuarioBusca)
       alert("Usuário excluido com sucesso !")
       campos.disabled = true
       document.getElementById("formBusca").reset();

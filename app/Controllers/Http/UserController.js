@@ -46,15 +46,17 @@ class UserController {
   async show ({ request,params }){
 
     const {username} = request.all(params)
-    console.log(username)
 
     const user = await User.findByOrFail('username', username)
 
     return user
   }
 
-  async destroy ({ params, request, response }) {
-    const user = await User.findByOrFail(params)
+  async destroy ({ params,  response, request }) {
+    const {username} = request.all(params)
+   
+    const user = await User.findByOrFail('username', username)
+    
     await user.delete()
      
     return response.status(200).send({ok:'Deletado com sucesso'})

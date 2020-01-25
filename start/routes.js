@@ -35,14 +35,14 @@ Route.get('files/:id', 'FileController.show')
 
 
 Route.group(() => {
-Route.get('acesso','UserController.acesso')
+
 
 Route.post('files', 'FileController.store')
 Route.delete('files/:id', 'FileController.destroy')
 
 Route.get('users', 'UserController.index')
 Route.post('user', 'UserController.show')
-Route.delete('users/:username', 'UserController.destroy')
+Route.post('userDelete', 'UserController.destroy')
 Route.put('users','UserController.update')
 Route.post('users','UserController.store')
 
@@ -53,7 +53,7 @@ Route.post('empresas','EmpresaController.show')
 Route.get('empresas','EmpresaController.index')
 
 Route.put('empresa','EmpresaController.update')
-Route.delete('empresa/:empresa','EmpresaController.destroy')
+Route.post('empresaDelete','EmpresaController.destroy')
 
 
 
@@ -62,7 +62,7 @@ Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
 
 
-
+Route.get('acesso','UserController.acesso')
 }).middleware('auth') // FUNÇÃO QUE REQUER AS ROTAS AUTENTICADAS 
 
 // ROTA CORINGA PARA MOSTRAR CASO NAO ENCONTRE AS DEMAIS

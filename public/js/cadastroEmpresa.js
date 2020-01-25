@@ -194,7 +194,7 @@ async function excluirEmpresa() {
 
 
   if (!x == 0) {
-    await axios.delete("/empresa/" + empresaBusca, config)
+    await axios.post('/empresaDelete',{'empresa':`${empresaBusca}`}, config)
 
       .then(function (response) {
         alert("Empresa excluida com sucesso !")
