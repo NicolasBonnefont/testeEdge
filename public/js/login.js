@@ -1,10 +1,18 @@
 // SE JA ESTIVER LOGADO, DESCONSIDERA TELA DE LOGIN
-function verificaLogado() {
-  const on = sessionStorage.getItem('sessao')
-
-  if (on) {
-    window.location.replace("pag/principal");
+const config = {
+  headers: {
+    Authorization: 'Bearer ' + sessionStorage.getItem('sessao')
   }
+}
+async function verificaLogado() {
+  await axios.get('../acesso', config)
+    .then(function (response) {
+      window.location.replace("../pag/principal");
+    })
+    .catch(function (err) {   
+      sessionStorage.clear()
+      localStorage.clear()
+    })
 }
 //CHAMA A FUNCAO A TODOS OS  LOADING DAS PAGINAS
 verificaLogado()

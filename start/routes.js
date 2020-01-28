@@ -35,7 +35,7 @@ Route.get('files/:id', 'FileController.show')
 
 
 Route.group(() => {
-
+Route.get('acesso','UserController.acesso')
 
 Route.post('files', 'FileController.store')
 Route.delete('files/:id', 'FileController.destroy')
@@ -61,7 +61,7 @@ Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
 
 
-Route.get('acesso','UserController.acesso')
+
 }).middleware('auth') // FUNÇÃO QUE REQUER AS ROTAS AUTENTICADAS 
 
 // ROTA CORINGA PARA MOSTRAR CASO NAO ENCONTRE AS DEMAIS

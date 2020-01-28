@@ -69,7 +69,9 @@ class UserController {
     return {data}
   }
   async acesso({response, auth}){
-      await auth.check()
+      
+        await auth.check()
+ 
   }
 
 }

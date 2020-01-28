@@ -1,30 +1,27 @@
 // CONFIG PARA ENVIAR DADOS DO TIPO ARQUIVO COM TOKEN
-const token = sessionStorage.getItem('sessao')
-const sessao = token
+
 const configMultipart = {
   headers: {
-    Authorization: 'Bearer ' + token,
+    Authorization: 'Bearer ' + sessionStorage.getItem('sessao'),
     'Content-Type': 'multipart/form-data'
   }
 }
 // CONFIG PARA ENVIAR DADOS COM TOKEN
 const config = {
   headers: {
-    Authorization: 'Bearer ' + token
+    Authorization: 'Bearer ' + sessionStorage.getItem('sessao')
   }
 }
 async function verificaAcesso() {
-  // VERIFICA A INTEGRIDADE DO TOKEN
+  
   await axios.get('../acesso', config)
-    .then(function (response) {
-
+    .then(function (response) {      
     })
     .catch(function (err) {
-      sessionStorage.clear()
-      localStorage.clear()
-      window.location.replace("../home");
+      console.log(err)
+      deslogar()
     })
-
+   
   var empresa = window.sessionStorage.getItem("empresa")
   const linkPrincipal = document.getElementById('linkPrincipal')
   var habilitaMenuCadastro = document.getElementById('habilitaMenuCadastro')
@@ -48,3 +45,4 @@ async function deslogar() {
   window.location.replace("../home");
 }
 verificaAcesso()
+var token = sessionStorage.getItem('sessao')
