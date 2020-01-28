@@ -75,7 +75,7 @@ async function buscarEmpresa() {
   var empresaBusca = y[x].text
   const campos = document.getElementById('campos')
 
-
+  
   if (!x == 0) {
     await axios.post('/empresas',{'empresa':`${empresaBusca}`}, config)
 
