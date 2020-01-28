@@ -212,14 +212,16 @@ async function excluirEmpresa() {
 }
 
 function atualizaTabela() {
-  $('#teste').DataTable().ajax.reload();
+  $('#TabelaEmpresa').DataTable().ajax.reload();
 }
 
 function mostrarTabela() {
   var token = sessionStorage.getItem('sessao')
   console.log(token)
   $(document).ready(function () {
-    $('#teste').DataTable({
+    $('#TabelaEmpresa').DataTable({
+      
+ 
       "ajax": {
         "url": '../empresas',
         "type": "GET",
@@ -237,9 +239,15 @@ function mostrarTabela() {
       }
       ],
       "language": idioma,
+      dom: 'Bfrtip',
       buttons: [
-        'copy', 'excel', 'pdf'
+          'copyHtml5',
+          'excelHtml5',          
+          'pdfHtml5',
+          'print'
+          
       ]
+
     })
   })
   var idioma = {
@@ -273,9 +281,6 @@ function mostrarTabela() {
       }
     }
   }
-  $('#teste').DataTable({
-    responsive: true
-  })
 }
 
 function showImageNovo() {

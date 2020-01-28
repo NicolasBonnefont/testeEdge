@@ -130,24 +130,44 @@ async function excluirIp() {
 
 
 function atualizaTabela() {
-  $('#teste').DataTable().ajax.reload();
+  $('#configIp').DataTable().ajax.reload();
 }
 
 function mostrarTabela() {
   $(document).ready(function () {
-    $('#teste').DataTable({
-      "ajax": "../ip",
-      "columns": [{
-        "data": "local"
-      },
-      {
-        "data": "ip"
-      }
+    $('#configIp').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+          {            
+              extend: 'pdfHtml5',
+              download: 'open'
+          }
+      ],
+      "ajax": {
+        "url": '../ip',
+        "type": "GET",        
+        "beforeSend": function (xhr) {
+        xhr.setRequestHeader("Authorization",
+        "Bearer " + token)
+        }},
+
+       "columns": [{
+          "data": "local"
+        },
+        {
+          "data": "ip"
+        }           
       ],
       "language": idioma,
+      dom: 'Bfrtip',
       buttons: [
-        'copy', 'excel', 'pdf'
+          'copyHtml5',
+          'excelHtml5',          
+          'pdfHtml5',
+          'print'
+          
       ]
+
     })
   })
   var idioma = {
@@ -181,9 +201,7 @@ function mostrarTabela() {
       }
     }
   }
-  $('#teste').DataTable({
-    responsive: true
-  })
+
 }
 
 

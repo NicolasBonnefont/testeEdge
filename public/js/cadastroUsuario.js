@@ -328,7 +328,8 @@ function mostrarTabela() {
   
   $(document).ready(function () {
     
-    $('#teste').DataTable({
+    $('#teste').DataTable( {
+
       "ajax": {
         "url": '../users',
         "type": "GET",        
@@ -348,14 +349,20 @@ function mostrarTabela() {
         },
         {
           "data": "admin"
-        }
+        }          
+
       ],
       "language": idioma,
+      dom: 'Bfrtip',
       buttons: [
-        'copy', 'excel', 'pdf'
+          'copyHtml5',
+          'excelHtml5',          
+          'pdfHtml5',
+          'print'
+          
       ]
-    })
 
+    })
   })
   var idioma = {
 
