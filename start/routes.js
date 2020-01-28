@@ -47,7 +47,6 @@ Route.put('users','UserController.update')
 Route.post('users','UserController.store')
 
 
-
 Route.post('empresa','EmpresaController.store')
 Route.post('empresas','EmpresaController.show')
 Route.get('empresas','EmpresaController.index')

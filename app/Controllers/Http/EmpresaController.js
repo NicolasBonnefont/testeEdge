@@ -50,12 +50,13 @@ class EmpresaController {
   async destroy ({ params, response, request }) {
     const {empresa} = request.all(params)
   
-    const del = await User.findByOrFail('empresa', empresa)
+    const del = await Empresa.findByOrFail('empresa', empresa)
     
     await del.delete()
      
     return response.status(200).send({ok:'Deletado com sucesso'})
   }
 }
+
 
 module.exports = EmpresaController
