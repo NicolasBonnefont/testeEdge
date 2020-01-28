@@ -23,7 +23,7 @@ class EmpresaController {
   async show ({ request, response, params}) {
     
       const {empresa} = request.all(params)
-      console.log(empresa)
+      
       const empresas = await Empresa.findByOrFail('empresa', empresa)
   
       return empresas
