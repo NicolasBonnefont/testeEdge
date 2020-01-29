@@ -39,8 +39,7 @@ async function carregaEmpresa(){
     SelectAltera.add(optionEmpresaAltera);
 }
 }
-carregaEmpresa()
-carregaUsuario()
+
 
 
 // FUNCAO QUE CRIA USUARIO
@@ -428,5 +427,6 @@ function showImageAltera() {
     obj.readAsDataURL(this.files[0])
   }
 }
-
+carregaEmpresa()
+carregaUsuario()
 mostrarTabela()

@@ -1,19 +1,51 @@
-var data = sessionStorage.getItem("user")
-const u = JSON.parse(data)
-document.getElementById("imgPerfil").src = u.url
-document.getElementById("nomePerfil").innerHTML = u.name
-document.getElementById("cargoPerfil").innerHTML = u.cargo
-document.getElementById("emailPerfil").innerHTML = u.email
-document.getElementById("imageAltera").src = u.url
-document.getElementById("usuarioAltera").value = u.name
-document.getElementById("imageAlteraCapa").src = u.urlCapa
-document.getElementById("fundoCapa").style.backgroundImage = "url("+u.urlCapa+")";
+var usuario
+var nomeUsuario
+var emailUsuario
+var urlUsuario
+var urlIdUsuario
+var adminUsuario
+var urlCapaUsuario
+var urlIdCapaUsuario
+var cargoUsuario
+var empresaUsuario
 
-if(!u.urlCapa){
-  document.getElementById("fundoCapa").style.backgroundImage = u.urlCapa
-  console.log(u.urlCapa)
+// carrega os dados do usuario logado
+async function carregaUsuario() {
+
+  await axios.get('../acesso', config)
+    .then(function (response) {
+      usuario = response.data.usuario.username
+      nomeUsuario = response.data.usuario.name
+      emailUsuario = response.data.usuario.email
+      urlUsuario = response.data.usuario.url
+      urlIdUsuario = response.data.usuario.urlID
+      adminUsuario = response.data.usuario.admin
+      urlCapaUsuario = response.data.usuario.urlCapa
+      urlIdCapaUsuario = response.data.usuario.idcapa
+      cargoUsuario = response.data.usuario.cargo
+      empresaUsuario = response.data.usuario.empresa
+    })
+    .catch(function (err) {
+      console.log(err)
+      deslogar()
+    })
+
+  //  iguala os campos do usuario logado no HTML
+  document.getElementById("imgPerfil").src = urlUsuario
+  document.getElementById("nomePerfil").innerHTML = nomeUsuario
+  document.getElementById("cargoPerfil").innerHTML = cargoUsuario
+  document.getElementById("emailPerfil").innerHTML = emailUsuario
+  document.getElementById("imageAltera").src = urlUsuario
+  document.getElementById("usuarioAltera").value = nomeUsuario
+  document.getElementById("imageAlteraCapa").src = urlCapaUsuario
+  document.getElementById("fundoCapa").style.backgroundImage = "url(" + urlCapaUsuario + ")";
+
+  // Verifica se tem uma capa, se nao, trazer um padrao
+  if (!urlCapaUsuario) {
+    document.getElementById("fundoCapa").style.backgroundImage = "url('../img/fundo.jpg')";
+    console.log(u.urlCapa)
+  }
 }
-
 
 async function alteraUsuario() {
   event.preventDefault()
@@ -22,19 +54,19 @@ async function alteraUsuario() {
   var usuarioAltera = document.getElementById('usuarioAltera').value
   var senhaAltera = document.getElementById('senhaAltera').value
   var imgAltera = document.getElementById('imgAltera').files[0]
-  var urlAltera = u.url
-  var urlID = u.urlID
-
+  var urlAltera = urlUsuario
+  var urlID = urlIdUsuario
+  console.log(urlIdUsuario)
   if (!imgAltera == '') {
 
-    await axios.delete("/files/" + u.urlID, configMultipart)
+    await axios.delete("/files/" + urlIdUsuario, configMultipart)
 
       .then(function (response) {
         console.log(response.data)
       })
       .catch(function (error) {
         console.log(error)
-        
+
       })
 
     let dataAltera = new FormData()
@@ -58,34 +90,33 @@ async function alteraUsuario() {
 
   }
   var dados = {
-    "username": u.username,
+    "username": usuario,
     "name": `${usuarioAltera}`,
     "url": urlAltera,
     "urlID": urlID
   }
-  if(senhaAltera){
+  if (senhaAltera) {
     dados = {
-      "username": u.username,
+      "username": usuario,
       "name": `${usuarioAltera}`,
       "url": urlAltera,
       "urlID": urlID,
       "password": senhaAltera
     }
   }
- 
+
   await axios.put("/users", dados, config)
 
     .then(function (response) {
-      var data = sessionStorage.getItem("user")
-      const u = JSON.parse(data)
-      u.url = urlAltera
-      u.urlID = urlID
-      u.name = usuarioAltera
-      const user = JSON.stringify(u)
-      sessionStorage.setItem("user", user)
+    
+      urlUsuario = urlAltera
+      urlIdCapaUsuario = urlID
+      nomeUsuario = usuarioAltera
+
+
 
       alert("Usuário alterado com sucesso !")
-      campos.disabled = true      
+      campos.disabled = true
       document.location.reload();
     })
     .catch(function (error) {
@@ -98,23 +129,21 @@ async function alteraUsuario() {
 async function alteraUsuarioCapa() {
   event.preventDefault()
 
- 
+
   var imgAlteraCapa = document.getElementById('imgAlteraCapa').files[0]
-  var urlAlteraCapa = u.urlCapa
-  var urlIDCapa = u.lIDCapa
+  var urlAlteraCapa = urlCapaUsuario
+  var urlIDCapa = urlIdCapaUsuario
 
   if (!imgAlteraCapa == '') {
-    console.log("entrou no if " + u.urlCapa)
-
-   
-    await axios.delete("/files/" + u.urlCapa, configMultipart)
+  
+    await axios.delete("/files/" + urlIDCapa, config)
 
       .then(function (response) {
         console.log(response.data)
       })
       .catch(function (error) {
         console.log(error)
-        
+
       })
 
 
@@ -130,7 +159,7 @@ async function alteraUsuarioCapa() {
       .then(function (response) {
         urlAlteraCapa = response.data.url
         urlIDCapa = response.data.id
-        console.log(urlAlteraCapa+" --"+urlAlteraCapa)
+        console.log(urlAlteraCapa + " --" + urlAlteraCapa)
 
       })
       .catch(function (err) {
@@ -142,19 +171,13 @@ async function alteraUsuarioCapa() {
   }
 
   await axios.put("/users", {
-    "username": u.username,
-    "urlCapa": urlAlteraCapa,
-    "IDCapa": urlIDCapa,
-  },config)
+      "username": usuario,
+      "urlCapa": urlAlteraCapa,
+      "IDCapa": urlIDCapa,
+    }, config)
 
     .then(function (response) {
-      var data = sessionStorage.getItem("user")
-      const u = JSON.parse(data)
-      u.urlCapa = urlAlteraCapa
-      u.IDCapa = urlIDCapa
-      const user = JSON.stringify(u)
-      sessionStorage.setItem("user", user)
-         
+
       document.location.reload();
     })
     .catch(function (error) {
@@ -196,3 +219,5 @@ function showImageAlteraCapa() {
     obj.readAsDataURL(this.files[0])
   }
 }
+
+carregaUsuario()

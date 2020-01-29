@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Empresa = use('App/Models/Empresa')
 
 class UserController {
   async store({request, response}){
@@ -68,10 +69,20 @@ class UserController {
 
     return {data}
   }
+
   async acesso({response, auth}){
+
+    const usuario = await auth.getUser()
       
-        await auth.check()
- 
+    const {empresa} = await auth.getUser()
+    
+    const empresas = await Empresa.findBy('empresa',empresa)
+   
+    try {
+      return {usuario,empresas}
+    } catch (error) {
+      response.send('Missing or invalid jwt token')
+    }
   }
 
 }

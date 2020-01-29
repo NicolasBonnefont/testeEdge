@@ -12,37 +12,37 @@ const config = {
     Authorization: 'Bearer ' + sessionStorage.getItem('sessao')
   }
 }
+
 async function verificaAcesso() {
-  
+
+  // esta rota, carrega os dados do usuario logado e a empresa na qual o mesmo faz parte
   await axios.get('../acesso', config)
-    .then(function (response) {      
+    .then(function (response) {
+      document.body.style.backgroundImage = "url(" + response.data.usuario.url + ")"
+      document.getElementById("imgLogin").src = response.data.usuario.url 
+         usuarioteste = response.data.usuario.username 
+      if(!response.data.empresas.empresa){
+        document.getElementById('linkPrincipal').text = 'morinfo'
+        document.body.style.backgroundImage = "url('')"
+      }
+
+      document.getElementById('linkPrincipal').text = response.data.empresas.empresa
+      document.body.style.backgroundImage = "url("+response.data.empresas.url+")"
+      // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
+      if (!response.data.usuario.admin == 1) {
+        document.getElementById('habilitaMenuCadastro').remove()
+      }
     })
     .catch(function (err) {
       console.log(err)
       deslogar()
     })
-   
-  var empresa = window.sessionStorage.getItem("empresa")
-  const linkPrincipal = document.getElementById('linkPrincipal')
-  var habilitaMenuCadastro = document.getElementById('habilitaMenuCadastro')
-  var data = sessionStorage.getItem("user")
-  const user = JSON.parse(data)
-
-  // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
-  if (!user.admin == 1) {
-    habilitaMenuCadastro.remove()
-  }
-
-  // CARREGA OS DADOS DA EMPRESA CONFORME USER LOGADO E IM DO PERFIL
-  document.body.style.backgroundImage = "url(" + sessionStorage.getItem("empresaUrl") + ")"
-  linkPrincipal.text = empresa
-  document.getElementById("imgLogin").src = user.url
-
 }
 async function deslogar() {
   sessionStorage.clear()
   localStorage.clear()
-  window.location.replace("../home");
+  window.location.replace("..");
 }
+
 verificaAcesso()
 var token = sessionStorage.getItem('sessao')

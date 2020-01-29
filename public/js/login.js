@@ -9,7 +9,7 @@ async function verificaLogado() {
     .then(function (response) {
       window.location.replace("../pag/principal");
     })
-    .catch(function (err) {   
+    .catch(function (err) {
       sessionStorage.clear()
       localStorage.clear()
     })
@@ -31,29 +31,15 @@ async function logar() {
     })
 
     .then(function (response) {
-      //CARREGA OS DADOS VINDO BACKEND
-      const bi = response.data.empresas.bi
-      var empresa = response.data.empresas.empresa
-      const sessao = response.data.token.token
-      let user = response.data.user
-      let usuario = JSON.stringify(user)
-      let url = response.data.empresas.url
 
 
-      // QUANDO O STATUS VINDO DO BACKEND FOR 200, AI FAZ O LOGIN
-      if (response.status === 200) {
+      sessionStorage.setItem('sessao', response.data.token)
 
-        sessionStorage.setItem('empresa', empresa)
-        sessionStorage.setItem('bi', bi)
-        sessionStorage.setItem('sessao', sessao)
-        sessionStorage.setItem('user', usuario)
-        sessionStorage.setItem('empresaUrl', url)
+      alert("Logado com Sucesso")
+
+      window.location.replace("pag/principal");
 
 
-        alert("Logado com Sucesso")
-        window.location.replace("pag/principal");
-
-      }
 
     })
     .catch(function (error) {
