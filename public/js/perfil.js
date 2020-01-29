@@ -43,7 +43,7 @@ async function carregaUsuario() {
   // Verifica se tem uma capa, se nao, trazer um padrao
   if (!urlCapaUsuario) {
     document.getElementById("fundoCapa").style.backgroundImage = "url('../img/fundo.jpg')";
-    console.log(u.urlCapa)
+
   }
 }
 
@@ -56,7 +56,7 @@ async function alteraUsuario() {
   var imgAltera = document.getElementById('imgAltera').files[0]
   var urlAltera = urlUsuario
   var urlID = urlIdUsuario
-  console.log(urlIdUsuario)
+
   if (!imgAltera == '') {
 
     await axios.delete("/files/" + urlIdUsuario, configMultipart)
@@ -108,7 +108,7 @@ async function alteraUsuario() {
   await axios.put("/users", dados, config)
 
     .then(function (response) {
-    
+
       urlUsuario = urlAltera
       urlIdCapaUsuario = urlID
       nomeUsuario = usuarioAltera
@@ -135,7 +135,7 @@ async function alteraUsuarioCapa() {
   var urlIDCapa = urlIdCapaUsuario
 
   if (!imgAlteraCapa == '') {
-  
+
     await axios.delete("/files/" + urlIDCapa, config)
 
       .then(function (response) {
@@ -159,7 +159,7 @@ async function alteraUsuarioCapa() {
       .then(function (response) {
         urlAlteraCapa = response.data.url
         urlIDCapa = response.data.id
-        console.log(urlAlteraCapa + " --" + urlAlteraCapa)
+     
 
       })
       .catch(function (err) {
@@ -197,7 +197,7 @@ function limparCampos() {
 }
 
 function showImageAltera() {
-  console.log("NOVO IMG ")
+ 
   if (this.files && this.files[0]) {
     var obj = new FileReader()
     obj.onload = function (data) {
@@ -209,7 +209,7 @@ function showImageAltera() {
 }
 
 function showImageAlteraCapa() {
-  console.log("NOVO IMG ")
+
   if (this.files && this.files[0]) {
     var obj = new FileReader()
     obj.onload = function (data) {
