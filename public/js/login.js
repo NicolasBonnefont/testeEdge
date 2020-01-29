@@ -14,13 +14,14 @@ async function verificaLogado() {
       localStorage.clear()
     })
 }
-//CHAMA A FUNCAO A TODOS OS  LOADING DAS PAGINAS
 verificaLogado()
+
+
 
 // FUNCAO DE LOGAR NO SISTEMA
 async function logar() {
   event.preventDefault()
-
+  
   const password = document.getElementById('password').value
   const email = document.getElementById('email').value
 
@@ -29,24 +30,44 @@ async function logar() {
       "password": `${password}`,
       "email": `${email}`
     })
-
+ 
     .then(function (response) {
 
 
       sessionStorage.setItem('sessao', response.data.token)
 
-      alert("Logado com Sucesso")
+      let timerInterval
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Logado com sucesso !',
+        showConfirmButton: false,
+        timer: 1800
+        
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          window.location.replace("pag/principal");
+        }
+      })
 
-      window.location.replace("pag/principal");
-
-
+      
+     
+   
 
     })
     .catch(function (error) {
-      console.log(error)
+     if(error.response.data[0].field == 'email'){
+       alert("Email não existe")
+       document.getElementById('email').focus()
+     }
+     if(error.response.data[0].field == 'password'){
+      alert("Senha inválida !")
+      document.getElementById('password').focus()
+     }
+     if(!error.response.data[0].field == 'email' && !error.response.data[0].field == 'password')
       alert("Problema na autenticação !")
-
-
+     
     })
 
 }
