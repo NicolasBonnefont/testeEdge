@@ -249,9 +249,6 @@ async function alterarUsuario() {
 
       urlUsuario = urlAltera
       urlIdUsuario = urlID
-      const user = JSON.stringify(u)
-      sessionStorage.setItem("user", user)
-
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
       limparCampos()
