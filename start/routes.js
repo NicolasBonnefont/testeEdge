@@ -65,4 +65,4 @@ Route.put('notificacao',"NotificacaoController.update")
 }).middleware('auth') // FUNÇÃO QUE REQUER AS ROTAS AUTENTICADAS 
 
 // ROTA CORINGA PARA MOSTRAR CASO NAO ENCONTRE AS DEMAIS
-Route.on('*').render('404') 
+Route.on('*').render('pag/404') 
