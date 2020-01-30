@@ -1,15 +1,15 @@
 'use strict'
 /** @type {import('@adonisjs/framework/src/Route/Manager'} */
 const User = use('App/Models/User')
-
+const Env = use('Env')
 const crypto = require('crypto')
 const moment = require('moment')
-
+const url = Env.get('APP_URL')
 const Mail = use('Mail')
 
 class ForgotPasswordController {
   async store({request,response}){
-
+    
     try {
       const email = request.input('email')
     
@@ -23,7 +23,7 @@ class ForgotPasswordController {
 
       await Mail.send(
         ['emails.forgot_password'],
-        {email, token: user.token, link:`${request.input('redirect_url')}?token=${user.token} `},
+        {usuario: user.name, email, token: user.token, link: url+`/resetpassword?token=${user.token}` },
         message =>{
           message
           .to(user.email)
