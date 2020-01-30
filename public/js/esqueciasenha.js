@@ -18,10 +18,10 @@ async function recuperar() {
         text: ' Favor, verificar sua caixa de Entrada.',
         footer: email,
         showConfirmButton: false,
-        timer: 10000
+        timer: 6000
 
       }).then((result) => {
-        /* Read more about handling dismissals below */
+        
         if (result.dismiss === Swal.DismissReason.timer) {
           window.location.replace("home");
         }
