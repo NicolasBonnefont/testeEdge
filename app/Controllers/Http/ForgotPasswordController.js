@@ -22,8 +22,13 @@ class ForgotPasswordController {
       await user.save()
 
       await Mail.send(
-        ['emails.forgot_password'],
-        {usuario: user.name, email, token: user.token, link: url+`/resetpassword?token=${user.token}` },
+        // Caminho da View de Template do email
+        ['emails.forgot_password'],       
+        
+        // Quando estiver com um dominio valido, usar a linha comentada
+        //{usuario: user.name, email, token: user.token, link: url+`/resetpassword?token=${user.token}` },
+
+        {usuario: user.name, email, token: user.token, link: 'http://mor-api-com.umbler.net//resetpassword?token='+`${user.token}` }, 
         message =>{
           message
           .to(user.email)
