@@ -11,7 +11,7 @@ class EmpresaSchema extends Schema {
       table.string('bi')
       table.string('url')
       table.string('urlID')
-      table.string('painel')
+      table.string('setor')
       table.timestamps()
     })
   }
