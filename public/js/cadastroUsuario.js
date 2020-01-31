@@ -45,6 +45,7 @@ async function carregaEmpresa(){
 // FUNCAO QUE CRIA USUARIO
   async function cadastraUsuario() {
   event.preventDefault()
+  
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var empresa = y[x].text
@@ -118,10 +119,10 @@ async function carregaEmpresa(){
 
 async function buscarUsuario() {
   event.preventDefault()
-  
+  // SELECT REFERENTE A BUSCA DE EMPRESA
   var a = document.getElementById("SelectAltera").selectedIndex;
   var b = document.getElementById("SelectAltera").options;
-  
+  // SELECT REFERENTE A BUSCA DE USUARIO
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
 
@@ -129,7 +130,7 @@ async function buscarUsuario() {
   
   const campos = document.getElementById('campos')
   var imgAltera = document.getElementById('imgAltera')
-console.log(usuarioBusca)
+
   if(!x == 0){
     await axios.post('/user', {'username':`${usuarioBusca}`}, config)
 
@@ -399,6 +400,7 @@ function limparCampos() {
   document.getElementById("imageNovo").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
   document.getElementById("imageAltera").src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
   document.getElementById("imgAltera").disabled = true
+  document.getElementById("campos").disabled = true
 }
 
 function showImageNovo() {
