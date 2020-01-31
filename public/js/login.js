@@ -69,7 +69,6 @@ async function logar() {
               document.getElementById('email').focus()
             }
           })
-          document.getElementById('email').focus()
         }
         if (error.response.data[0].field == 'password') {
 
@@ -87,7 +86,6 @@ async function logar() {
               document.getElementById('password').focus()
             }
           })
-          document.getElementById('password').focus()
         }
 
         if (!error.response.data[0].field == 'email' && !error.response.data[0].field == 'password')
@@ -100,7 +98,7 @@ async function logar() {
             timer: 1800
 
           }).then((result) => {
-           
+
             if (result.dismiss === Swal.DismissReason.timer) {
               window.location.replace("home");
             }
@@ -111,7 +109,7 @@ async function logar() {
 
     let timerInterval
     Swal.fire({
-      
+
       position: 'center',
       icon: 'error',
       title: 'Problema com o Login! Contate o suporte !',
@@ -119,7 +117,7 @@ async function logar() {
       timer: 3000
 
     }).then((result) => {
-    
+
       if (result.dismiss === Swal.DismissReason.timer) {
         document.getElementById('email').focus()
       }
