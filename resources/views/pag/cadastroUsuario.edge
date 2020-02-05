@@ -14,8 +14,6 @@
   <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet">
 
-
-
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cadastro de Usuários</title>
@@ -62,13 +60,15 @@
                 </div>
                 <br>
                 <div class="form-group">
-                  <select class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresa">
-                    <option>Selecione a Empresa...</option>
+                  <select onchange="igualaPainelCadastro()" class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresa">
+                    <option>Selecione a Empresa</option>
                   </select>
                 </div>
+                <br>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Cargo</label>
-                  <input type="text" class="form-control" id="cargo" required>
+                  <select onchange="carregaIdPainel()" class="form-control selectpicker" data-style="btn btn-link" id="selectPainel">
+                    <option>Selecione o Painel</option>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Senha</label>
@@ -107,7 +107,7 @@
           <form class="form-group" id="formBusca" onsubmit="buscarUsuario()">
             <div class="col-sm-6 align-items-center">
               <div class="input-group ">
-                <select class="form-control selectpicker" data-style="btn btn-link" id="Select">
+                <select  class="form-control selectpicker" data-style="btn btn-link" id="Select">
                   <option>Selecione o Usuário...</option>
                 </select>
                 <button class="btn btn-primary btn-round  btn-sm" type="submit">
@@ -123,20 +123,21 @@
                 <fieldset id="campos" disabled>
                   <div class="form-group ">
                     <label for="exampleInputEmail1">Nome</label>
-                    <input type="text" class="form-control" id="usuarioAltera" required>
+                    <input onchange="igualaPainelAltera()"type="text" class="form-control" id="usuarioAltera" required>
                   </div>
                   <div class="form-group ">
                     <label for="exampleInputEmail1">Email</label>
                     <input type="email" class="form-control" id="emailAltera" required>
                   </div>
                   <div class="form-group ">
-                    <select class="form-control selectpicker" data-style="btn btn-link" id="SelectAltera">
+                    <select onchange="igualaPainelAltera()" class="form-control selectpicker" data-style="btn btn-link" id="selectEmpresaAltera">
                       <option>Selecione a Empresa...</option>
                     </select>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Cargo</label>
-                    <input type="text" class="form-control" id="cargoAltera" required>
+                  <div class="form-group ">
+                    <select class="form-control selectpicker" data-style="btn btn-link" id="selectPainelAltera">
+                      <option>Selecione o Painel...</option>
+                    </select>
                   </div>
                   <div class="form-check">
                     <label class="form-check-label">
@@ -177,7 +178,7 @@
               <tr>
                 <th>Nome</th>               
                 <th>Email</th>
-                <th>Cargo</th>
+                <th>Painel</th>
                 <th>Admin</th>               
               </tr>
             </thead>

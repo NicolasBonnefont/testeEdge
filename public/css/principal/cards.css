@@ -1,0 +1,16 @@
+.principalCards{
+
+  padding-top: 50px;
+  text-align: center;
+ 
+  width: 100%;
+  padding-right: 80px;
+  padding-left: 80px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.card-body{
+  
+  text-align: center;
+  color: brown;
+}

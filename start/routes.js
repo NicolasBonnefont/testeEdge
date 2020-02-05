@@ -9,6 +9,7 @@ Route.on('/home').render('home')
 Route.on('/resetpassword').render('resetpassword')
 Route.on('/esqueciasenha').render('esqueciasenha')
 Route.on('/pag/cadastroEmpresa').render('pag/cadastroEmpresa')
+Route.on('/pag/cadastroPainel').render('pag/cadastroPainel')
 Route.on('/pag/cadastroUsuario').render('pag/cadastroUsuario')
 Route.on('/pag/dashboard').render('pag/dashboard')
 Route.on('/pag/principal').render('pag/principal')
@@ -35,6 +36,7 @@ Route.get('files/:id', 'FileController.show')
 
 
 Route.group(() => {
+
 Route.get('acesso','UserController.acesso')
 
 Route.post('files', 'FileController.store')
@@ -45,6 +47,14 @@ Route.post('user', 'UserController.show')
 Route.post('userDelete', 'UserController.destroy')
 Route.put('users','UserController.update')
 Route.post('users','UserController.store')
+
+Route.get('painel', 'PainelController.index')
+Route.post('painelEmpresa', 'PainelController.show')
+Route.post('painelCarrega', 'PainelController.showUsuario')
+Route.post('painelDelete', 'PainelController.destroy')
+Route.put('painel','PainelController.update')
+Route.post('painel','PainelController.store')
+Route.put('painelAltera','PainelController.update')
 
 
 Route.post('empresa','EmpresaController.store')

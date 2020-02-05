@@ -21,7 +21,6 @@ carregaEmpresa()
 async function cadastraEmpresa() {
   event.preventDefault()
   const empresa = document.getElementById('empresa').value;
-  const linkbi = document.getElementById('linkbi').value;
   const imgNovo = document.getElementById('imgNovo').files[0]
   var url = ''
 
@@ -39,7 +38,6 @@ async function cadastraEmpresa() {
 
   await axios.post('/empresa', {
     "empresa": `${empresa}`,
-    "bi": `${linkbi}`,
     "url": `${url}`
   }, config)
 
@@ -83,7 +81,6 @@ async function buscarEmpresa() {
         imgAltera.disabled = false
         campos.disabled = false
         empresaAltera.value = response.data.empresa
-        linkbiAltera.value = response.data.bi
         id = response.data.id
         sessionStorage.setItem('idEmpresa', id)
         document.getElementById("imageAltera").src = response.data.url
@@ -110,7 +107,6 @@ async function alteraEmpresa() {
   var empresaBusca = y[x].text
   const campos = document.getElementById('campos')
   const empresaAltera = document.getElementById('empresaAltera').value
-  const linkbiAltera = document.getElementById('linkbiAltera').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   var urlAltera = url
 
@@ -151,7 +147,6 @@ async function alteraEmpresa() {
 
   await axios.put("/empresa", {
     "empresa": `${empresaAltera}`,
-    "bi": `${linkbiAltera}`,
     "url": urlAltera,
     "urlID": urlID,
     "id": sessionStorage.getItem('idEmpresa')
@@ -309,7 +304,7 @@ function showImageAltera() {
 
 function limparCampos() {
   const campos = document.getElementById('campos')
-  campos.disa
+  campos.disabled = true
   document.getElementById("form").reset();
   document.getElementById("formBusca").reset();
   document.getElementById("formAltera").reset();

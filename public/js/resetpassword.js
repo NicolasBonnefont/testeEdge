@@ -1,13 +1,9 @@
-
-var token = location.href.split("=").pop();
-
-
 async function renovar() {
   event.preventDefault();
   
   const password = document.getElementById('password').value;
   const resetar = document.getElementById('resetar')
-
+  var token = location.href.split("=").pop();
   resetar.disabled = true
 
   document.getElementById('campos').disabled = false

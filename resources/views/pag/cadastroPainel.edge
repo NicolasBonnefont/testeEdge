@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="../css/alinhamentoCadastro.css">
+  <link href="../css/alinhamentoImg.css" rel="stylesheet">
+  <link href="../css/perfil/imgPerfil.css" rel="stylesheet">
+
+  <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Painel</title>
+</head>
+
+<body>
+  @include('nav/nav')
+  <div class="card card-nav-tabs card-header container ">
+    <div class="card-header card-header-danger">
+      <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+      <div class="nav-tabs-navigation">
+        <div class="nav-tabs-wrapper">
+          <ul class="nav nav-tabs" data-tabs="tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#Cadastrar" data-toggle="tab" onclick="limparCampos()">Cadastrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#Alterar" data-toggle="tab" onclick="limparCampos()">Alterar</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card-body ">
+      <div class="tab-content col-12 ">
+        <div class="tab-pane active" id="Cadastrar">
+          <div class="row">
+            <div class="col-sm-6">
+              <form id="form" onsubmit="gravarPainel()">
+                <div class="col">
+                  <select class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresa">
+                    <option>Selecione a Empresa...</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                  <div class="form-group col-sm-6">
+                    <label for="exampleInputPassword1">Setor</label>
+                    <input type="text" class="form-control" id="setor" required>
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="exampleInputPassword1">Descrição</label>
+                    <input type="text" class="form-control" id="descricao" required>
+                  </div>
+                <div class="form-group col-sm-12">
+                  <label for="exampleInputEmail1">Link do Painel</label>
+                  <input type="text" class="form-control" id="linkPainel" required>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+              </form>
+              </div>
+                <br>
+              </div>
+    
+        </div>
+        <!--               PARTE DE ALTERACAO      -->
+        <div class="tab-pane" id="Alterar">
+
+          <form class=" form-group" id="formAltera" method="POST" class="">
+            <div class="row">
+
+            <div class="col-sm-6 align-items-center">
+              <div class="input-group ">
+                <select onchange="carregaPainel()" class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresaAltera">
+                  <option>Selecione a Empresa...</option>
+                </select>
+              </div>
+            </div>
+            <div  class="col-sm-6 align-items-center" >
+              <div class="input-group ">
+                <select class="form-control selectpicker" data-style="btn btn-link" id="SelectSetor">
+                  <option>Selecione o Painel...</option>
+                </select>
+                <button class="btn btn-primary btn-round  btn-sm" type="submit" onclick="igualaPainel()">
+                  <i class="material-icons">search</i>Buscar
+                </button>
+              </div>
+
+            </div>
+          </div>         
+          <br>
+          <div class="row">
+            <div class="col-sm-6">
+              
+                <fieldset id="campos" disabled>
+                 
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Descrição</label>
+                    <input type="text" class="form-control" id="descricaoAltera" required>
+                  </div>
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Setor</label>
+                    <input type="text" class="form-control" id="setorAltera" required>
+                  </div>                  
+                  <div class="form-group ">
+                    <label for="exampleInputEmail1">Link do Painel</label>
+                    <input type="text" class="form-control" id="linkPainelAltera" required>
+                  </div>
+
+            </div>
+
+            </form>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary" onclick="alterarPainel()">Alterar</button>
+          <button type="submit" class="btn btn-danger" onclick="excluirUsuario()">Excluir</button>
+
+          </fieldset>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  </div>
+  <script src="../js/cadastroPainel.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
+
+
+
+</html>
