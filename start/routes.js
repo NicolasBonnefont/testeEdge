@@ -56,6 +56,7 @@ Route.post('painel','PainelController.store')
 Route.put('painelAltera','PainelController.update')
 Route.get('painel/:id','PainelController.showPainel')
 Route.post('carregaIdPainel','PainelController.idPainel')
+Route.delete('deletaPainel/:id','PainelController.destroy')
 
 
 Route.post('empresa','EmpresaController.store')

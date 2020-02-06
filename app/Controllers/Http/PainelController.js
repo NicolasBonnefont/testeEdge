@@ -117,8 +117,9 @@ class PainelController {
   }
 
   async destroy ({ params, request, response }) {
-
-    const painel = await Painel.findByOrFail(params)
+    console.log(params.id)
+    const painel = await Painel.findByOrFail('id',params.id)
+    
     await painel.delete()
      
     return response.status(200).send({ok:'Deletado com sucesso'})    
