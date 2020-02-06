@@ -103,7 +103,7 @@ async function carregaPainel(){
 
  async function igualaPainel(){
   event.preventDefault()
-  SelectEmpresaAltera
+  
   var a = document.getElementById("SelectSetor").selectedIndex;
   var b = document.getElementById("SelectSetor").options;
   var setorBusca = b[a].text
@@ -111,9 +111,9 @@ async function carregaPainel(){
   document.getElementById('descricaoAltera').value = ''
   document.getElementById('setorAltera').value = ''
   document.getElementById('linkPainelAltera').value = ''
-
-  await axios.post('/painelCarrega', {"idEmpresa":sessionStorage.getItem('idEmpresa'),
-  "descricao":setorBusca}, config)
+  console.log(setorBusca)
+  await axios.post('/carregaIdPainel', {"idEmpresa":sessionStorage.getItem('idEmpresa'),
+  "descricao": setorBusca}, config)
 
   .then(function(response){
     
