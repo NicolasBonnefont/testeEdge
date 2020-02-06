@@ -170,7 +170,7 @@ function limparCampos() {
   document.getElementById("form").reset();
   sessionStorage.setItem('idEmpresa', '')
   sessionStorage.setItem('idPainel', '')
-
+  document.querySelectorAll('#SelectSetor option').forEach(option => option.remove())
 
 }
 
