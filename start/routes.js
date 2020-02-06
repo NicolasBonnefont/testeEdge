@@ -52,9 +52,10 @@ Route.get('painel', 'PainelController.index')
 Route.post('painelEmpresa', 'PainelController.show')
 Route.post('painelCarrega', 'PainelController.showUsuario')
 Route.post('painelDelete', 'PainelController.destroy')
-Route.put('painel','PainelController.update')
 Route.post('painel','PainelController.store')
 Route.put('painelAltera','PainelController.update')
+Route.get('painel/:id','PainelController.showPainel')
+Route.post('carregaIdPainel','PainelController.idPainel')
 
 
 Route.post('empresa','EmpresaController.store')

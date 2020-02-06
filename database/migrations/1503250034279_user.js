@@ -15,7 +15,6 @@ class UserSchema extends Schema {
       table.string('token')
       table.boolean('admin').defaultTo('false')
       table.string('painel')
-      table.string('descricaoPainel')
       table.string('url')
       table.string('urlID')
       table.string('urlCapa')
