@@ -21,13 +21,15 @@ async function verificaAcesso() {
       document.body.style.backgroundImage = "url(" + response.data.usuario.url + ")"
       document.getElementById("imgLogin").src = response.data.usuario.url
       usuarioteste = response.data.usuario.username
-      if (!response.data.empresas.empresa) {
-        document.getElementById('linkPrincipal').text = 'morinfo'
-        document.body.style.backgroundImage = "url('')"
+     
+      document.getElementById('linkPrincipal').text = 'morinfo'
+      document.body.style.backgroundImage = "url('')"
+      if (!(response.data.empresas === null)) {
+        document.getElementById('linkPrincipal').text = response.data.empresas.empresa
+        document.body.style.backgroundImage = "url(" + response.data.empresas.url + ")"
       }
 
-      document.getElementById('linkPrincipal').text = response.data.empresas.empresa
-      document.body.style.backgroundImage = "url(" + response.data.empresas.url + ")"
+
       // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
       if (!response.data.usuario.admin == 1) {
         document.getElementById('habilitaMenuCadastro').remove()

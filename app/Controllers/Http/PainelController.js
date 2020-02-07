@@ -71,21 +71,22 @@ class PainelController {
     })
     .innerJoin('users', function () {
       this
-        .on('users.painel', 'painels.id')
+        .on('users.idPainel', 'painels.id')
     })
     .where('users.id', id)
 
     return painel[0]
   }
 
-  //retorna o id
+  //retorna as info do painel
   async idPainel({ params, request, response }){
 
     const {idEmpresa, descricao} = await request.all()
-    console.log(idEmpresa, descricao)
+
+    
     const painel = await Painel.query().where('idEmpresa', '=', idEmpresa)
     .andWhere('descricao', '=', descricao ).fetch()
-
+    
     return painel
   }
 

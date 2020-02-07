@@ -88,18 +88,18 @@ async function carregaIdPainel() {
   var painelBusca = ''
   sessionStorage.setItem('idPainel', '')
 
-  var x = document.getElementById("selectPainel").selectedIndex;
-  var y = document.getElementById("selectPainel").options;
+  var x = document.getElementById("selectPainelAltera").selectedIndex;
+  var y = document.getElementById("selectPainelAltera").options;
   painelBusca = y[x].text
 
   await axios.post('/carregaIdPainel', {
-      "idEmpresa": window.sessionStorage.getItem('idEmpresa'),
+      "idEmpresa": sessionStorage.getItem('idEmpresa'),
       "descricao": painelBusca
      }, config)
-    .then(function (response) {
-
+    .then(function (response) {      
       sessionStorage.setItem('idPainel', response.data[0].id)
-     
+      sessionStorage.setItem('descricaoPainel', response.data[0].Descricao)
+    
 
     })
     .catch(function (error) {
@@ -107,8 +107,6 @@ async function carregaIdPainel() {
     })
 
 }
-
-
 
 
 // FUNCAO QUE CRIA USUARIO
@@ -155,7 +153,8 @@ async function cadastraUsuario() {
       "name": `${name}`,
       "password": `${password}`,
       "email": `${email}`,
-      "painel": sessionStorage.getItem('idPainel'),
+      "idPainel": sessionStorage.getItem('idPainel'),
+      "painel": sessionStorage.getItem('descricaoPainel'),
       "empresa": `${empresaCadastra}`,
       "admin": `${adminOK}`,
       "url": url
@@ -188,14 +187,16 @@ async function igualaPainelAltera() {
   // traz os dashs conforme a empresa selecionada
   document.querySelectorAll('#selectPainelAltera option').forEach(option => option.remove())
   document.querySelectorAll('#selectPainelAltera option').innerText = 'Selecione o Setor'
+  var selectPainel = document.getElementById("selectPainelAltera")
+  var option = document.createElement("option")
+  option.text = 'Selecione o Painel...';
+  selectPainel.add(option);
+
   var empresaBusca = ''
 
   var x = document.getElementById("selectEmpresaAltera").selectedIndex;
   var y = document.getElementById("selectEmpresaAltera").options;
   empresaBusca = y[x].text
-
-  var a = document.getElementById("selectPainelAltera").selectedIndex;
-  var b = document.getElementById("selectPainelAltera").options;
 
   //so entra na funcao de pesquisa se for diferente ao selecione a empresa
   if (!(empresaBusca == "Selecione a Empresa")) {
@@ -227,15 +228,17 @@ async function igualaPainelAltera() {
       .catch(function (error) {
 
       })
+
+
   }
-
-
 }
-
 
 // FUNCAO QUE BUSCA O USUARIO
 async function buscarUsuario() {
   event.preventDefault()
+
+  
+
   // SELECT REFERENTE A BUSCA DE EMPRESA
   var a = document.getElementById("selectEmpresaAltera").selectedIndex;
   var b = document.getElementById("selectEmpresaAltera").options;
@@ -258,7 +261,7 @@ async function buscarUsuario() {
 
       .then(function (response) {
         sessionStorage.setItem('id', response.data.id)
-
+        
         campos.disabled = false
 
         usuarioAltera.value = response.data.name
@@ -289,8 +292,9 @@ async function buscarUsuario() {
 
       })
       
-      await igualaPainelAltera()
-      igualaPainelUsuario()
+       await igualaPainelAltera()
+       await igualaPainelUsuario()
+      
   }
 
 }
@@ -301,39 +305,50 @@ async function igualaPainelUsuario(){
   var a = document.getElementById("selectPainelAltera").selectedIndex;
   var b = document.getElementById("selectPainelAltera").options;
 
-  await axios.post('/painelCarrega',
-  { // buscar por id do usuario
-    "id": sessionStorage.getItem('id')
-    
-  }, config)
-
+  await axios.post('/painelCarrega',{"id": sessionStorage.getItem('id')}, config)
   .then(function(response){
-    sessionStorage.setItem('descricaoPainel', response.data.Descricao)
-    b[0].text =  response.data.Descricao
+    b[0].text = response.data.Descricao
+    sessionStorage.setItem('idPainel', response.data.idPainel)
+   
+  })
+  .catch(function(error){
+    console.log(error)
+
   })
 
 }
 
-
-
-
 async function alterarUsuario() {
   event.preventDefault()
+  
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
 
-  var a = document.getElementById("SelectAltera").selectedIndex;
-  var b = document.getElementById("SelectAltera").options;
-  var empresaAltera = b[a].text
+  var painelAltera = ''
+  var empresaAltera = ''
 
+  if(!(document.getElementById("selectEmpresaAltera").selectedIndex == -1)){
+    var a = document.getElementById("selectEmpresaAltera").selectedIndex;
+    var b = document.getElementById("selectEmpresaAltera").options;
+    empresaAltera = b[a].text
+  }
+  
+  if(!(document.getElementById("selectPainelAltera").selectedIndex == -1)){
+    var a = document.getElementById("selectPainelAltera").selectedIndex;
+    var b = document.getElementById("selectPainelAltera").options;
+    painelAltera = b[a].text
+  }
+
+
+  console.log(a)
 
   const campos = document.getElementById('campos')
   const emailAltera = document.getElementById('emailAltera').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera')
   const usuarioAltera = document.getElementById('usuarioAltera').value
-  const painelAltera = document.getElementById("painelAltera").value
+  
   var adminAlteraOK = 0
   var urlAltera = url
 
@@ -384,7 +399,8 @@ async function alterarUsuario() {
       "email": `${emailAltera}`,
       "username": `${usuarioBusca}`,
       "empresa": `${empresaAltera}`,
-      "painel": `${painelAltera}`,
+      "painel": sessionStorage.getItem('descricaoPainel'),
+      "idPainel": sessionStorage.getItem('idPainel'),
       "admin": `${adminAlteraOK}`,
       "url": urlAltera,
       "urlID": urlID
@@ -396,14 +412,15 @@ async function alterarUsuario() {
       urlIdUsuario = urlID
       alert("Usuário alterado com sucesso !")
       campos.disabled = true
-      document.location.reload();
+      limparCampos()
+      location.reload();
 
     })
     .catch(function (error) {
 
       console.log(error)
       alert("Não foi possivel alterar este cadastro, verificar log")
-
+      
     })
 
 }

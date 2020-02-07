@@ -59,6 +59,7 @@ Route.post('carregaIdPainel','PainelController.idPainel')
 Route.delete('deletaPainel/:id','PainelController.destroy')
 
 
+
 Route.post('empresa','EmpresaController.store')
 Route.post('empresas','EmpresaController.show')
 Route.get('empresas','EmpresaController.index')
