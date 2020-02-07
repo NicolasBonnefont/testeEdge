@@ -505,6 +505,9 @@ function mostrarTabela() {
           "data": "email"
         },
         {
+          "data": "empresa"
+        },
+        {
           "data": "painel"
         },
         {

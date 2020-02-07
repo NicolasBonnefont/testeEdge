@@ -6,7 +6,7 @@ var urlIdUsuario
 var adminUsuario
 var urlCapaUsuario
 var urlIdCapaUsuario
-var cargoUsuario
+var painelUsuario
 var empresaUsuario
 
 // carrega os dados do usuario logado
@@ -22,7 +22,7 @@ async function carregaUsuario() {
       adminUsuario = response.data.usuario.admin
       urlCapaUsuario = response.data.usuario.urlCapa
       urlIdCapaUsuario = response.data.usuario.idcapa
-      cargoUsuario = response.data.usuario.cargo
+      painelUsuario = response.data.usuario.painel
       empresaUsuario = response.data.usuario.empresa
     })
     .catch(function (err) {
@@ -33,7 +33,7 @@ async function carregaUsuario() {
   //  iguala os campos do usuario logado no HTML
   document.getElementById("imgPerfil").src = urlUsuario
   document.getElementById("nomePerfil").innerHTML = nomeUsuario
-  document.getElementById("cargoPerfil").innerHTML = cargoUsuario
+  document.getElementById("cargoPerfil").innerHTML = painelUsuario
   document.getElementById("emailPerfil").innerHTML = emailUsuario
   document.getElementById("imageAltera").src = urlUsuario
   document.getElementById("usuarioAltera").value = nomeUsuario
