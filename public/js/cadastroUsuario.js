@@ -500,19 +500,8 @@ function mostrarTabela() {
 
       "columns": [{
           "data": "name"
-        },
-        {
-          "data": "email"
-        },
-        {
-          "data": "empresa"
-        },
-        {
-          "data": "painel"
-        },
-        {
-          "data": "admin"
         }
+       
 
       ],
       "language": idioma,
