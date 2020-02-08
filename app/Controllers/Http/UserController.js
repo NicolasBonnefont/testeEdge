@@ -16,7 +16,7 @@ class UserController {
    } 
    catch(err){
 
-    return response.status(200).send({error: { message: 'Algo não deu certo!' } } )
+    return response.status(200).send({error: { message: 'Algo não deu certo!' }, err } )
 
    }
 

@@ -15,6 +15,7 @@ Route.on('/pag/dashboard').render('pag/dashboard')
 Route.on('/pag/principal').render('pag/principal')
 Route.on('/pag/perfil').render('pag/perfil')
 Route.on('/pag/configuracaoIp').render('pag/configuracaoIp')
+Route.on('/pag/cadastroSetor').render('pag/cadastroSetor')
 
 // rotas para as API
 Route.post('sessions','SessionController.store')
@@ -58,20 +59,20 @@ Route.get('painel/:id','PainelController.showPainel')
 Route.post('carregaIdPainel','PainelController.idPainel')
 Route.delete('deletaPainel/:id','PainelController.destroy')
 
-
-
 Route.post('empresa','EmpresaController.store')
 Route.post('empresas','EmpresaController.show')
 Route.get('empresas','EmpresaController.index')
-
 Route.put('empresa','EmpresaController.update')
 Route.post('empresaDelete','EmpresaController.destroy')
-
-
 
 Route.post('notificacao', 'NotificacaoController.store')
 Route.get('notificacao',"NotificacaoController.index")
 Route.put('notificacao',"NotificacaoController.update")
+
+Route.post('setor',"SetorController.store")
+Route.put('setor/:id',"SetorController.update")
+Route.delete('setor/:id',"SetorController.destroy")
+Route.get('setor',"SetorController.index")
 
 
 

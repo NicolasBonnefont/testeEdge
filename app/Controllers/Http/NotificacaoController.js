@@ -18,7 +18,7 @@ class NotificacaoController {
     const {userRecebe,empresa,departamento} = request.all()
 
     const notificacao = await Database.raw(`select * from notificacaos
-     where userRecebe = '${userRecebe}'
+      where userRecebe = '${userRecebe}'
       and empresa = '${empresa}' 
       and departamento ='${departamento}'` )
       
