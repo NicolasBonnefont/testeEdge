@@ -22,11 +22,14 @@ async function verificaAcesso() {
       document.getElementById("imgLogin").src = response.data.usuario.url
       usuarioteste = response.data.usuario.username
      
-      document.getElementById('linkPrincipal').text = 'morinfo'
+      //document.getElementById('linkPrincipal').text = 'morinfo'
       document.body.style.backgroundImage = "url('')"
       if (!(response.data.empresas === null)) {
-        document.getElementById('linkPrincipal').text = response.data.empresas.empresa
-        document.body.style.backgroundImage = "url(" + response.data.empresas.url + ")"
+        //document.getElementById('linkPrincipal').text = response.data.empresas.empresa
+        //document.body.style.backgroundImage = "url(" + response.data.empresas.url + ")"
+       document.getElementById('linkPrincipal').src = response.data.empresas.url
+       document.getElementById('linkPrincipal').style.backgroundImage = "url(" + response.data.empresas.url + ")"
+       console.log(response.data.empresas.url )
       }
 
 
@@ -37,7 +40,7 @@ async function verificaAcesso() {
     })
     .catch(function (err) {
       console.log(err)
-      deslogar()
+     // deslogar()
     })
 }
 async function deslogar() {
