@@ -15,7 +15,7 @@
   <link href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro de Painel</title>
+  <title>Cadastro de Setor</title>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
         <div class="tab-pane active" id="Cadastrar">
           <div class="row">
             <div class="col-sm-6">
-              <form id="form" onsubmit="gravarPainel()">
+              <form id="form" onsubmit="gravaSetor()">
                 <div class="col">
                   <label for="">Empresa</label>
                   <select class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresa">
@@ -54,17 +54,9 @@
             <div class="row">
                 <div class="col">
                   <div class="form-group col-sm-6">
-                    <label for="exampleInputPassword1">Setor</label>
-                    <input type="text" class="form-control" id="setor" required>
-                  </div>
-                  <div class="form-group col-sm-6">
-                    <label for="exampleInputPassword1">Descrição</label>
+                    <label>Descrição</label>
                     <input type="text" class="form-control" id="descricao" required>
                   </div>
-                <div class="form-group col-sm-12">
-                  <label for="exampleInputEmail1">Link do Painel</label>
-                  <input type="text" class="form-control" id="linkPainel" required>
-                </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
               </form>
@@ -74,69 +66,49 @@
     
         </div>
         <!--               PARTE DE ALTERACAO      -->
-        <div class="tab-pane" id="Alterar">
-
+      <div class="tab-pane" id="Alterar">
           <form class=" form-group" id="formAltera" method="POST" class="">
-            <div class="row">
-             
+            <div class="row">             
             <div class="col-sm-6 align-items-center">
               <label for="">Empresa</label>
               <div class="input-group ">               
-                <select onchange="carregaPainel()" class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresaAltera">
+                <select onchange="carregaSetor()" class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresaAltera">
                   <option>Selecione a Empresa...</option>
                 </select>
               </div>
             </div>
-            <div  class="col-sm-6 align-items-center" >
-              <label for="exampleInputPassword1">Painel/DASH</label>
-              <div class="input-group ">
-                <select class="form-control selectpicker" data-style="btn btn-link" id="SelectSetor">
-                  <option>Selecione o Painel...</option>
+            <div class="col-sm-6 align-items-center">
+              <label for="">Setor</label>
+              <div class="input-group ">               
+                <select onchange="igualaSetor()" class="form-control selectpicker" data-style="btn btn-link" id="SelectSetor">
+                  <option>Selecione o Setor...</option>
                 </select>
-                <button class="btn btn-primary btn-round  btn-sm" type="submit" onclick="igualaPainel()">
-                  <i class="material-icons">search</i>Buscar
-                </button>
               </div>
-
             </div>
           </div>         
           <br>
           <div class="row">
-            <div class="col-sm-6">
-              
-                <fieldset id="campos" disabled>
-                 
+            <div class="col-sm-6">              
+                <fieldset id="campos" disabled>                
                   <div class="form-group ">
                     <label for="exampleInputEmail1">Descrição</label>
                     <input type="text" class="form-control" id="descricaoAltera" required>
-                  </div>
-                  <div class="form-group ">
-                    <label for="exampleInputEmail1">Setor</label>
-                    <input type="text" class="form-control" id="setorAltera" required>
-                  </div>                  
-                  <div class="form-group ">
-                    <label for="exampleInputEmail1">Link do Painel</label>
-                    <input type="text" class="form-control" id="linkPainelAltera" required>
-                  </div>
-
+                  </div>               
             </div>
-
             </form>
           </div>
           <br>
-          <button type="submit" class="btn btn-primary" onclick="alterarPainel()">Alterar</button>
-          <button type="submit" class="btn btn-danger" onclick="excluiPainel()">Excluir</button>
+          <button type="submit" class="btn btn-primary" onclick="alteraSetor()">Alterar</button>
+          <button type="submit" class="btn btn-danger" onclick="excluirSetor()">Excluir</button>
 
           </fieldset>
           </form>
         </div>
-
-
       </div>
     </div>
   </div>
   </div>
-  <script src="../js/cadastroPainel.js"></script>
+  <script src="../js/cadastroSetor.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>

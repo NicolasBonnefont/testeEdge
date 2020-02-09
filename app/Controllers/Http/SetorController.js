@@ -9,6 +9,7 @@
  */
 const Setor = use('App/Models/Setor')
 const Empresa = use('App/Models/Empresa')
+
 class SetorController {
   /**
    * Show a list of all setors.
@@ -47,19 +48,16 @@ class SetorController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {       
-
-
     try{
       
       const data = request.all()
       
-      const {empresa} = await Empresa.find(data.idEmpresa)
-     
+      const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)
+
+    
       const setor = await Setor.create(data)
-
       
-
-      setor.merge({"descricao": empresa});
+      setor.merge({"descricaoEmpresa": empresa});
       await setor.save();
       
       return setor
@@ -84,6 +82,35 @@ class SetorController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
+    try{
+          
+       const setor = await Setor.query().where('idEmpresa', '=', params.id).fetch()
+     
+      return setor
+    
+    }catch (err){
+
+      return response.status(200).send({error: { message: 'Algo não deu certo!' }, err } )
+    
+    }
+
+  }
+
+  async showDescricao ({ params, request, response, view }) {
+    try{
+          
+       const {idEmpresa, descricao} = await request.all()
+       const setor = await Setor.query().where('idEmpresa', '=', idEmpresa)
+       .andWhere('descricao', '=', descricao).fetch()
+     
+      return JSON.stringify(setor)
+    
+    }catch (err){
+
+      return response.status(200).send({error: { message: 'Algo não deu certo!' }, err } )
+    
+    }
+
   }
 
   /**
@@ -109,17 +136,17 @@ class SetorController {
   async update ({ params, request, response }) {
     try{
       
-      
+      const data = request.all()
+
       const setor = await Setor.findByOrFail('id', params.id)
 
-      const {empresa} = await Empresa.find(setor.idEmpresa)
-
-      const data = request.all()
-     
+      const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)
+  
       setor.merge(data);
+      setor.merge({"descricaoEmpresa": empresa})
       
-      setor.merge({"descricao": empresa})
       await setor.save();
+  
 
       return setor
     

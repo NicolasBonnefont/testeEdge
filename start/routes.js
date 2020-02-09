@@ -73,6 +73,8 @@ Route.post('setor',"SetorController.store")
 Route.put('setor/:id',"SetorController.update")
 Route.delete('setor/:id',"SetorController.destroy")
 Route.get('setor',"SetorController.index")
+Route.get('setor/empresa/:id',"SetorController.show")
+Route.post('setorDescricao',"SetorController.showDescricao")
 
 
 

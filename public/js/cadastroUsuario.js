@@ -5,7 +5,7 @@ async function carregaUsuario() {
     .then(function (response) {
       dados = response.data.data
     })
-    .catch(function (error) {})
+    .catch(function (error) { })
 
   for (var i = 0; i < dados.length; i++) {
     var select = document.getElementById("Select")
@@ -22,7 +22,7 @@ async function carregaEmpresa() {
     .then(function (response) {
       dadosEmpresa = response.data.data
     })
-    .catch(function (error) {})
+    .catch(function (error) { })
 
   for (var i = 0; i < dadosEmpresa.length; i++) {
     var SelectEmpresa = document.getElementById("SelectEmpresa")
@@ -53,16 +53,16 @@ async function igualaPainelCadastro() {
   if (!(empresaBusca == "Selecione a Empresa")) {
 
     await axios.post('/empresas', {
-        "empresa": empresaBusca
-      }, config)
+      "empresa": empresaBusca
+    }, config)
       .then(function (response) {
         sessionStorage.setItem('idEmpresa', response.data.id)
       })
-      .catch(function (error) {})
+      .catch(function (error) { })
 
     await axios.post('/painelEmpresa', {
-        "idEmpresa": sessionStorage.getItem('idEmpresa')
-      }, config)
+      "idEmpresa": sessionStorage.getItem('idEmpresa')
+    }, config)
 
       .then(function (response) {
 
@@ -81,6 +81,31 @@ async function igualaPainelCadastro() {
       })
   }
 }
+async function carregaIdPainelCadastro() {
+  // carrega o id do painel conforme os campos da empresa e o dash escolhido
+
+  var painelBusca = ''
+  sessionStorage.setItem('idPainel', '')
+
+  var x = document.getElementById("selectPainel").selectedIndex;
+  var y = document.getElementById("selectPainel").options;
+  painelBusca = y[x].text
+
+  await axios.post('/carregaIdPainel', {
+    "idEmpresa": sessionStorage.getItem('idEmpresa'),
+    "descricao": painelBusca
+  }, config)
+    .then(function (response) {
+      sessionStorage.setItem('idPainel', response.data[0].id)
+      sessionStorage.setItem('descricaoPainel', response.data[0].Descricao)
+
+
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+
+}
 
 async function carregaIdPainel() {
   // carrega o id do painel conforme os campos da empresa e o dash escolhido
@@ -93,13 +118,13 @@ async function carregaIdPainel() {
   painelBusca = y[x].text
 
   await axios.post('/carregaIdPainel', {
-      "idEmpresa": sessionStorage.getItem('idEmpresa'),
-      "descricao": painelBusca
-     }, config)
-    .then(function (response) {      
+    "idEmpresa": sessionStorage.getItem('idEmpresa'),
+    "descricao": painelBusca
+  }, config)
+    .then(function (response) {
       sessionStorage.setItem('idPainel', response.data[0].id)
       sessionStorage.setItem('descricaoPainel', response.data[0].Descricao)
-    
+
 
     })
     .catch(function (error) {
@@ -111,8 +136,8 @@ async function carregaIdPainel() {
 
 // FUNCAO QUE CRIA USUARIO
 async function cadastraUsuario() {
- event.preventDefault()
- await carregaIdPainel()
+  event.preventDefault()
+  await carregaIdPainelCadastro()
 
   var x = document.getElementById("SelectEmpresa").selectedIndex;
   var y = document.getElementById("SelectEmpresa").options;
@@ -149,16 +174,16 @@ async function cadastraUsuario() {
     });
 
   await axios.post('/users', {
-      "username": `${username}`,
-      "name": `${name}`,
-      "password": `${password}`,
-      "email": `${email}`,
-      "idPainel": sessionStorage.getItem('idPainel'),
-      "painel": sessionStorage.getItem('descricaoPainel'),
-      "empresa": `${empresaCadastra}`,
-      "admin": `${adminOK}`,
-      "url": url
-    }, config)
+    "username": `${username}`,
+    "name": `${name}`,
+    "password": `${password}`,
+    "email": `${email}`,
+    "idPainel": sessionStorage.getItem('idPainel'),
+    "painel": sessionStorage.getItem('descricaoPainel'),
+    "empresa": `${empresaCadastra}`,
+    "admin": `${adminOK}`,
+    "url": url
+  }, config)
 
     .then(function (response) {
 
@@ -202,16 +227,16 @@ async function igualaPainelAltera() {
   if (!(empresaBusca == "Selecione a Empresa")) {
 
     await axios.post('/empresas', {
-        "empresa": empresaBusca
-      }, config)
+      "empresa": empresaBusca
+    }, config)
       .then(function (response) {
         sessionStorage.setItem('idEmpresa', response.data.id)
       })
-      .catch(function (error) {})
+      .catch(function (error) { })
 
     await axios.post('/painelEmpresa', {
-        "idEmpresa": sessionStorage.getItem('idEmpresa')
-      }, config)
+      "idEmpresa": sessionStorage.getItem('idEmpresa')
+    }, config)
 
       .then(function (response) {
 
@@ -237,7 +262,7 @@ async function igualaPainelAltera() {
 async function buscarUsuario() {
   event.preventDefault()
 
-  
+
 
   // SELECT REFERENTE A BUSCA DE EMPRESA
   var a = document.getElementById("selectEmpresaAltera").selectedIndex;
@@ -256,12 +281,12 @@ async function buscarUsuario() {
 
   if (!x == 0) {
     await axios.post('/user', {
-        'username': `${usuarioBusca}`
-      }, config)
+      'username': `${usuarioBusca}`
+    }, config)
 
       .then(function (response) {
         sessionStorage.setItem('id', response.data.id)
-        
+
         campos.disabled = false
 
         usuarioAltera.value = response.data.name
@@ -291,36 +316,36 @@ async function buscarUsuario() {
         limparCampos()
 
       })
-      
-       await igualaPainelAltera()
-       await igualaPainelUsuario()
-      
+
+    await igualaPainelAltera()
+    await igualaPainelUsuario()
+
   }
 
 }
 // FUNÇÃO QUE ALTERA O USUARIO DA PESQUISA
 
-async function igualaPainelUsuario(){
+async function igualaPainelUsuario() {
 
   var a = document.getElementById("selectPainelAltera").selectedIndex;
   var b = document.getElementById("selectPainelAltera").options;
 
-  await axios.post('/painelCarrega',{"id": sessionStorage.getItem('id')}, config)
-  .then(function(response){
-    b[0].text = response.data.Descricao
-    sessionStorage.setItem('idPainel', response.data.idPainel)
-   
-  })
-  .catch(function(error){
-    console.log(error)
+  await axios.post('/painelCarrega', { "id": sessionStorage.getItem('id') }, config)
+    .then(function (response) {
+      b[0].text = response.data.Descricao
+      sessionStorage.setItem('idPainel', response.data.idPainel)
 
-  })
+    })
+    .catch(function (error) {
+      console.log(error)
+
+    })
 
 }
 
 async function alterarUsuario() {
   event.preventDefault()
-  
+
   var x = document.getElementById("Select").selectedIndex;
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
@@ -328,13 +353,13 @@ async function alterarUsuario() {
   var painelAltera = ''
   var empresaAltera = ''
 
-  if(!(document.getElementById("selectEmpresaAltera").selectedIndex == -1)){
+  if (!(document.getElementById("selectEmpresaAltera").selectedIndex == -1)) {
     var a = document.getElementById("selectEmpresaAltera").selectedIndex;
     var b = document.getElementById("selectEmpresaAltera").options;
     empresaAltera = b[a].text
   }
-  
-  if(!(document.getElementById("selectPainelAltera").selectedIndex == -1)){
+
+  if (!(document.getElementById("selectPainelAltera").selectedIndex == -1)) {
     var a = document.getElementById("selectPainelAltera").selectedIndex;
     var b = document.getElementById("selectPainelAltera").options;
     painelAltera = b[a].text
@@ -348,7 +373,7 @@ async function alterarUsuario() {
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera')
   const usuarioAltera = document.getElementById('usuarioAltera').value
-  
+
   var adminAlteraOK = 0
   var urlAltera = url
 
@@ -395,16 +420,16 @@ async function alterarUsuario() {
   }
 
   await axios.put('/users', {
-      "name": `${usuarioAltera}`,
-      "email": `${emailAltera}`,
-      "username": `${usuarioBusca}`,
-      "empresa": `${empresaAltera}`,
-      "painel": sessionStorage.getItem('descricaoPainel'),
-      "idPainel": sessionStorage.getItem('idPainel'),
-      "admin": `${adminAlteraOK}`,
-      "url": urlAltera,
-      "urlID": urlID
-    }, config)
+    "name": `${usuarioAltera}`,
+    "email": `${emailAltera}`,
+    "username": `${usuarioBusca}`,
+    "empresa": `${empresaAltera}`,
+    "painel": sessionStorage.getItem('descricaoPainel'),
+    "idPainel": sessionStorage.getItem('idPainel'),
+    "admin": `${adminAlteraOK}`,
+    "url": urlAltera,
+    "urlID": urlID
+  }, config)
 
     .then(function (response) {
 
@@ -420,7 +445,7 @@ async function alterarUsuario() {
 
       console.log(error)
       alert("Não foi possivel alterar este cadastro, verificar log")
-      
+
     })
 
 }
@@ -449,17 +474,13 @@ async function excluirUsuario() {
   if (!x == 0) {
 
     await axios.post('/userDelete', {
-        'username': `${usuarioBusca}`
-      }, config)
+      'username': `${usuarioBusca}`
+    }, config)
 
       .then(function (response) {
         console.log(usuarioBusca)
         alert("Usuário excluido com sucesso !")
-        campos.disabled = true
-        document.getElementById("formBusca").reset();
-        document.getElementById("formAltera").reset();
-        document.location.reload();
-
+        limparCampos()
       })
       .catch(function (error) {
         console.log(error)
@@ -498,10 +519,20 @@ function mostrarTabela() {
         }
       },
 
-      "columns": [{
-          "data": "name"
-        }
-       
+      "columns": [
+        {
+        "data": "name"
+      },
+      {
+        "data": "email"
+      },
+      {
+        "data": "empresa"
+      },
+      {
+        "data": "painel"
+      }
+
 
       ],
       "language": idioma,

@@ -44,8 +44,15 @@
               <form id="form" onsubmit="gravarPainel()">
                 <div class="col">
                   <label for="">Empresa</label>
-                  <select class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresa">
+                  <select onchange="carregaSetor()" class="form-control selectpicker" data-style="btn btn-link" id="SelectEmpresa">
                     <option>Selecione a Empresa...</option>
+                  </select>
+                </div>
+                <br>
+                <div class="col">
+                  <label for="">Setor</label>
+                  <select onchange="igualaSetor()" class="form-control selectpicker" data-style="btn btn-link" id="SelectSetor">
+                    <option>Selecione o Setor...</option>
                   </select>
                 </div>
               </div>
@@ -54,15 +61,11 @@
             <div class="row">
                 <div class="col">
                   <div class="form-group col-sm-6">
-                    <label for="exampleInputPassword1">Setor</label>
-                    <input type="text" class="form-control" id="setor" required>
-                  </div>
-                  <div class="form-group col-sm-6">
-                    <label for="exampleInputPassword1">Descrição</label>
+                    <label for="exampleInputPassword1">Descrição do Painel/DASH</label>
                     <input type="text" class="form-control" id="descricao" required>
                   </div>
                 <div class="form-group col-sm-12">
-                  <label for="exampleInputEmail1">Link do Painel</label>
+                  <label for="exampleInputEmail1">Link do Painel/DASH</label>
                   <input type="text" class="form-control" id="linkPainel" required>
                 </div>
                 <br>
@@ -90,7 +93,7 @@
             <div  class="col-sm-6 align-items-center" >
               <label for="exampleInputPassword1">Painel/DASH</label>
               <div class="input-group ">
-                <select class="form-control selectpicker" data-style="btn btn-link" id="SelectSetor">
+                <select class="form-control selectpicker" data-style="btn btn-link" id="selectPainel">
                   <option>Selecione o Painel...</option>
                 </select>
                 <button class="btn btn-primary btn-round  btn-sm" type="submit" onclick="igualaPainel()">
