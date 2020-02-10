@@ -1,0 +1,8 @@
+.principal a:link, a:visited {
+ 
+  color: black;
+  padding: 1px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
