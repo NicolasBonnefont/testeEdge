@@ -24,9 +24,12 @@ class PainelController {
   async store ({ request, response }) {
     try{
       const data = request.all()
-      console.log(data)
+
+      const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)
+
       const painel = await Painel.create(data)
   
+      painel.merge({"descricaoEmpresa": empresa});
       return painel
   
      } 
@@ -96,18 +99,20 @@ class PainelController {
 
   async update ({ params, request, response }) {
     try{
-
-      const {id} = request.all()
-      
-      const painel = await Painel.findByOrFail('id', id)
-
+  
       const data = request.all()
+
+      const painel = await Painel.findByOrFail('id', params.id)
+
+      const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)     
      
       painel.merge(data);
+
+      painel.merge({"descricaoEmpresa": empresa})
+
       await painel.save();
 
-      return painel
-    
+      return painel    
 
     }catch (err){
 

@@ -50,6 +50,7 @@ class SetorController {
   async store ({ request, response }) {       
     try{
       
+
       const data = request.all()
       
       const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)
@@ -143,10 +144,10 @@ class SetorController {
       const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)
   
       setor.merge(data);
-      setor.merge({"descricaoEmpresa": empresa})
+
+      setor.merge({"descricaoEmpresa": empresa})    
       
-      await setor.save();
-  
+      await setor.save();  
 
       return setor
     

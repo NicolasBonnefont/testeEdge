@@ -16,6 +16,9 @@ function mostrarTabela() {
       },
 
       "columns": [
+      {
+        "data": "descricaoEmpresa"
+      },
         {
         "data": "Setor"
       },
@@ -24,7 +27,7 @@ function mostrarTabela() {
       },
       { "data": "Link",
         "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-            $(nTd).html("<a href='tel:"+oData.Link+"'>"+oData.Link+"</a>");
+            $(nTd).html("<a href='/pag/dashboard?dash="+oData.Link+"'>"+oData.Descricao+"</a>");
         }
     },
 

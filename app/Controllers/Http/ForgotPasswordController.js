@@ -28,7 +28,7 @@ class ForgotPasswordController {
         // Quando estiver com um dominio valido, usar a linha comentada
         //{usuario: user.name, email, token: user.token, link: url+`/resetpassword?token=${user.token}` },
 
-        {usuario: user.name, email, token: user.token, link: 'http://mor-api-com.umbler.net//resetpassword?token='+`${user.token}` }, 
+        {usuario: user.name, email, token: user.token, link: 'http://mor-api-com.umbler.net/resetpassword?token='+`${user.token}` }, 
         message =>{
           message
           .to(user.email)

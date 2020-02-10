@@ -8,6 +8,7 @@ class PainelSchema extends Schema {
     this.create('painels', (table) => {
       table.increments()
       table.integer('idEmpresa')
+      table.string('descricaoEmpresa')
       table.string('Descricao')
       table.string('Link')
       table.string('Setor')    
