@@ -62,13 +62,36 @@ class PainelController {
     return painel
   }
 
-
 // BUSCAR O PAINEL POR ID DO USUARIO
   async showUsuario ({ params, request, response }) {
-        
-    const {id} = await request.all()
+            
+    const verifica = await User.findByOrFail('id', params.id)
+    
+    if( verifica.admin === 1 ){
 
-    const painel = await Database
+      const data = await Painel.all()
+
+      return {data}
+  }
+
+    if (verifica.gestor === 1){
+
+      const data = await Database
+      .table('painels')
+      .innerJoin('empresas', function () {
+        this
+          .on('empresas.id', 'painels.idEmpresa')
+      })
+      .innerJoin('users', function () {
+        this
+          .on('users.empresa', 'empresas.empresa')
+      })
+      .where('users.id', params.id)
+  
+      return {data}
+    }
+
+    const data = await Database
     .table('painels')
     .innerJoin('empresas', function () {
       this
@@ -78,9 +101,14 @@ class PainelController {
       this
         .on('users.idPainel', 'painels.id')
     })
-    .where('users.id', id)
+    .where('users.id', params.id)
 
-    return painel[0]
+    return {data}
+
+
+
+
+
   }
 
   //retorna as info do painel

@@ -13,6 +13,7 @@ const config = {
   }
 }
 
+
 async function verificaAcesso() {
 
   // esta rota, carrega os dados do usuario logado e a empresa na qual o mesmo faz parte
@@ -21,6 +22,7 @@ async function verificaAcesso() {
       document.body.style.backgroundImage = "url(" + response.data.usuario.url + ")"
       document.getElementById("imgLogin").src = response.data.usuario.url
       usuarioteste = response.data.usuario.username
+      sessionStorage.setItem('principal', response.data.usuario.id)
      
       //document.getElementById('linkPrincipal').text = 'morinfo'
       document.body.style.backgroundImage = "url('')"
@@ -29,7 +31,7 @@ async function verificaAcesso() {
         //document.body.style.backgroundImage = "url(" + response.data.empresas.url + ")"
        document.getElementById('linkPrincipal').src = response.data.empresas.url
        document.getElementById('linkPrincipal').style.backgroundImage = "url(" + response.data.empresas.url + ")"
-       console.log(response.data.empresas.url )
+      
       }
 
 

@@ -148,10 +148,12 @@ async function cadastraUsuario() {
   const password = document.getElementById('password').value
   const email = document.getElementById('email').value
   const admin = document.getElementById('admin')
+  const gestor = document.getElementById('gestor')
   const imgNovo = document.getElementById('imgNovo').files[0]
 
   var url = ''
   var adminOK = 0
+  var gestorOK = 0
 
   let data = new FormData()
   data.append("file", imgNovo)
@@ -160,6 +162,12 @@ async function cadastraUsuario() {
     adminOK = 1
   } else {
     adminOK = 0
+  }
+
+  if (gestor.checked) {
+    gestorOK = 1
+  } else {
+    gestorOK = 0
   }
 
   await axios.post('/files', data, configMultipart)
@@ -182,6 +190,7 @@ async function cadastraUsuario() {
     "painel": sessionStorage.getItem('descricaoPainel'),
     "empresa": `${empresaCadastra}`,
     "admin": `${adminOK}`,
+    "gestor": `${gestorOK}`,
     "url": url
   }, config)
 
@@ -295,6 +304,7 @@ async function buscarUsuario() {
         b[0].text = response.data.empresa
 
         adminAltera.value = response.data.admin
+        gestorAltera.value = response.data.gestor
 
         document.getElementById("imageAltera").src = response.data.url
         urlID = response.data.urlID
@@ -306,6 +316,12 @@ async function buscarUsuario() {
           adminAltera.checked = true
         } else {
           adminAltera.checked = false
+        }
+
+        if (gestorAltera.value == 1) {
+          gestorAltera.checked = true
+        } else {
+          gestorAltera.checked = false
         }
 
       }, config)
@@ -372,9 +388,11 @@ async function alterarUsuario() {
   const emailAltera = document.getElementById('emailAltera').value
   const imgAltera = document.getElementById('imgAltera').files[0]
   const adminAltera = document.getElementById('adminAltera')
+  const gestorAltera = document.getElementById('gestorAltera')
   const usuarioAltera = document.getElementById('usuarioAltera').value
 
   var adminAlteraOK = 0
+  var gestorAlteraOK = 0
   var urlAltera = url
 
 
@@ -382,7 +400,11 @@ async function alterarUsuario() {
 
     adminAlteraOK = 1
   }
-  console.log(adminAlteraOK)
+  if (gestorAltera.checked) {
+
+    gestorAlteraOK = 1
+  }
+
   if (!imgAltera == '') {
 
     await axios.delete("/files/" + urlID, configMultipart)
@@ -427,6 +449,7 @@ async function alterarUsuario() {
     "painel": sessionStorage.getItem('descricaoPainel'),
     "idPainel": sessionStorage.getItem('idPainel'),
     "admin": `${adminAlteraOK}`,
+    "gestor": `${gestorAlteraOK}`,
     "url": urlAltera,
     "urlID": urlID
   }, config)

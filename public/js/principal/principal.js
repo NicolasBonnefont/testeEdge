@@ -1,13 +1,15 @@
 
 
-function mostrarTabela() {
-
+async function mostrarTabela() {
+  await  verificaAcesso()
+  const url = '/painelCarregaUsuario/'+ sessionStorage.getItem('principal')
+  console.log(url)
   $(document).ready(function () {
 
     $('#teste').DataTable({
 
       "ajax": {
-        "url": '/painel',
+        "url": url,
         "type": "GET",
         "beforeSend": function (xhr) {
           xhr.setRequestHeader("Authorization",

@@ -51,7 +51,7 @@ Route.post('users','UserController.store')
 
 Route.get('painel', 'PainelController.index')
 Route.post('painelEmpresa', 'PainelController.show')
-Route.post('painelCarrega', 'PainelController.showUsuario')
+Route.get('painelCarregaUsuario/:id', 'PainelController.showUsuario')
 Route.post('painelDelete', 'PainelController.destroy')
 Route.post('painel','PainelController.store')
 Route.put('painelAltera/:id','PainelController.update')
