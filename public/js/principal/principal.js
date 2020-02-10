@@ -21,7 +21,12 @@ function mostrarTabela() {
       },
       {
         "data": "Descricao"
-      }
+      },
+      { "data": "Link",
+        "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+            $(nTd).html("<a href='tel:"+oData.Link+"'>"+oData.Link+"</a>");
+        }
+    },
 
 
       ],
