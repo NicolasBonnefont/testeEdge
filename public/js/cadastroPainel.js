@@ -195,8 +195,8 @@ async function igualaPainel() {
 
 async function alterarPainel() {
 
-  await axios.put('/painelAltera', {
-      "id": sessionStorage.getItem('idPainel'),
+  await axios.put('/painelAltera/'+ sessionStorage.getItem('idSetor'), {
+      "idEmpresa": sessionStorage.getItem('idEmpresa'),      
       "Descricao": document.getElementById('descricaoAltera').value,
       "Setor": document.getElementById('setorAltera').value,
       "Link": document.getElementById('linkPainelAltera').value
@@ -249,9 +249,8 @@ async function excluiPainel() {
   var b = document.getElementById("SelectSetor").options;
   await axios.delete('/deletaPainel/' + sessionStorage.getItem('idPainel'), config)
     .then(function (response) {
-      alert('Painel excluido com sucesso')
-      b[0].text = 'Selecione o Painel...'
-      limparCampos()
+      alert('Painel excluido com sucesso')      
+      location.reload()
 
     })
     .catch(function (error) {

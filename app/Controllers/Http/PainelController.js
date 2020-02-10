@@ -26,12 +26,14 @@ class PainelController {
       const data = request.all()
 
       const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)
-
+      console.log(empresa)
       const painel = await Painel.create(data)
   
       painel.merge({"descricaoEmpresa": empresa});
+      await painel.save();
       return painel
   
+
      } 
      catch(err){
   
