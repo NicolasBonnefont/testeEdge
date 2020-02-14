@@ -65,17 +65,22 @@
                     <option>Selecione a Empresa</option>
                   </select>
                 </div>
-                <br>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Painel/DASH</label>
-                  <select onchange="carregaIdPainelCadastro()" class="form-control selectpicker" data-style="btn btn-link" id="selectPainel">
-                    <option>Selecione o Painel</option>
-                  </select>
+               
+
+
+                <div class="row"  onchange="mudaCheckbox()" >
+                 <div id="checkbox">
+
+                 </div>                 
                 </div>
+
+
+                <br>
                 <div class="form-group">
                   <label>Senha</label>
                   <input type="password" class="form-control col-8" id="password" required>
                 </div>
+
                 <div class="row">             
                   <div class="col-sm-4 align-items-center">
                     <label class="form-check">                 
@@ -86,7 +91,8 @@
                       </span>
                     </label>
                   </div>
-                  <div class="col-sm-3 align-items-center">
+
+                  <div class="col-sm-4 align-items-center">
                     <label class="form-check">
                       <input class="form-check-input" id="gestor" type="checkbox" value="">
                       Gestor
@@ -148,12 +154,15 @@
                       <option>Selecione a Empresa...</option>
                     </select>
                   </div>
-                  <div class="form-group ">
-                    <label for="exampleInputEmail1">Painel/DASH</label>
-                    <select onchange="carregaIdPainel() " class="form-control selectpicker" data-style="btn btn-link" id="selectPainelAltera">
-                      <option>Selecione o Painel...</option>
-                    </select>
-                  </div>
+
+                  <div class="row"  onchange="mudaCheckbox()" >
+                    <div id="checkboxAltera">
+   
+                    </div>                 
+                   </div>
+
+                
+                <br>
                   <div class="row">             
                     <div class="col-sm-4 align-items-center">
                       <label class="form-check">                 
@@ -204,8 +213,7 @@
               <tr>
                 <th>Nome</th>               
                 <th>Email</th>
-                <th>Empresa</th>
-                <th>Painel</th>    
+                <th>Empresa</th>   
               </tr>
             </thead>
           </table>
@@ -235,7 +243,7 @@
 
   
  
-  
+
  
 
 

@@ -26,11 +26,12 @@ class PainelController {
       const data = request.all()
 
       const {empresa} = await Empresa.findByOrFail('id',data.idEmpresa)
-      console.log(empresa)
+     
       const painel = await Painel.create(data)
   
       painel.merge({"descricaoEmpresa": empresa});
       await painel.save();
+      
       return painel
   
 
@@ -53,13 +54,11 @@ class PainelController {
   // MOSTRAR TODOS OS PAINEIS POR ID EMPRESA
   async show ({ params, request, response }) {
     
-    // BUSCAR O PAINEL POR EMPRESA
+    // BUSCAR O PAINEL POR EMPRESA    
 
-    const {idEmpresa} = await request.all()
-
-    const painel = await Painel.query().where('idEmpresa', '=', idEmpresa).fetch()
+    const data = await Painel.query().where('idEmpresa', '=', params.id).fetch()
     
-    return painel
+    return {data}
   }
 
 // BUSCAR O PAINEL POR ID DO USUARIO
@@ -104,10 +103,6 @@ class PainelController {
     .where('users.id', params.id)
 
     return {data}
-
-
-
-
 
   }
 

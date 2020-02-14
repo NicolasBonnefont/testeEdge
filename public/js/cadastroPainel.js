@@ -127,9 +127,7 @@ async function carregaPainel() {
 
     })
 
-  await axios.post('/painelEmpresa', {
-      "idEmpresa": idEmpresa
-    }, config)
+  await axios.get('/painelEmpresa'+idEmpresa, config)
     .then(function (response) {
       
       if (response.data.length < 1) {

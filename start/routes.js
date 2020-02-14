@@ -50,7 +50,7 @@ Route.put('users','UserController.update')
 Route.post('users','UserController.store')
 
 Route.get('painel', 'PainelController.index')
-Route.post('painelEmpresa', 'PainelController.show')
+Route.get('painelEmpresa/:id', 'PainelController.show')
 Route.get('painelCarregaUsuario/:id', 'PainelController.showUsuario')
 Route.post('painelDelete', 'PainelController.destroy')
 Route.post('painel','PainelController.store')
@@ -75,6 +75,13 @@ Route.delete('setor/:id',"SetorController.destroy")
 Route.get('setor',"SetorController.index")
 Route.get('setor/empresa/:id',"SetorController.show")
 Route.post('setorDescricao',"SetorController.showDescricao")
+
+Route.post('painelUsuario',"UsuariosPainelController.store")
+Route.get('painelUsuario',"UsuariosPainelController.index")
+Route.put('painelUsuario',"UsuariosPainelController.update")
+Route.get('painelUsuario/:id',"UsuariosPainelController.show")
+Route.delete('painelUsuario/:id',"UsuariosPainelController.destroy")
+
 
 
 
