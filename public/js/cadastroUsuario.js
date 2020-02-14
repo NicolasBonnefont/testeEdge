@@ -226,7 +226,7 @@ async function igualaPainelAltera() {
             }
             count1++
           }
-
+          count+1
         }
 
       })
