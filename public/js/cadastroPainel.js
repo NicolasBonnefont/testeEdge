@@ -43,15 +43,12 @@ async function carregaSetor(){
    igualaSetor()
 
 }
-async function igualaSetor(){
-  
-  var a = document.getElementById("SelectEmpresa").selectedIndex;
-  var b= document.getElementById("SelectEmpresa").options;
-  var empresa = b[a].text
 
-  var c = document.getElementById("SelectSetor").selectedIndex;
-  var d= document.getElementById("SelectSetor").options;
-  var setor = d[c].text
+async function igualaSetor(){
+
+  var a = document.getElementById("SelectSetor").selectedIndex;
+  var b = document.getElementById("SelectSetor").options;
+  var setor = b[a].text
 
   await axios.post('/setorDescricao', 
   {
@@ -67,23 +64,7 @@ async function igualaSetor(){
     console.log(err)
     
   })
-}
-
-async function carregaUsuario() {
-  var dados
-
-  await axios.get('/users', config)
-    .then(function (response) {
-      dados = response.data.data
-    })
-    .catch(function (error) {})
-
-  for (var i = 0; i < dados.length; i++) {
-    var SelectUsuario = document.getElementById("SelectUsuario")
-    var option = document.createElement("option")
-    option.text = dados[i].username;
-    SelectUsuario.add(option);
-  }
+  
 }
 
 async function carregaEmpresaAltera() {
@@ -108,7 +89,6 @@ async function carregaPainel() {
   document.querySelectorAll('#selectPainel option').forEach(option => option.remove())
   var empresaBusca = null
   document.getElementById('descricaoAltera').value = ''
-  document.getElementById('setorAltera').value = ''
   document.getElementById('linkPainelAltera').value = ''
 
   var x = document.getElementById("SelectEmpresaAltera").selectedIndex;
@@ -127,18 +107,18 @@ async function carregaPainel() {
 
     })
 
-  await axios.get('/painelEmpresa'+idEmpresa, config)
+  await axios.get('/painelEmpresa/'+idEmpresa, config)
     .then(function (response) {
-      
-      if (response.data.length < 1) {
+     
+      if (response.data.data.length < 1) {
         
         alert('Empresa sem painel cadastrado !')
         limparCampos()
       }
-      for (var i = 0; i < response.data.length; i++) {
+      for (var i = 0; i < response.data.data.length; i++) {
         var selectPainel = document.getElementById("selectPainel")
         var option = document.createElement("option")
-        option.text = response.data[i].Descricao;
+        option.text = response.data.data[i].Descricao;
         selectPainel.add(option);
 
       }
@@ -147,62 +127,103 @@ async function carregaPainel() {
     })
     .catch(function (error) {
       console.log(error)
+      limparCampos()
       document.querySelectorAll('#selectPainel option').forEach(option => option.remove())
     })
-
+    carregaSetorAltera()
 }
 
 async function igualaPainel() {
   event.preventDefault()
+  
 
 
   if (sessionStorage.getItem('idEmpresa') < 1) {
     limparCampos()
   }
-  var setorBusca = ''
+  var painelBusca = ''
+  
   var a = document.getElementById("selectPainel").selectedIndex;
   var b = document.getElementById("selectPainel").options;
-  setorBusca = b[a].text
+  painelBusca = b[a].text
 
+  var c = document.getElementById("SelectSetorAltera").selectedIndex;
+  var d = document.getElementById("SelectSetorAltera").options;
+  
+  
   document.getElementById('descricaoAltera').value = ''
-  document.getElementById('setorAltera').value = ''
   document.getElementById('linkPainelAltera').value = ''
 
-  if (!(setorBusca == 'Selecione o Painel...')) {
+  if (!(painelBusca == 'Selecione o Painel...')) {
 
     await axios.post('/carregaIdPainel', {
         "idEmpresa": sessionStorage.getItem('idEmpresa'),
-        "descricao": setorBusca
+        "descricao": painelBusca
       }, config)
 
       .then(function (response) {
 
         document.getElementById('campos').disabled = false
         document.getElementById('descricaoAltera').value = response.data[0].Descricao
-        document.getElementById('setorAltera').value = response.data[0].Setor
         document.getElementById('linkPainelAltera').value = response.data[0].Link
         sessionStorage.setItem('idPainel', response.data[0].id)
-
+        console.log(response.data[0].Setor)
+        d[0].text = response.data[0].Setor
+    
+       
       })
       .catch(function (error) {
 
       })
   }
+  
+}
+async function carregaSetorAltera(){
+
+  document.querySelectorAll('#SelectSetorAltera option').forEach(option => option.remove())
+  
+  var x = document.getElementById("SelectEmpresaAltera").selectedIndex;
+  var y = document.getElementById("SelectEmpresaAltera").options;
+  var empresaBusca = y[x].text
+  var idEmpresa
+
+  await axios.post('/empresas', {"empresa": empresaBusca}, config)
+  .then(function(response){
+    idEmpresa = response.data.id
+    sessionStorage.setItem('idEmpresa', idEmpresa)
+  })
+
+  await axios.get('/setor/empresa/'+idEmpresa, config)
+  .then(function(response){  
+    document.querySelectorAll('#SelectSetorAltera option').forEach(option => option.remove())
+ 
+    for (var i = 0; i < response.data.length; i++) {
+      var SelectSetor = document.getElementById("SelectSetorAltera")
+      var option = document.createElement("option")
+      option.text = response.data[i].descricao;
+      SelectSetor.add(option);
+    }
+  })
+
 }
 
 
 async function alterarPainel() {
+  var x = document.getElementById("SelectSetorAltera").selectedIndex;
+  var y = document.getElementById("SelectSetorAltera").options;
+  setor = y[x].text
 
-  await axios.put('/painelAltera/'+ sessionStorage.getItem('idSetor'), {
+  await axios.put('/painelAltera/'+ sessionStorage.getItem('idPainel'), {
       "idEmpresa": sessionStorage.getItem('idEmpresa'),      
       "Descricao": document.getElementById('descricaoAltera').value,
-      "Setor": document.getElementById('setorAltera').value,
+      "Setor": setor,
       "Link": document.getElementById('linkPainelAltera').value
     }, config)
 
     .then(function (response) {
       alert('Alterado com sucesso')
       limparCampos()
+      location.reload()
 
     })
     .catch(function (error) {
@@ -264,10 +285,9 @@ function limparCampos() {
   document.getElementById("form").reset();
   sessionStorage.setItem('idEmpresa', '')
   sessionStorage.setItem('idPainel', '')
-  document.querySelectorAll('#SelectSetor option').forEach(option => option.remove())
+  document.querySelectorAll('#selectPainel option').forEach(option => option.remove())
 
 }
 carregaEmpresa()
-carregaUsuario()
 carregaEmpresaAltera()
 limparCampos()
