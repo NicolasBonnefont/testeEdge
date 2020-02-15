@@ -23,17 +23,14 @@ async function verificaAcesso() {
       document.getElementById("imgLogin").src = response.data.usuario.url
       usuarioteste = response.data.usuario.username
       sessionStorage.setItem('principal', response.data.usuario.id)
-     
-      //document.getElementById('linkPrincipal').text = 'morinfo'
+  
       document.body.style.backgroundImage = "url('')"
       if (!(response.data.empresas === null)) {
-        //document.getElementById('linkPrincipal').text = response.data.empresas.empresa
-        //document.body.style.backgroundImage = "url(" + response.data.empresas.url + ")"
+
        document.getElementById('linkPrincipal').src = response.data.empresas.url
        document.getElementById('linkPrincipal').style.backgroundImage = "url(" + response.data.empresas.url + ")"
       
       }
-
 
       // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
       if (!response.data.usuario.admin == 1) {
@@ -41,11 +38,13 @@ async function verificaAcesso() {
       }
     })
     .catch(function (err) {
+      deslogar()
       console.log(err)
-     // deslogar()
+   
     })
 }
-async function deslogar() {
+
+ function deslogar() {
   sessionStorage.clear()
   localStorage.clear()
   window.location.replace("..");
