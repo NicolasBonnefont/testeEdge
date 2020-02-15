@@ -70,6 +70,124 @@ async function carregaIdPainel() {
 
 
 // FUNCAO QUE CRIA USUARIO
+
+
+async function igualaPainelAltera() {
+
+  // traz os dashs conforme a empresa selecionada
+
+  document.querySelectorAll('#checkboxAltera div').forEach(div => div.remove())
+  var empresaBusca = ''
+
+  var x = document.getElementById("selectEmpresaAltera").selectedIndex;
+  var y = document.getElementById("selectEmpresaAltera").options;
+  empresaBusca = y[x].text
+
+  //so entra na funcao de pesquisa se for diferente ao selecione a empresa
+  if (!(empresaBusca == "Selecione a Empresa")) {
+
+    await axios.post('/empresas', {
+      "empresa": empresaBusca
+    }, config)
+      .then(function (response) {
+        sessionStorage.setItem('idEmpresa', response.data.id)
+      })
+      .catch(function (error) {
+
+      })
+
+    await axios.get('/painelEmpresa/' + sessionStorage.getItem('idEmpresa'), config)
+
+      .then(function (response) {
+        dados = { ...response.data.data }
+        for (var i = 0; i < response.data.data.length; i++) {
+
+          var node = document.createElement('div')
+
+          node.innerHTML = '<div class="col-sm-12 align-items-center"><label class="form-check"><input class="form-check-input objs" type="checkbox" value="' +
+          response.data.data[i].id + '">' +
+          response.data.data[i].Descricao + '<span class="form-check-sign"><span class="check"></span></span></label></div>'
+          document.getElementById('checkboxAltera').appendChild(node);
+
+        }
+
+        window.sessionStorage.setItem('idEmpresa', idEmpresa)
+
+      })
+      .catch(function (error) {
+
+      })
+
+    await axios.get('/painelUsuario/' + sessionStorage.getItem('id'), config)
+      .then(function (response) {
+        var inputs = document.querySelectorAll(".objs")
+
+        var count1 = 0
+        var count2 = 0
+
+        while (count1 <= inputs.length) { //7
+          
+          while (count2 <= response.data.painel.length) {     //3      
+            
+            if (inputs[count1].value == response.data.painel[count2].idPainel) {
+
+              inputs[count1].checked = true
+
+              count2++ 
+           
+            }
+            count1++ //6
+          }
+          
+        } 
+
+      })
+  }
+}
+
+async function igualaPainelCadastro() {
+
+  document.querySelectorAll('#checkbox div').forEach(div => div.remove())
+  var empresaBusca = ''
+
+  var x = document.getElementById("SelectEmpresa").selectedIndex;
+  var y = document.getElementById("SelectEmpresa").options;
+  empresaBusca = y[x].text
+
+  //so entra na funcao de pesquisa se for diferente ao selecione a empresa
+  if (!(empresaBusca == "Selecione a Empresa")) {
+
+    await axios.post('/empresas', {
+      "empresa": empresaBusca
+    }, config)
+      .then(function (response) {
+        sessionStorage.setItem('idEmpresa', response.data.id)
+      })
+      .catch(function (error) { })
+
+    await axios.get('/painelEmpresa/' + sessionStorage.getItem('idEmpresa'), config)
+
+      .then(function (response) {
+        for (var i = 0; i < response.data.data.length; i++) {
+
+          var node = document.createElement('div')
+
+          node.innerHTML = '<div class="col-sm-12 align-items-center"><label class="form-check"><input class="form-check-input objs" type="checkbox" value="' +
+            response.data.data[i].id + '">' +
+            response.data.data[i].Descricao + '<span class="form-check-sign"><span class="check"></span></span></label></div>'
+          document.getElementById('checkbox').appendChild(node);
+
+        }
+
+        window.sessionStorage.setItem('idEmpresa', idEmpresa)
+
+      })
+      .catch(function (error) {
+
+      })
+
+  }
+}
 async function cadastraUsuario() {
   event.preventDefault()
 
@@ -154,129 +272,16 @@ async function cadastraUsuario() {
       .catch(function (err) {
         console.log(err)
       })
-  } catch (err) {
+  }
+  
+  
+  catch (err) {
     console.log(err)
   }
 
+
+
 }
-
-async function igualaPainelAltera() {
-
-  // traz os dashs conforme a empresa selecionada
-
-  document.querySelectorAll('#checkboxAltera div').forEach(div => div.remove())
-  var empresaBusca = ''
-
-  var x = document.getElementById("selectEmpresaAltera").selectedIndex;
-  var y = document.getElementById("selectEmpresaAltera").options;
-  empresaBusca = y[x].text
-
-  //so entra na funcao de pesquisa se for diferente ao selecione a empresa
-  if (!(empresaBusca == "Selecione a Empresa")) {
-
-    await axios.post('/empresas', {
-      "empresa": empresaBusca
-    }, config)
-      .then(function (response) {
-        sessionStorage.setItem('idEmpresa', response.data.id)
-      })
-      .catch(function (error) {
-
-      })
-
-    await axios.get('/painelEmpresa/' + sessionStorage.getItem('idEmpresa'), config)
-
-      .then(function (response) {
-        dados = { ...response.data.data }
-        for (var i = 0; i < response.data.data.length; i++) {
-
-          var node = document.createElement('div')
-
-          node.innerHTML = '<div class="col-sm-12 align-items-center"><label class="form-check"><input class="form-check-input objs" type="checkbox" value="' +
-          response.data.data[i].id + '">' +
-          response.data.data[i].Descricao + '<span class="form-check-sign"><span class="check"></span></span></label></div>'
-          document.getElementById('checkboxAltera').appendChild(node);
-
-        }
-
-        window.sessionStorage.setItem('idEmpresa', idEmpresa)
-
-      })
-      .catch(function (error) {
-
-      })
-
-    await axios.get('/painelUsuario/' + sessionStorage.getItem('id'), config)
-      .then(function (response) {
-        var inputs = document.querySelectorAll(".objs")
-
-        var count1 = 0
-        var count2 = 0
-
-        while (count1 < inputs.length - 1) { 
-
-          while (count2 < response.data.painel.length) {           
-
-            if (inputs[count1].value == response.data.painel[count2].idPainel) {
-
-              inputs[count1].checked = true
-
-              count2++
-
-            }
-            count1++
-          }
-          count+1
-        }
-
-      })
-  }
-}
-
-async function igualaPainelCadastro() {
-
-  document.querySelectorAll('#checkbox div').forEach(div => div.remove())
-  var empresaBusca = ''
-
-  var x = document.getElementById("SelectEmpresa").selectedIndex;
-  var y = document.getElementById("SelectEmpresa").options;
-  empresaBusca = y[x].text
-
-  //so entra na funcao de pesquisa se for diferente ao selecione a empresa
-  if (!(empresaBusca == "Selecione a Empresa")) {
-
-    await axios.post('/empresas', {
-      "empresa": empresaBusca
-    }, config)
-      .then(function (response) {
-        sessionStorage.setItem('idEmpresa', response.data.id)
-      })
-      .catch(function (error) { })
-
-    await axios.get('/painelEmpresa/' + sessionStorage.getItem('idEmpresa'), config)
-
-      .then(function (response) {
-        for (var i = 0; i < response.data.data.length; i++) {
-
-          var node = document.createElement('div')
-
-          node.innerHTML = '<div class="col-sm-12 align-items-center"><label class="form-check"><input class="form-check-input objs" type="checkbox" value="' +
-            response.data.data[i].id + '">' +
-            response.data.data[i].Descricao + '<span class="form-check-sign"><span class="check"></span></span></label></div>'
-          document.getElementById('checkbox').appendChild(node);
-
-        }
-
-        window.sessionStorage.setItem('idEmpresa', idEmpresa)
-
-      })
-      .catch(function (error) {
-
-      })
-
-  }
-}
-
 // FUNCAO QUE BUSCA O USUARIO
 async function buscarUsuario() {
   event.preventDefault()
@@ -359,7 +364,7 @@ async function alterarUsuario() {
   var y = document.getElementById("Select").options;
   var usuarioBusca = y[x].text
 
-  var painelAltera = ''
+ 
   var empresaAltera = ''
 
   if (!(document.getElementById("selectEmpresaAltera").selectedIndex == -1)) {
@@ -368,14 +373,7 @@ async function alterarUsuario() {
     empresaAltera = b[a].text
   }
 
-  if (!(document.getElementById("selectPainelAltera").selectedIndex == -1)) {
-    var a = document.getElementById("selectPainelAltera").selectedIndex;
-    var b = document.getElementById("selectPainelAltera").options;
-    painelAltera = b[a].text
-  }
-
-
-  console.log(a)
+  
 
   const campos = document.getElementById('campos')
   const emailAltera = document.getElementById('emailAltera').value
@@ -449,10 +447,7 @@ async function alterarUsuario() {
 
       urlUsuario = urlAltera
       urlIdUsuario = urlID
-      alert("Usuário alterado com sucesso !")
-      campos.disabled = true
-      limparCampos()
-      location.reload();
+
 
     })
     .catch(function (error) {
@@ -461,7 +456,30 @@ async function alterarUsuario() {
       alert("Não foi possivel alterar este cadastro, verificar log")
 
     })
+    mudaCheckbox()
 
+    var local = sessionStorage.getItem('idPainel')
+    var idAtualiza =  sessionStorage.getItem('id')
+    var dados = JSON.parse(local)
+    var idPainel = [...dados]
+    console.log(idPainel)
+    console.log(idAtualiza)
+
+    await axios.put('/painelUsuario', {
+      "idUsuario": idAtualiza,
+      "idPainel": idPainel
+    }, config)
+      .then(function (response) {
+        alert('Usuario Alterado com Sucesso !')
+        alert("Usuário alterado com sucesso !")
+        campos.disabled = true
+        limparCampos()
+        location.reload();
+       
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
 }
 
 async function excluirUsuario() {
@@ -491,19 +509,25 @@ async function excluirUsuario() {
       'username': `${usuarioBusca}`
     }, config)
 
-      .then(function (response) {
-        console.log(usuarioBusca)
-        alert("Usuário excluido com sucesso !")
-        limparCampos()
+      .then(function (response) {        
+
       })
       .catch(function (error) {
         console.log(error)
         campos.disabled = true
         alert("Não foi possivel excluir este cadastro, verificar log")
-        document.getElementById("formBusca").reset();
-        document.getElementById("formAltera").reset();
+        limparCampos()
       })
 
+    await axios.delete('/PainelUsuario/'+sessionStorage.getItem('id'),config)
+    .then(function(response){
+      alert("Usuário excluido com sucesso !")
+      limparCampos()
+    })
+    .catch(function(error){
+      console.log(error)
+      alert('Poblema na exclusao dos acessos, consultar log !')
+    })
   }
 }
 

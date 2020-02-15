@@ -107,11 +107,10 @@ class UsuariosPainelController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
-   
-   
+      
     const idUsuario = request.only('idUsuario')  
     const {idPainel} = request.all()
-    
+    console.log(idUsuario, idPainel)
     await Database.from('usuarios_painels').where(idUsuario).delete()
            
     for(var i = 0; i < idPainel.length; i++){
