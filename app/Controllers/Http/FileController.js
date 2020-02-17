@@ -11,7 +11,7 @@ class FileController {
   async store({ request, response }) {
     try {
 
-      if (!request.file('file')) return response.status(500).send({ mensagem: "erro" })
+      if (!request.file('file')) return response.status(200).send({ mensagem: "erro" })
 
       const upload = request.file('file', { size: '10mb' })
 

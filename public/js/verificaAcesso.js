@@ -40,7 +40,7 @@ async function verificaAcesso() {
       }
     })
     .catch(function (err) {
-      //deslogar()
+      deslogar()
       console.log(err)
    
     })

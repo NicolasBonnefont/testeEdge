@@ -227,13 +227,8 @@ async function cadastraUsuario() {
 
     .then(function (response) {
       url = response.data.url
-
-    }).catch(function (err) {
-
-      console.log(err)
-
-    });
-  try {
+    })
+  
     await axios.post('/users', {
       "username": `${username}`,
       "name": `${name}`,
@@ -247,7 +242,7 @@ async function cadastraUsuario() {
 
       .then(function (response) {
         id = sessionStorage.setItem('idAtualiza', response.data.id)
-
+        alert('Usuario Cadastrado com Sucesso !')
       })
       .catch(function (error) {
         alert("Verificar log")
@@ -258,6 +253,9 @@ async function cadastraUsuario() {
 
 
     var local = sessionStorage.getItem('idPainel')
+    
+
+    if (local){
     var dados = JSON.parse(local)
     var idPainel = [...dados]
 
@@ -266,21 +264,18 @@ async function cadastraUsuario() {
       "idPainel": idPainel
     }, config)
       .then(function (response) {
-        alert('Usuario Cadastrado com Sucesso !')
+        
         limparCampos()
+        location.reload()
       })
       .catch(function (err) {
         console.log(err)
+        limparCampos()
+        location.reload()
       })
-  }
-  
-  
-  catch (err) {
-    console.log(err)
-  }
-
-
-
+    }
+    limparCampos()
+    location.reload()
 }
 // FUNCAO QUE BUSCA O USUARIO
 async function buscarUsuario() {
