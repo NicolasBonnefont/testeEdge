@@ -33,7 +33,6 @@ async function carregaUsuario() {
   //  iguala os campos do usuario logado no HTML
   document.getElementById("imgPerfil").src = urlUsuario
   document.getElementById("nomePerfil").innerHTML = nomeUsuario
-  document.getElementById("cargoPerfil").innerHTML = painelUsuario
   document.getElementById("emailPerfil").innerHTML = emailUsuario
   document.getElementById("imageAltera").src = urlUsuario
   document.getElementById("usuarioAltera").value = nomeUsuario

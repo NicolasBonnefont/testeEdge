@@ -230,9 +230,6 @@ function mostrarTabela() {
       "columns": [{
         "data": "empresa"
       },
-      {
-        "data": "bi"
-      }
       ],
       "language": idioma,
       dom: 'Bfrtip',
