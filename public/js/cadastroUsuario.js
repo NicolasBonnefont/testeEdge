@@ -405,7 +405,7 @@ async function alterarUsuario() {
       })
       .catch(function (error) {
         console.log(error)
-        return alert("Houve um problema !")
+        return alert("Houve um problema, verificar log !")
       })
 
 
@@ -470,8 +470,7 @@ async function alterarUsuario() {
       "idPainel": idPainel
     }, config)
       .then(function (response) {
-        alert('Usuario Alterado com Sucesso !')
-        alert("Usuário alterado com sucesso !")
+        alert('Usuario Alterado com Sucesso !')        
         campos.disabled = true
         limparCampos()
         location.reload();
@@ -523,6 +522,7 @@ async function excluirUsuario() {
     .then(function(response){
       alert("Usuário excluido com sucesso !")
       limparCampos()
+      location.reload()
     })
     .catch(function(error){
       console.log(error)
