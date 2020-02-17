@@ -2,8 +2,8 @@
 
 async function mostrarTabela() {
   await  verificaAcesso()
-  const url = '/painelCarregaUsuario/'+ sessionStorage.getItem('principal')
-  console.log(url)
+  const url = '/painelCarregaUsuario/' + sessionStorage.getItem('principal')
+  
   $(document).ready(function () {
 
     $('#teste').DataTable({

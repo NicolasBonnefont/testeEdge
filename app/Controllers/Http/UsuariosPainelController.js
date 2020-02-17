@@ -78,7 +78,7 @@ class UsuariosPainelController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
-
+    
     const painel = await Database.from('usuarios_painels')
     .where({"idUsuario":params.id})
     .orderBy('idPainel', 'asc')
@@ -110,7 +110,7 @@ class UsuariosPainelController {
       
     const idUsuario = request.only('idUsuario')  
     const {idPainel} = request.all()
-    console.log(idUsuario, idPainel)
+   
     await Database.from('usuarios_painels').where(idUsuario).delete()
            
     for(var i = 0; i < idPainel.length; i++){

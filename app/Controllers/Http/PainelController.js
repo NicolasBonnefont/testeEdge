@@ -76,32 +76,33 @@ class PainelController {
     if (verifica.gestor === 1){
 
       const data = await Database
-      .table('painels')
-      .innerJoin('empresas', function () {
+      .table('painels  ')
+      .innerJoin('usuarios_painels ', function () {
         this
-          .on('empresas.id', 'painels.idEmpresa')
+          .on('painels.id', 'usuarios_painels.idPainel')
       })
       .innerJoin('users', function () {
         this
-          .on('users.empresa', 'empresas.empresa')
+          .on('users.id', 'idUsuario')
       })
-      .where('users.id', params.id)
-  
+      .groupBy('painels.id')
+    
+      
       return {data}
     }
 
     const data = await Database
-    .table('painels')
-    .innerJoin('empresas', function () {
+    .table('painels  ')
+    .innerJoin('usuarios_painels ', function () {
       this
-        .on('empresas.id', 'painels.idEmpresa')
+        .on('painels.id', 'usuarios_painels.idPainel')
     })
     .innerJoin('users', function () {
       this
-        .on('users.idPainel', 'painels.id')
+        .on('users.id', 'idUsuario')
     })
-    .where('users.id', params.id)
-
+    .where('usuarios_painels.idUsuario', '=', params.id)
+  
     return {data}
 
   }
@@ -148,7 +149,7 @@ class PainelController {
   }
 
   async destroy ({ params, request, response }) {
-    console.log(params.id)
+    
     const painel = await Painel.findByOrFail('id',params.id)
     
     await painel.delete()

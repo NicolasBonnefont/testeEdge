@@ -34,11 +34,13 @@ async function verificaAcesso() {
 
       // CHECA SE TEM PERMISSAO PARA ACESSAR O CADASTRO
       if (!response.data.usuario.admin == 1) {
+        if(document.getElementById('habilitaMenuCadastro')){
         document.getElementById('habilitaMenuCadastro').remove()
+        }
       }
     })
     .catch(function (err) {
-      deslogar()
+      //deslogar()
       console.log(err)
    
     })
