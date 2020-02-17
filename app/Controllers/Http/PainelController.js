@@ -65,7 +65,7 @@ class PainelController {
   async showUsuario ({ params, request, response }) {
             
     const verifica = await User.findByOrFail('id', params.id)
-    
+    console.log(verifica)
     if( verifica.admin === 1 ){
 
       const data = await Painel.all()
@@ -77,15 +77,11 @@ class PainelController {
 
       const data = await Database
       .table('painels  ')
-      .innerJoin('usuarios_painels ', function () {
+      .innerJoin('empresas ', function () {
         this
-          .on('painels.id', 'usuarios_painels.idPainel')
+          .on('empresas.id', 'painels.idEmpresa')
       })
-      .innerJoin('users', function () {
-        this
-          .on('users.id', 'idUsuario')
-      })
-      .groupBy('painels.id')
+      .where('empresas.empresa', '=', verifica.empresa)
     
       
       return {data}
